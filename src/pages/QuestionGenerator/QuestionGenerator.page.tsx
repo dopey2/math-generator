@@ -11,14 +11,14 @@ import {
     radical,
     xBaseExponentDivision,
     xBaseExponentMultiplication
-} from "../../generator/arithmetics/arithmetics";
+} from "../../generator/arithmetics/arithmetics.gen";
 import ExerciseComponent from "../../component/Exercice.component";
 import {
     developpeExpression2
 } from "../../generator/arithmetics/developpeExpression/developpeExpression";
-import { equation1, equation2, lineEquationFromPoints } from "../../generator/arithmetics/equation";
+import { equation1, equation2, lineEquationFromPoints } from "../../generator/arithmetics/equation.gen";
 import { ExerciseI } from "../../generator/ExerciseBuilder";
-import { systemWith2Unknown } from "../../generator/linear_algebra/LinearSystem/linear_system";
+import { systemWith2Unknown } from "../../generator/linear_algebra/linearSystem";
 
 const styles = {
     pageContainer: "flex flex-1 justify-center",

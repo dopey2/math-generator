@@ -21,7 +21,7 @@ const App: React.FC<any> = () => {
                         <QuestionGeneratorComponent/>
                     </Route>
 
-                    <Route path="/select">
+                    <Route path="/select/:id">
                         <SelectExercise/>
                     </Route>
 
@@ -36,7 +36,7 @@ const App: React.FC<any> = () => {
 
                     <Route path="/">
                         <a href="/generator">Generator</a>
-                        <a href="/select">Select</a>
+                        <a href="/select/0">Select</a>
                     </Route>
 
                 </Switch>

@@ -1,6 +1,6 @@
-import ExerciseBuilder from "../../ExerciseBuilder";
-import MathX from "../../../math/MathX";
-import Graphs from "../../@component/Graphs";
+import ExerciseBuilder from "../ExerciseBuilder";
+import MathX from "../../math/MathX";
+import GraphsComponent from "../@component/Graphs.component";
 
 
 export const vectors1 = () => {
@@ -13,15 +13,13 @@ export const vectors1 = () => {
 
 
     const vectors = [
-        { x: x1, y: y1, name: 'u' },
-        { x: x2, y: y2, name: 'v' }
+        { x: 2, y: 3, label: 'u' },
     ];
 
     return new ExerciseBuilder()
         .addQuestionHtml(expression)
-        .addCustomQuestion(Graphs, { vectors })
+        .addCustomQuestion(GraphsComponent, { vectors })
         .addAnswerLatex(expression)
         .addStepAnswerLatex(expression)
         .toJSON();
-
 };

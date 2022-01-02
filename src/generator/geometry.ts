@@ -1,5 +1,5 @@
 import { toMultilineLatex } from "./utils";
-import { BaseOperationMethods } from "./arithmetics/arithmetics";
+import { BaseOperationMethods } from "./arithmetics/arithmetics.gen";
 import { Vector2 } from "../math";
 import MathX from "../math/MathX";
 

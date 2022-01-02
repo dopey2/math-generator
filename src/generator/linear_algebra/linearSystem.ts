@@ -1,7 +1,7 @@
-import MathX from "../../../math/MathX";
-import ExerciseBuilder from "../../ExerciseBuilder";
-import { toMultilineLatex } from "../../utils";
-import Constant from "../../../math/Operation/Constant/Constant";
+import MathX from "../../math/MathX";
+import ExerciseBuilder from "../ExerciseBuilder";
+import { toMultilineLatex } from "../utils";
+import Constant from "../../math/Operation/Constant/Constant";
 
 
 /**

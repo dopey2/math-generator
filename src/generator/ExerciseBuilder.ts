@@ -21,7 +21,6 @@ export default class ExerciseBuilder {
         answer: [],
     };
 
-
     addQuestionLatex(...args: any) {
         this.output.question.push({ type: "latex", latex: toMultilineLatex(args) });
         return this;
