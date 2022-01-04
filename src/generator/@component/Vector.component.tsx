@@ -1,10 +1,9 @@
 import React from 'react';
+import Line from "../../math/Line/Line";
 
 interface Props {
-    x1: number;
-    y1: number;
-    x2: number;
-    y2: number;
+    x: number;
+    y: number;
     units: number
     label?: string;
     color?: string;
@@ -12,37 +11,61 @@ interface Props {
 }
 
 export default class VectorComponent extends React.PureComponent<Props> {
+    static id = 0;
+    private _id = 0;
 
     get color() {
         return this.props.color || "#000";
     }
 
-    toPoint = (x: number) => x * this.props.units
+    constructor(props: Props) {
+        super(props);
+        this._id = VectorComponent.id;
+        VectorComponent.id += 1;
+    }
+
+    getLabelCoordinates = () => {
+        const line = new Line(0, 0, this.props.x, this.props.y);
+        const fixMargin = 0.3;
+        const fixX = this.props.x > 0 ? this.props.x + fixMargin : this.props.x - fixMargin * 2;
+        const lineY = line.getY(this.props.x) || this.props.y;
+        const fixY = lineY > 0 ? lineY + fixMargin : lineY - fixMargin * 2
+
+        return {
+            x: this.toPointX(fixX),
+            y: this.toPointY(fixY)
+        };
+    }
+
+    toPointX = (k: number) => this.props.origin.x + k * this.props.units
+    toPointY = (k: number) => this.props.origin.y - k * this.props.units
 
     render() {
         return (
             <>
                 <defs>
                     <marker
-                        id="arrowhead"
+                        id={`arrowhead-${this._id}`}
                         markerWidth="6"
                         markerHeight="4"
-                        refX="0"
+                        refX="5.5"
                         refY="2"
                         orient="auto"
                     >
-                        <polygon points="0 0, 6 2, 0 4"/>
+                        <polygon fill={this.color} points="0 0, 6 2, 0 4"/>
                     </marker>
                 </defs>
                 <line
-                    x1={this.toPoint(this.props.x1)}
-                    y1={this.toPoint(this.props.y1)}
-                    x2={this.toPoint(this.props.x2)}
-                    y2={this.toPoint(this.props.y2)}
+                    x1={this.toPointX(0)}
+                    y1={this.toPointY(0)}
+                    x2={this.toPointX(this.props.x)}
+                    y2={this.toPointY(this.props.y)}
                     stroke={this.color}
-                    strokeWidth="2"
-                    markerEnd="url(#arrowhead)"
+                    strokeWidth="1.5"
+                    markerEnd={`url(#arrowhead-${this._id})`}
                 />
+
+                <text {...this.getLabelCoordinates()} stroke={this.color}>{this.props.label}</text>
             </>
         )
     }

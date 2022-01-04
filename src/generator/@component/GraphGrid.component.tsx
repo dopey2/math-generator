@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 
 interface Props {
     width: number;
@@ -32,15 +32,11 @@ export default class GraphGrid extends React.PureComponent<Props> {
 
     renderUnit = () => {
 
-        if(this.props.hideUnits) {
+        if (this.props.hideUnits) {
             return null;
         }
 
-        const units = [
-            <style>
-                {`.small { font: italic 10px sans-serif; }`}
-            </style>
-        ];
+        const units = [];
 
         const xStep = this.props.width / this.props.units;
         let x = -(xStep / 2);
@@ -49,8 +45,13 @@ export default class GraphGrid extends React.PureComponent<Props> {
             if (x === 0) {
                 continue;
             }
+
+            if(this.props.unitsInterval !== undefined && x % this.props.unitsInterval !== 0) {
+                continue;
+            }
+
             units.push(<line
-                key={i}
+                key={`h-${i}`}
                 x1={i}
                 y1={this.props.height / 2 - 2}
                 x2={i}
@@ -60,15 +61,15 @@ export default class GraphGrid extends React.PureComponent<Props> {
             />);
 
             let textY = this.props.height / 2 + (this.props.units * 0.8);
-            if(x < 0) {
+            if (x < 0) {
                 textY = this.props.height / 2 - (this.props.units * 0.4);
             }
 
             units.push(<text
-                key={i}
+                key={`h-t-${i}`}
                 x={i - this.props.units * 0.2}
                 y={textY}
-                className="small"
+                className="graph-grid-units"
             >{x}</text>);
         }
 
@@ -80,8 +81,12 @@ export default class GraphGrid extends React.PureComponent<Props> {
                 continue;
             }
 
+            if(this.props.unitsInterval !== undefined && y % this.props.unitsInterval !== 0) {
+                continue;
+            }
+
             units.push(<line
-                key={i}
+                key={`v-${i}`}
                 x1={this.props.width / 2 - 2}
                 y1={i}
                 x2={this.props.width / 2 + 2}
@@ -92,15 +97,15 @@ export default class GraphGrid extends React.PureComponent<Props> {
 
 
             let textX = this.props.height / 2 + (this.props.units * 0.4);
-            if(y < 0) {
+            if (y < 0) {
                 textX = this.props.height / 2 - (this.props.units * 0.8);
             }
 
             units.push(<text
-                key={i}
+                key={`v-t-${i}`}
                 x={textX}
                 y={i + this.props.units * 0.2}
-                className="small"
+                className="graph-grid-units"
             >{y}</text>);
 
 
@@ -110,16 +115,31 @@ export default class GraphGrid extends React.PureComponent<Props> {
     }
 
     render() {
-
         return (
             <>
                 {this.renderRows()}
                 {this.renderCols()}
 
-                <line x1={0} y1={this.props.height / 2} x2={this.props.width} y2={this.props.height / 2} stroke="black"
-                      strokeWidth={1}/>
-                <line x1={this.props.width / 2} y1={0} x2={this.props.width / 2} y2={this.props.height} stroke="black"
-                      strokeWidth={1}/>
+                <style>
+                    {`.graph-grid-units { font: italic 10px sans-serif; }`}
+                </style>
+
+                <line
+                    x1={0}
+                    y1={this.props.height / 2}
+                    x2={this.props.width}
+                    y2={this.props.height / 2}
+                    stroke="black"
+                    strokeWidth={1}
+                />
+                <line
+                    x1={this.props.width / 2}
+                    y1={0}
+                    x2={this.props.width / 2}
+                    y2={this.props.height}
+                    stroke="black"
+                    strokeWidth={1}
+                />
 
                 {this.renderUnit()}
 

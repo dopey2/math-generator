@@ -120,7 +120,9 @@ class SelectExercise extends React.PureComponent<RouteComponentProps<{ id: strin
                 <div className={styles.navMenu}>
                     <ul>
                         {exerciseList.map((ex, i) => (
-                            <li className={clsx({
+                            <li
+                                key={i}
+                                className={clsx({
                                 [styles.navItemSelected]: i === parseInt(this.props.match.params.id),
                                 [styles.navItem]: true
                             })}>
@@ -153,9 +155,9 @@ export default withRouter(SelectExercise)
 
 const styles = {
     pageContainer: "flex flex-1 w-full h-full",
-    navMenu: "flex flex-col w-96 h-full border-r-2 border-grey-300 pl-4 pr-4 pt-4 overflow-scroll",
+    navMenu: "flex flex-col w-96 h-full border-r-2 border-grey-300 pl-4 pr-4 pt-4 pb-4 overflow-scroll",
     navItem: "pl-4 pr-4 pt-2 pb-2",
     navItemSelected: "bg-green-300 text-white rounded-md",
-    contentContainer: "flex flex-col min w-6/12 p-8",
+    contentContainer: "flex flex-col flex-1 p-8",
 };
 

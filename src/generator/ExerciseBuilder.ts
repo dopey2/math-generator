@@ -1,12 +1,13 @@
 import { toMultilineLatex } from "./utils";
 
 export interface VisualRepresentationI {
-    type: "latex" | "canvas" | "html" | "custom",
+    type: "latex" | "canvas" | "html" | "custom" | "row",
     latex?: string;
     canvas?: any;
     html?: string;
     component?: any;
     props?: any;
+    row: VisualRepresentationI[]
 }
 
 export interface ExerciseI {
@@ -43,6 +44,11 @@ export default class ExerciseBuilder {
 
     addAnswerHtml(...args: any) {
         this.output.answer.push({ type: "html", html: args });
+        return this;
+    }
+
+    addCustomAnswer(component: any, props: any) {
+        this.output.answer.push({ type: 'custom', component, props });
         return this;
     }
 

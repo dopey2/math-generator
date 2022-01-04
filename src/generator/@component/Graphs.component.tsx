@@ -33,6 +33,10 @@ export default class GraphsComponent extends React.PureComponent<Props> {
         return this.props.units !== undefined ? this.props.units : 20;
     }
 
+    get unitsInterval() {
+        return this.props.unitsInterval !== undefined ? this.props.unitsInterval : 1;
+    }
+
     toPoint = (x: number) => x * this.units
 
     render() {
@@ -46,18 +50,15 @@ export default class GraphsComponent extends React.PureComponent<Props> {
                     width={this.width}
                     height={this.height}
                     units={this.units}
+                    unitsInterval={this.unitsInterval}
                     hideUnits={this.props.hideUnits}
                 />
 
-                {this.props.vectors && this.props.vectors.length && this.props.vectors.map((v) => (
+                {this.props.vectors && this.props.vectors.length && this.props.vectors.map((v, i) => (
                     <VectorComponent
-                        x1={this.width / 2}
-                        y1={this.height / 2}
-                        x2={v.x}
-                        y2={v.y}
+                        key={i}
+                        {...v}
                         units={this.units}
-                        label={v.label}
-                        color={v.color}
                         origin={{x: this.width /2, y: this.height / 2}}
                     />
                     ))}
