@@ -3,7 +3,7 @@ import {BaseOperationMethods} from "./arithmetics/arithmetics.gen";
 import {Vector2} from "../math";
 import MathX from "../math/MathX";
 import ExerciseBuilder from "./ExerciseBuilder";
-import TriangleComponent from "../component/Triangle.component";
+import TriangleComponent from "./@component/Triangle.component";
 
 export interface Triangle {
     points: { x: number, y: number, label?: string }[]
@@ -66,27 +66,6 @@ export const pythagore = () => {
         .addAnswerLatex(steps[steps.length - 1])
         .addStepAnswerLatex(...steps)
         .toJSON()
-
-    //
-    // return {
-    //     type: "geometry",
-    //     expression: "",
-    //     triangle: {
-    //         points,
-    //         vectors,
-    //         AB,
-    //         BC,
-    //         AC,
-    //         knowSide: [0, 1],
-    //     },
-    //     latex: toMultilineLatex([
-    //         `Soit ABC un triangle rectangle en B`,
-    //         `AB=${AB};  BC=${BC};`,
-    //         `Calculer AC`
-    //     ]),
-    //     latexValue: "",
-    //     steps: steps,
-    // };
 };
 
 export const triangleOneAngleOneSide = () => {

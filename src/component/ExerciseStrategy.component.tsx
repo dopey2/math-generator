@@ -1,7 +1,6 @@
 import React from "react";
 import * as MathJax from "@nteract/mathjax";
 import { VisualRepresentationI } from "../generator/ExerciseBuilder";
-import TriangleComponent from "./Triangle.component";
 
 interface Props {
     visualRepresentation: VisualRepresentationI;
@@ -26,14 +25,6 @@ const ExerciseStrategy: React.FC<Props> = (props) => {
 
     if (props.visualRepresentation.type === "html" && props.visualRepresentation.html) {
         return props.visualRepresentation.html;
-    }
-
-    if (props.visualRepresentation.type === "canvas" && props.visualRepresentation.canvas) {
-        return (
-            <TriangleComponent
-                triangle={props.visualRepresentation.canvas}
-            />
-        );
     }
 
     if (props.visualRepresentation.type === "custom" && props.visualRepresentation.custom) {
