@@ -22,7 +22,7 @@ export default class GeometryDraftPage extends React.PureComponent {
         return new Polygon(vectors)
             .scale(size_adjust)
             .adjustX(100)
-            .adjustY(100)
+            .adjustY(150)
             .toString();
     };
 

@@ -6,11 +6,12 @@ import MathX from "../../math/MathX";
 
 export const randomTriangleLength = () => {
     const A = MathX.random(2, 10);
-    let minB = A - 2;
-    let maxB = A + 2;
-    if (minB < 2) {
-        minB += (2 - minB);
-        maxB += (2 - maxB);
+    let minB = A - 1;
+    let maxB = A + 1;
+
+    if (minB < 1) {
+        minB += (1 - minB);
+        maxB += (1 - maxB);
     }
 
     const B = MathX.random(minB, maxB);
@@ -28,7 +29,6 @@ export const randomTriangle = () => {
     const circle1 = new Circle(0, 0, AC);
     const circle2 = new Circle(AB, 0, BC);
     const intersections = Circle.intersection(circle1, circle2);
-
     const intersection = MathX.random(0, 1) ? intersections[0] : intersections[1];
 
     const points = [

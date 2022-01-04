@@ -49,7 +49,7 @@ const ExerciseComponent: React.FC<Props> = (props) => {
                                         <ExerciseStrategy key={i} visualRepresentation={q} />
                                     ))}
                                 </>
-                            )}
+                            )}  
 
                             {showResult === 1 && (
                                 <>

@@ -1,7 +1,9 @@
-import { toMultilineLatex } from "./utils";
-import { BaseOperationMethods } from "./arithmetics/arithmetics.gen";
-import { Vector2 } from "../math";
+import {toMultilineLatex} from "./utils";
+import {BaseOperationMethods} from "./arithmetics/arithmetics.gen";
+import {Vector2} from "../math";
 import MathX from "../math/MathX";
+import ExerciseBuilder from "./ExerciseBuilder";
+import TriangleComponent from "../component/Triangle.component";
 
 export interface Triangle {
     points: { x: number, y: number, label?: string }[]
@@ -12,7 +14,7 @@ export interface Triangle {
     knowSide: number[];
 }
 
-export const pythagore: BaseOperationMethods = () => {
+export const pythagore = () => {
     const AB = MathX.random(2, 20);
     const angleA = MathX.random(35, 65);
     const tan = Math.tan(angleA * Math.PI / 180);
@@ -21,9 +23,9 @@ export const pythagore: BaseOperationMethods = () => {
 
 
     const points = [
-        { x: 0, y: 0, label: 'A' },
-        { x: 0, y: AB, label: 'B' },
-        { x: BC, y: AB, label: 'C' }
+        {x: 0, y: 0, label: 'A'},
+        {x: 0, y: AB, label: 'B'},
+        {x: BC, y: AB, label: 'C'}
     ];
 
     const vectors = [
@@ -45,25 +47,46 @@ export const pythagore: BaseOperationMethods = () => {
 
     result === Math.floor(result) && steps.push(`AC = ${result}`);
 
-    return {
-        type: "geometry",
-        expression: "",
+    const expression = `Soit ABC un triangle rectangle en B. AB=${AB} et BC=${BC}. Calculer AC`
+    const triangleProps = {
         triangle: {
             points,
             vectors,
             AB,
             BC,
             AC,
-            knowSide: [0, 1],
-        },
-        latex: toMultilineLatex([
-            `Soit ABC un triangle rectangle en B`,
-            `AB=${AB};  BC=${BC};`,
-            `Calculer AC`
-        ]),
-        latexValue: "",
-        steps: steps,
-    };
+            knowSide: [0, 1]
+        }
+    }
+
+    return new ExerciseBuilder()
+        .addQuestionHtml(expression)
+        .addCustomQuestion(TriangleComponent, triangleProps)
+        .addCustomAnswer(TriangleComponent, triangleProps)
+        .addAnswerLatex(steps[steps.length - 1])
+        .addStepAnswerLatex(...steps)
+        .toJSON()
+
+    //
+    // return {
+    //     type: "geometry",
+    //     expression: "",
+    //     triangle: {
+    //         points,
+    //         vectors,
+    //         AB,
+    //         BC,
+    //         AC,
+    //         knowSide: [0, 1],
+    //     },
+    //     latex: toMultilineLatex([
+    //         `Soit ABC un triangle rectangle en B`,
+    //         `AB=${AB};  BC=${BC};`,
+    //         `Calculer AC`
+    //     ]),
+    //     latexValue: "",
+    //     steps: steps,
+    // };
 };
 
 export const triangleOneAngleOneSide = () => {

@@ -35,6 +35,7 @@ import {
 } from "../../generator/enumeration/enumeration";
 import ExerciseComponent from "../../component/Exercice.component";
 import {vectors1} from "../../generator/linear_algebra/vectors";
+import { pythagore } from "../../generator/geometry";
 
 type ExerciseItem = { label: string, fun: () => ExerciseI };
 
@@ -65,7 +66,9 @@ const exerciseList: ExerciseItem[] = [
     {label: "Enumeration locker 2", fun: () => enumerationDigitCode()},
     {label: "Enumeration pin code", fun: () => enumerationPinCode()},
     {label: "Probability with intersection", fun: () => probabilityWithIntersection()},
-    {label: "Vecteurs", fun: () => vectors1()}
+    {label: "Vecteurs", fun: () => vectors1()},
+    {label: "Pythagore", fun: () => pythagore()},
+
 ];
 
 interface State {

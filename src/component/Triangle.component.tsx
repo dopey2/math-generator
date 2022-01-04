@@ -1,37 +1,11 @@
-import React, { useCallback } from 'react';
+import React, {useCallback} from 'react';
 
-import { Triangle as TriangleI } from "../generator/geometry";
-import { Polygon, Vector2 } from '../math';
+import {Triangle as TriangleI} from "../generator/geometry";
+import {Polygon, Vector2} from '../math';
 
 const x_adjust = 50;
 const y_adjust = 50;
 
-
-const triangleToSvgPoints = (triangle: TriangleI) => {
-    const { vectors } = triangle;
-    const size_adjust = 100 / vectors[0].magnitude();
-
-    return new Polygon(vectors)
-        .scale(size_adjust)
-        .adjustX(x_adjust)
-        .adjustY(y_adjust)
-        .toString();
-};
-
-const squareSvgPoints = (triangle: TriangleI) => {
-    const { AB, points } = triangle;
-    const size_adjust = 100 / AB;
-
-    const s = 10;
-
-    return `
-        ${x_adjust} ${points[1].y * size_adjust + y_adjust},
-        ${x_adjust + s} ${points[1].y * size_adjust + y_adjust},
-        ${x_adjust + s} ${points[1].y * size_adjust + y_adjust - s},
-        ${x_adjust} ${points[1].y * size_adjust + y_adjust - s},
-        ${x_adjust} ${points[1].y * size_adjust + y_adjust}
-   `;
-};
 
 function arrayRotate(arr: Array<any>) {
     arr.push(arr.shift());
@@ -45,9 +19,9 @@ const getPositionForLabel = (points: TriangleI['points'], labels: string[]) => {
 
     for (let i = 0; i < 3; i++) {
         let [point1, point2, point3] = _points;
-        const vectorA = new Vector2({ ...point1 });
-        const vectorB = new Vector2({ ...point2 });
-        const vectorC = new Vector2({ ...point3 });
+        const vectorA = new Vector2({...point1});
+        const vectorB = new Vector2({...point2});
+        const vectorC = new Vector2({...point3});
         const coordsBC = vectorB.add(vectorC).scalar(1 / 2);
         // Opposite position of coordsBC relative to A
         const vectorD = vectorA.add(vectorA.subtract(coordsBC));
@@ -77,82 +51,103 @@ const getPositionForLabel = (points: TriangleI['points'], labels: string[]) => {
     return arr;
 };
 
-const triangleTextToSvgPoints = (triangle: TriangleI) => {
-    const { AB, BC, AC, points } = triangle;
-    const size_adjust = 100 / AB;
-
-    const vectorAB = new Vector2({ ...points[0] }).add({ ...points[1] });
-    const vectorBC = new Vector2({ ...points[1] }).add({ ...points[2] });
-    const vectorAC = new Vector2({ ...points[2] }).add({ ...points[0] });
-
-    const lengthPoints = [
-        { ...vectorAB.scalar(1 / 2).xy },
-        { ...vectorBC.scalar(1 / 2).xy },
-        { ...vectorAC.scalar(1 / 2).xy }
-    ];
-
-    const positionForLabels = getPositionForLabel(points, ['A', 'B', 'C']);
-    const positionForLength = getPositionForLabel(lengthPoints, [
-        AB.toString(),
-        BC.toString(),
-        AC.toString()
-    ]).filter((p, i) => triangle.knowSide.includes(i));
-
-
-    return [
-        ...[...positionForLabels, ...positionForLength].map((p) => {
-            p.vector.adjustX = (x) => x * size_adjust + x_adjust + p.fixVector.x;
-            p.vector.adjustY = (y) => y * size_adjust + y_adjust + p.fixVector.y;
-
-            return {
-                ...p.vector.xy,
-                label: p.label,
-            };
-        })
-    ];
-};
-
 interface Props {
     triangle: TriangleI
 }
 
-const TriangleComponent: React.FC<Props> = (props) => {
+export default class TriangleComponent extends React.PureComponent<Props> {
 
-    const trianglePoints = useCallback(() => {
-        return triangleToSvgPoints(props.triangle);
-    }, [props.triangle]);
 
-    const squarePoints = useCallback(() => {
-        return squareSvgPoints(props.triangle);
-    }, [props.triangle]);
+    squareSvgPoints = (triangle: TriangleI) => {
+        const {AB, points} = triangle;
+        const size_adjust = 100 / AB;
 
-    const textsCoordinates = useCallback(() => {
-        return triangleTextToSvgPoints(props.triangle);
-    }, [props.triangle]);
+        const s = 10;
 
-    return (
-        <svg
-            style={{ maxWidth: 400, maxHeight: 200 }}
-            viewBox="0 0 400 200"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <polygon points={trianglePoints()} stroke="black" fill="white" strokeWidth={1}/>
-            <polygon points={squarePoints()} stroke="black" fill="white" strokeWidth={1}/>
+        return `
+        ${x_adjust} ${points[1].y * size_adjust + y_adjust},
+        ${x_adjust + s} ${points[1].y * size_adjust + y_adjust},
+        ${x_adjust + s} ${points[1].y * size_adjust + y_adjust - s},
+        ${x_adjust} ${points[1].y * size_adjust + y_adjust - s},
+        ${x_adjust} ${points[1].y * size_adjust + y_adjust}
+        `;
+    };
 
-            {textsCoordinates().map((text, i) => (
-                (text.label
-                    && <text
-                    key={i}
-                    x={text.x}
-                    y={text.y}
-                    fontFamily="Verdana"
-                    fontSize="15"
-                  >
-                      {text.label}
-                  </text>)
-            ))}
-        </svg>
-    );
+
+    triangleTextToSvgPoints = (triangle: TriangleI) => {
+        const {AB, BC, AC, points} = triangle;
+        const size_adjust = 100 / AB;
+
+        const vectorAB = new Vector2({...points[0]}).add({...points[1]});
+        const vectorBC = new Vector2({...points[1]}).add({...points[2]});
+        const vectorAC = new Vector2({...points[2]}).add({...points[0]});
+
+        const lengthPoints = [
+            {...vectorAB.scalar(1 / 2).xy},
+            {...vectorBC.scalar(1 / 2).xy},
+            {...vectorAC.scalar(1 / 2).xy}
+        ];
+
+        const positionForLabels = getPositionForLabel(points, ['A', 'B', 'C']);
+        const positionForLength = getPositionForLabel(lengthPoints, [
+            AB.toString(),
+            BC.toString(),
+            AC.toString()
+        ]).filter((p, i) => triangle.knowSide.includes(i));
+
+
+        return [
+            ...[...positionForLabels, ...positionForLength].map((p) => {
+                p.vector.adjustX = (x) => x * size_adjust + x_adjust + p.fixVector.x;
+                p.vector.adjustY = (y) => y * size_adjust + y_adjust + p.fixVector.y;
+
+                return {
+                    ...p.vector.xy,
+                    label: p.label,
+                };
+            })
+        ];
+    };
+
+    triangleToSvgPoints = (triangle: TriangleI) => {
+        const {vectors} = triangle;
+        const size_adjust = 100 / vectors[0].magnitude();
+
+        return new Polygon(vectors)
+            .scale(size_adjust)
+            .adjustX(x_adjust)
+            .adjustY(y_adjust)
+            .toString();
+    };
+
+
+    render() {
+        const trianglePoints = this.triangleToSvgPoints(this.props.triangle)
+        const squarePoints = this.squareSvgPoints(this.props.triangle)
+        const textsCoordinates = this.triangleTextToSvgPoints(this.props.triangle);
+
+        return (
+            <svg
+                style={{maxWidth: 400, maxHeight: 200}}
+                viewBox="0 0 400 200"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <polygon points={trianglePoints} stroke="black" fill="white" strokeWidth={1}/>
+                <polygon points={squarePoints} stroke="black" fill="white" strokeWidth={1}/>
+
+                {textsCoordinates.map((text, i) => (
+                    (text.label
+                        && <text
+                            key={i}
+                            x={text.x}
+                            y={text.y}
+                            fontFamily="Verdana"
+                            fontSize="15"
+                        >
+                            {text.label}
+                        </text>)
+                ))}
+            </svg>
+        );
+    }
 };
-
-export default TriangleComponent;

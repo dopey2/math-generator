@@ -328,8 +328,8 @@ export const xBaseExponent = () => {
     const expression = `\\frac{x^{${a}} * x^{${b}}}{x^{${c}} * x^{${d}}} =`;
     const step1 = `\\frac{x^{${a} + ${b}}}{x^{${c} + ${d}}} =`;
     const step2 = `\\frac{x^{${ab}}}{x^{${cd}}} =`;
-    let step3 = `x^{${ab} - ${cd}}`;
-    let step4 = `x^{${ab - cd}}`;
+    let step3 = `x^{${ab} - ${cd}} =`;
+    let step4 = `x^{${ab - cd}} `;
     let step5 = ``;
 
     if (ab - cd === 0) {

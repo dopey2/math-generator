@@ -34,12 +34,11 @@ const ExerciseStrategy: React.FC<Props> = (props) => {
                 triangle={props.visualRepresentation.canvas}
             />
         );
-
     }
 
-    if (props.visualRepresentation.type === "custom" && props.visualRepresentation.component) {
-        const C = props.visualRepresentation.component;
-        return <C {...props.visualRepresentation.props} />;
+    if (props.visualRepresentation.type === "custom" && props.visualRepresentation.custom) {
+        const C = props.visualRepresentation.custom.component;
+        return <C {...props.visualRepresentation.custom.props} />;
     }
 
     return null;
