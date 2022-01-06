@@ -1,5 +1,5 @@
 import Circle from "../Circle";
-import MathX from "../MathX";
+import MathX from "../MathX/MathX";
 
 type TriangleMathParams = {
   lengths?: number[];

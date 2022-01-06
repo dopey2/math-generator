@@ -1,4 +1,4 @@
-import MathX from "../../math/MathX";
+import MathX from "../../math/MathX/MathX";
 import ExerciseBuilder from "../ExerciseBuilder";
 import { toMultilineLatex } from "../utils";
 import Constant from "../../math/Operation/Constant/Constant";

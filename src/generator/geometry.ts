@@ -1,7 +1,7 @@
 import {toMultilineLatex} from "./utils";
 import {BaseOperationMethods} from "./arithmetics/arithmetics.gen";
 import {Vector2} from "../math";
-import MathX from "../math/MathX";
+import MathX from "../math/MathX/MathX";
 import ExerciseBuilder from "./ExerciseBuilder";
 import TriangleComponent from "./@component/Triangle.component";
 

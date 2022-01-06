@@ -2,7 +2,7 @@ import Tex from "../../Tex";
 import MathObj, { MathObjEnum } from "../MathObj/MathObj";
 import Constant from "../Constant/Constant";
 import Add from "../Add/Add";
-import MathX from "../../MathX";
+import MathX from "../../MathX/MathX";
 import Multiply from "../Multiply/Multiply";
 import Subtract from "../Subtract/Subtract";
 

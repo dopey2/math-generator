@@ -1,5 +1,5 @@
 import ExerciseBuilder from "../../ExerciseBuilder";
-import MathX from "../../../math/MathX";
+import MathX from "../../../math/MathX/MathX";
 
 const withSigne = (x: number) => {
     return x >= 0 ? `+ ${x}` : `- ${Math.abs(x)}`;

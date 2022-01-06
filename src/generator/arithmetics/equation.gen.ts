@@ -4,7 +4,7 @@ import Fraction from "../../math/Operation/Fraction/Fraction";
 import Subtract from "../../math/Operation/Subtract/Subtract";
 import Constant from "../../math/Operation/Constant/Constant";
 import Multiply from "../../math/Operation/Multiply/Multiply";
-import MathX from "../../math/MathX";
+import MathX from "../../math/MathX/MathX";
 import Tex from "../../math/Tex";
 
 const withSigne = (x: number) => {

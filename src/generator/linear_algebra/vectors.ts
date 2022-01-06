@@ -1,5 +1,5 @@
 import ExerciseBuilder from "../ExerciseBuilder";
-import MathX from "../../math/MathX";
+import MathX from "../../math/MathX/MathX";
 import GraphsComponent from "../@component/Graphs.component";
 import {toMultilineLatex} from "../utils";
 

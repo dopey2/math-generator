@@ -1,0 +1,49 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "tsconfig.json",
+    "sourceType": "module"
+  },
+
+  "plugins": [
+    "@typescript-eslint",
+    "@typescript-eslint/tslint"
+  ],
+  "rules": {
+    "array-callback-return": "warn",
+    "brace-style": "warn",
+    "comma-dangle": [
+      "warn",
+      {
+        "arrays": "never",
+        "functions": "never",
+        "objects": "always-multiline"
+      }
+    ],
+    "curly": "warn",
+    "default-param-last": ["warn"],
+    "dot-location": ["warn", "property"],
+    "function-paren-newline": ["warn", "multiline"],
+    "key-spacing": ["warn", {"beforeColon": false, "afterColon": true}],
+    "max-len": ["warn", {
+      "code": 120,
+      "ignoreStrings": true,
+      "ignoreTemplateLiterals": true,
+      "tabWidth": 4
+    }],
+
+    "no-multi-spaces": "warn",
+    "no-multiple-empty-lines": "warn",
+    "no-redeclare": "warn",
+    "@typescript-eslint/no-unused-vars": ["warn"],
+    "object-curly-spacing": ["warn", "always"],
+    "operator-linebreak": ["warn", "before"],
+    "quote-props": ["warn", "consistent"],
+    "semi": ["warn", "always"],
+    "semi-spacing": ["warn", {"before": false, "after": true}],
+    "space-before-blocks": "warn",
+    "space-before-function-paren": ["warn", "never"],
+    "space-infix-ops": ["warn", { "int32Hint": false }],
+    "space-in-parens": ["warn", "never"]
+  }
+}

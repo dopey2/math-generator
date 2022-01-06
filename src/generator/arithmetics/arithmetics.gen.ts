@@ -2,7 +2,7 @@ import * as math from 'mathjs';
 
 import { Triangle } from "../geometry";
 import ExerciseBuilder from "../ExerciseBuilder";
-import MathX from "../../math/MathX";
+import MathX from "../../math/MathX/MathX";
 
 export type BaseOperationMethods = (...args: any) => {
     expression: string;

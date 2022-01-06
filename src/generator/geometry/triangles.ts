@@ -2,7 +2,7 @@ import { toMultilineLatex } from "../utils";
 import Circle from "../../math/Circle";
 import { Vector2 } from "../../math";
 import { Coordinates2D } from "../../math/Vector2";
-import MathX from "../../math/MathX";
+import MathX from "../../math/MathX/MathX";
 
 export const randomTriangleLength = () => {
     const A = MathX.random(2, 10);
