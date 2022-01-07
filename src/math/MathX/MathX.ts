@@ -73,19 +73,13 @@ export default class MathX {
 
   static cartesianToPolar = (x: number, y: number) => {
       const h = Math.hypot(x, y);
-      const rad = Math.atan(y / x);
-
-      const quadrant = MathX.getQuadrantForPoint(x, y);
-      let fix = 0;
-      if([2, 3].includes(quadrant)) {
-        fix = 180;
-      }
-      if(quadrant === 4) {
-        fix = 360;
+      const rad = Math.atan2(y, x);
+      let deg = MathX.radianToDeg(rad);
+      if(deg < 0) {
+        deg += 360;
       }
 
-      const direction = (MathX.radianToDeg(rad) + fix) % 360;
-      return [h, direction];
+      return [h, deg];
   };
 
   static polarToCartesian = (length: number, degree: number) => {
