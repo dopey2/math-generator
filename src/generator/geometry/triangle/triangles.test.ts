@@ -1,4 +1,4 @@
-import { times } from "../utils";
+import { times } from "../../utils";
 import { randomTriangleLength } from "./triangles";
 
 describe("TRIANGLE LENGTH GENERATOR", () => {

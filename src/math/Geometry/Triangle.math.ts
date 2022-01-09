@@ -2,30 +2,47 @@ import Circle from "../Circle";
 import MathX from "../MathX/MathX";
 
 type TriangleMathParams = {
-  lengths?: number[];
-
+    sides?: number[];
 }
 
-export class Triangle {
+export default class Triangle {
+    sides: number[] = [];
 
-  constructor(params: TriangleMathParams) {
-    if (params.lengths && params.lengths.length === 3) {
-      const [AB, BC, AC] = params.lengths;
-
-      const circle1 = new Circle(0, 0, AC);
-      const circle2 = new Circle(AB, 0, BC);
-      const intersections = Circle.intersection(circle1, circle2);
-      const intersection = MathX.random(0, 1) ? intersections[0] : intersections[1];
-
-      const points = [
-        {x: 0, y: 0, label: 'A'},
-        {x: AB, y: 0, label: 'B'},
-        {x: intersection.x, y: intersection.y, label: 'C'}
-      ];
+    constructor(A: number, B: number, C: number) {
+        this.sides.push(A);
+        this.sides.push(B);
+        this.sides.push(C);
     }
-  }
 
-  static withSize = (AB: number, BC: number, AC: number) => {
-    return new Triangle({lengths: [AB, BC, AC]});
-  }
+    static withSize = (AB: number, BC: number, AC: number) => {
+        return new Triangle(AB, BC, AC);
+    }
+
+
+    getAngles: () => number[] = () => {
+        // cos A = (b2 + c2 − a2) / 2bc
+        const [a, b, c] = this.sides;
+
+        const cosA = (b ** 2 + c ** 2 - a ** 2) / (2 * b * c);
+        const A = MathX.radianToDeg(Math.acos(cosA));
+
+        const cosB = (c ** 2 + a ** 2 - b ** 2) / (2 * c * a);
+        const B = MathX.radianToDeg(Math.acos(cosB));
+        const C = 180 - (A + B);
+
+        return [A, B, C];
+    }
+
+    getAngleA: () => number = () => {
+        return this.getAngles()[0];
+    }
+
+    getAngleB: () => number = () => {
+        return this.getAngles()[1];
+    }
+
+    getAngleC: () => number = () => {
+        return this.getAngles()[2];
+    }
+
 }

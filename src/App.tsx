@@ -5,7 +5,6 @@ import {
     Route
 } from "react-router-dom";
 
-import QuestionGeneratorComponent from "./pages/QuestionGenerator/QuestionGenerator.page";
 import GeometryDraftPage from "./pages/Draft/GeometryDraft.page";
 import DraftOperationPage from "./pages/Draft/DraftOperationPage";
 import SelectExercise from "./pages/SelectExercice/SelectExercise";
@@ -17,14 +16,9 @@ const App: React.FC<any> = () => {
         <div className="App">
             <Router>
                 <Switch>
-                    <Route path="/generator">
-                        <QuestionGeneratorComponent/>
-                    </Route>
-
                     <Route path="/select/:id">
                         <SelectExercise/>
                     </Route>
-
 
                     <Route path="/geometryDraft">
                         <GeometryDraftPage/>
@@ -36,9 +30,10 @@ const App: React.FC<any> = () => {
 
                     <Route path="/">
                         <a href="/generator">Generator</a>
+                        <a href="/geometryDraft">Geometry Draft</a>
+                        <a href="/draftOperation">Operation Draft</a>
                         <a href="/select/0">Select</a>
                     </Route>
-
                 </Switch>
             </Router>
         </div>

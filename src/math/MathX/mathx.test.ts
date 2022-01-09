@@ -32,14 +32,12 @@ describe("MathX", () => {
   it("cartesianToPolar (-5, -3.5) => (6.10, -145.00°)", () => {
     const [l, d] = MathX.cartesianToPolar(-5, -3.5);
     expect(approxeq(l, 6.10)).toBe(true);
-    console.log("d", d);
     expect(approxeq(d, 215.00)).toBe(true);
   });
 
   it("cartesianToPolar (4.6, -3) => (5.49, 326.88°)", () => {
     const [l, d] = MathX.cartesianToPolar(4.6, -3);
     expect(approxeq(l, 5.49)).toBe(true);
-    console.log("d", d);
     expect(approxeq(d, 326.88)).toBe(true);
   });
 
