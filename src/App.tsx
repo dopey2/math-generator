@@ -29,7 +29,6 @@ const App: React.FC<any> = () => {
                     </Route>
 
                     <Route path="/">
-                        <a href="/generator">Generator</a>
                         <a href="/geometryDraft">Geometry Draft</a>
                         <a href="/draftOperation">Operation Draft</a>
                         <a href="/select/0">Select</a>

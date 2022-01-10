@@ -1,13 +1,10 @@
-import {toMultilineLatex} from "./utils";
-import {BaseOperationMethods} from "./arithmetics/arithmetics.gen";
 import MathX from "../math/MathX/MathX";
 import ExerciseBuilder from "./ExerciseBuilder";
 import TriangleComponent from "./@component/Triangle.component";
 import PolygonComponent from "./@component/Polygon.component";
-import Vector2 from "../math/Vector2";
-import { randomTriangleLength, vectorsFromPoints } from "./geometry/triangle/triangles";
-import Circle from "../math/Circle";
+import { randomTriangleLength } from "./geometry/triangle/triangles";
 import Triangle from "../math/Geometry/Triangle/Triangle.math";
+import Vector2 from "../math/Vector2";
 
 export interface TriangleI {
     points: { x: number, y: number, label?: string }[]
@@ -27,9 +24,9 @@ export const pythagore = () => {
 
 
     const points = [
-        {x: 0, y: 0, label: 'A'},
-        {x: 0, y: AB, label: 'B'},
-        {x: BC, y: AB, label: 'C'}
+        { x: 0, y: 0, label: 'A' },
+        { x: 0, y: AB, label: 'B' },
+        { x: BC, y: AB, label: 'C' }
     ];
 
     const vectors = [
@@ -51,7 +48,7 @@ export const pythagore = () => {
 
     result === Math.floor(result) && steps.push(`AC = ${result}`);
 
-    const expression = `Soit ABC un triangle rectangle en B. AB=${AB} et BC=${BC}. Calculer AC`
+    const expression = `Soit ABC un triangle rectangle en B. AB=${AB} et BC=${BC}. Calculer AC`;
     const triangleProps = {
         triangle: {
             points,
@@ -59,9 +56,9 @@ export const pythagore = () => {
             AB,
             BC,
             AC,
-            knowSide: [0, 1]
-        }
-    }
+            knowSide: [0, 1],
+        },
+    };
 
     return new ExerciseBuilder()
         .addQuestionHtml(expression)
@@ -69,9 +66,8 @@ export const pythagore = () => {
         .addCustomAnswer(TriangleComponent, triangleProps)
         .addAnswerLatex(steps[steps.length - 1])
         .addStepAnswerLatex(...steps)
-        .toJSON()
+        .toJSON();
 };
-
 
 
 export const triangleExercice = () => {

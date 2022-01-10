@@ -1,18 +1,8 @@
 import * as math from 'mathjs';
 
-import { TriangleI } from "../geometry";
 import ExerciseBuilder from "../ExerciseBuilder";
 import MathX from "../../math/MathX/MathX";
 
-// TODO REMOVE THIS
-export type BaseOperationMethods = (...args: any) => {
-    expression: string;
-    latex: string;
-    value?: number;
-    latexValue: string;
-    steps?: string[];
-    triangle?: TriangleI
-}
 
 
 // TODO REMOVE THIS
@@ -70,22 +60,22 @@ export const multiplication = (args: {
         .toJSON();
 };
 
-export const substraction = (
-    maxNumber: number,
-    allowNegative: number
-) => {
-    const operands: number[] = MathX.randomValues(2, 1, maxNumber);
-
-    const min = Math.min(...operands);
-    const max = Math.max(...operands);
-    const expression = `${max} - ${min}`;
-    const value = max - min;
-
-    return new ExerciseBuilder()
-        .addQuestionLatex(expression)
-        .addAnswerLatex(`${expression} = ${value}`)
-        .toJSON();
-};
+// export const substraction = (
+//     maxNumber: number,
+//     allowNegative: number
+// ) => {
+//     const operands: number[] = MathX.randomValues(2, 1, maxNumber);
+//
+//     const min = Math.min(...operands);
+//     const max = Math.max(...operands);
+//     const expression = `${max} - ${min}`;
+//     const value = max - min;
+//
+//     return new ExerciseBuilder()
+//         .addQuestionLatex(expression)
+//         .addAnswerLatex(`${expression} = ${value}`)
+//         .toJSON();
+// };
 
 export const division = (args: {
     minNumber?: number,
@@ -243,9 +233,9 @@ export const fractionRulesExpression = () => {
         divisor: MathX.random(1, 10),
     };
 
-    const expression1 = `${fractionA.dividend}/${fractionA.divisor}`;
-    const expression2 = `${fractionB.dividend}/${fractionB.divisor}`;
-    const expression3 = `${fractionC.dividend}/${fractionC.divisor}`;
+    // const expression1 = `${fractionA.dividend}/${fractionA.divisor}`;
+    // const expression2 = `${fractionB.dividend}/${fractionB.divisor}`;
+    // const expression3 = `${fractionC.dividend}/${fractionC.divisor}`;
 
     const operator1 = MathX.random(0, 1) ? '*' : ':';
     const operator2 = MathX.random(0, 1) ? '+' : '-';
@@ -253,9 +243,8 @@ export const fractionRulesExpression = () => {
     const fractionAB = solveFractionOperation(fractionA, fractionB, operator1);
     const fractionABC = solveFractionOperation(fractionAB, fractionC, operator2);
 
-    const finalExpression = `${expression1} ${operator1} ${expression2} ${operator2} ${expression3}`;
-
-    const value = 0;
+    // const finalExpression = `${expression1} ${operator1} ${expression2} ${operator2} ${expression3}`;
+    // const value = 0;
 
     const steps = [];
 

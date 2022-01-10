@@ -37,12 +37,10 @@ export default class GraphsComponent extends React.PureComponent<Props> {
         return this.props.unitsInterval !== undefined ? this.props.unitsInterval : 1;
     }
 
-    toPoint = (x: number) => x * this.units
-
     render() {
         return (
             <svg
-                style={{width: this.width, height: this.height}}
+                style={{ width: this.width, height: this.height }}
                 viewBox={`0 0 ${this.width} ${this.height}`}
                 xmlns="http://www.w3.org/2000/svg"
             >
@@ -59,7 +57,7 @@ export default class GraphsComponent extends React.PureComponent<Props> {
                         key={i}
                         {...v}
                         units={this.units}
-                        origin={{x: this.width /2, y: this.height / 2}}
+                        origin={{ x: this.width / 2, y: this.height / 2 }}
                     />
                     ))}
 

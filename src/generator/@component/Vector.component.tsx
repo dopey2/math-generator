@@ -29,16 +29,16 @@ export default class VectorComponent extends React.PureComponent<Props> {
         const fixMargin = 0.3;
         const fixX = this.props.x > 0 ? this.props.x + fixMargin : this.props.x - fixMargin * 2;
         const lineY = line.getY(this.props.x) || this.props.y;
-        const fixY = lineY > 0 ? lineY + fixMargin : lineY - fixMargin * 2
+        const fixY = lineY > 0 ? lineY + fixMargin : lineY - fixMargin * 2;
 
         return {
             x: this.toPointX(fixX),
-            y: this.toPointY(fixY)
+            y: this.toPointY(fixY),
         };
-    }
+    };
 
-    toPointX = (k: number) => this.props.origin.x + k * this.props.units
-    toPointY = (k: number) => this.props.origin.y - k * this.props.units
+    toPointX = (k: number) => this.props.origin.x + k * this.props.units;
+    toPointY = (k: number) => this.props.origin.y - k * this.props.units;
 
     render() {
         return (
@@ -67,6 +67,6 @@ export default class VectorComponent extends React.PureComponent<Props> {
 
                 <text {...this.getLabelCoordinates()} stroke={this.color}>{this.props.label}</text>
             </>
-        )
+        );
     }
 }

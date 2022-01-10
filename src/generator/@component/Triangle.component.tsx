@@ -1,8 +1,8 @@
-import React, {useCallback} from 'react';
-import Polygon from '../../math/Geometry/Polygon/Polygon';
-import Vector2 from '../../math/Vector2';
+import React from 'react';
 
 import { TriangleI } from "../geometry";
+import Vector2 from "../../math/Vector2";
+import Polygon from "../../math/Geometry/Polygon/Polygon";
 
 const x_adjust = 50;
 const y_adjust = 50;
@@ -19,9 +19,9 @@ const getPositionForLabel = (points: TriangleI['points'], labels: string[]) => {
 
     for (let i = 0; i < 3; i++) {
         let [point1, point2, point3] = _points;
-        const vectorA = new Vector2({...point1});
-        const vectorB = new Vector2({...point2});
-        const vectorC = new Vector2({...point3});
+        const vectorA = new Vector2({ ...point1 });
+        const vectorB = new Vector2({ ...point2 });
+        const vectorC = new Vector2({ ...point3 });
         const coordsBC = vectorB.add(vectorC).scalar(1 / 2);
         // Opposite position of coordsBC relative to A
         const vectorD = vectorA.add(vectorA.subtract(coordsBC));
@@ -56,10 +56,8 @@ interface Props {
 }
 
 export default class TriangleComponent extends React.PureComponent<Props> {
-
-
     squareSvgPoints = (triangle: TriangleI) => {
-        const {AB, points} = triangle;
+        const { AB, points } = triangle;
         const size_adjust = 100 / AB;
 
         const s = 10;
@@ -75,17 +73,17 @@ export default class TriangleComponent extends React.PureComponent<Props> {
 
 
     triangleTextToSvgPoints = (triangle: TriangleI) => {
-        const {AB, BC, AC, points} = triangle;
+        const { AB, BC, AC, points } = triangle;
         const size_adjust = 100 / AB;
 
-        const vectorAB = new Vector2({...points[0]}).add({...points[1]});
-        const vectorBC = new Vector2({...points[1]}).add({...points[2]});
-        const vectorAC = new Vector2({...points[2]}).add({...points[0]});
+        const vectorAB = new Vector2({ ...points[0] }).add({ ...points[1] });
+        const vectorBC = new Vector2({ ...points[1] }).add({ ...points[2] });
+        const vectorAC = new Vector2({ ...points[2] }).add({ ...points[0] });
 
         const lengthPoints = [
-            {...vectorAB.scalar(1 / 2).xy},
-            {...vectorBC.scalar(1 / 2).xy},
-            {...vectorAC.scalar(1 / 2).xy}
+            { ...vectorAB.scalar(1 / 2).xy },
+            { ...vectorBC.scalar(1 / 2).xy },
+            { ...vectorAC.scalar(1 / 2).xy }
         ];
 
         const positionForLabels = getPositionForLabel(points, ['A', 'B', 'C']);
@@ -110,7 +108,7 @@ export default class TriangleComponent extends React.PureComponent<Props> {
     };
 
     triangleToSvgPoints = (triangle: TriangleI) => {
-        const {vectors} = triangle;
+        const { vectors } = triangle;
         const size_adjust = 100 / vectors[0].magnitude();
 
         return new Polygon(vectors)
@@ -122,13 +120,13 @@ export default class TriangleComponent extends React.PureComponent<Props> {
 
 
     render() {
-        const trianglePoints = this.triangleToSvgPoints(this.props.triangle)
-        const squarePoints = this.squareSvgPoints(this.props.triangle)
+        const trianglePoints = this.triangleToSvgPoints(this.props.triangle);
+        const squarePoints = this.squareSvgPoints(this.props.triangle);
         const textsCoordinates = this.triangleTextToSvgPoints(this.props.triangle);
 
         return (
             <svg
-                style={{maxWidth: 400, maxHeight: 200}}
+                style={{ maxWidth: 400, maxHeight: 200 }}
                 viewBox="0 0 400 200"
                 xmlns="http://www.w3.org/2000/svg"
             >

@@ -32,5 +32,4 @@ export const systemWith2Unknown = () => {
       .addAnswerLatex(expression, step4)
       .addStepAnswerLatex(expression, step1, step4)
       .toJSON();
-
 };

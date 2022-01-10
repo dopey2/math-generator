@@ -34,10 +34,9 @@ import {
     enumerationPinCode
 } from "../../generator/enumeration/enumeration";
 import ExerciseComponent from "../../component/Exercice.component";
-import { vectors1 } from "../../generator/linear_algebra/vectors";
 import { pythagore, triangleExercice } from "../../generator/geometry";
-import MathX from "../../math/MathX/MathX";
-import {degToRadian} from "../../generator/trigonometry/trigonometry";
+import { degToRadian } from "../../generator/trigonometry/trigonometry";
+import {vectors1} from "../../generator/linear_algebra/vectors";
 
 type ExerciseItem = { label: string, fun: () => ExerciseI };
 

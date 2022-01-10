@@ -5,14 +5,6 @@ const withSigne = (x: number) => {
     return x >= 0 ? `+ ${x}` : `- ${Math.abs(x)}`;
 };
 
-const withNegativeSigne = (x: number) => {
-    return x < 0 ? `- ${Math.abs(x)}` : `${x}`;
-};
-
-const inverseSigne = (x: number) => {
-    return x > 0 ? `- ${x}` : `+ ${-x}`;
-};
-
 export const developpeExpression2 = () => {
     let [a, b, c, d] = MathX.randomValues(4, -10, 10, [0]);
     const expression = `(${a}x ${withSigne(b)})(${c}x ${withSigne(d)})`;

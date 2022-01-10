@@ -24,7 +24,7 @@ import ExerciseBuilder from "../ExerciseBuilder";
 
 
 export const degToRadian = () => {
-  const deg = 180 // MathX.random(0, 36) * 10;
+  const deg = 180; // MathX.random(0, 36) * 10;
   const rad = MathX.degToRadian(deg);
 
   const expression = `Exprimer l'angle ${deg}° en radion.`;
@@ -36,18 +36,12 @@ export const degToRadian = () => {
     `\\frac{${deg}\\pi}{180°} rad`
   ];
 
-  let step3 = '';
-
   if(deg === 180) {
-    steps[steps.length -1] = `${steps[steps.length -1] } <=>`;
+    steps[steps.length - 1] = `${steps[steps.length - 1] } <=>`;
     steps.push("\\pi");
   } else {
 
   }
-
-
-  console.log("lcm", MathX.lcm(deg, 180));
-  console.log("gcd", MathX.gcd(deg, 180));
 
 
   return new ExerciseBuilder()
