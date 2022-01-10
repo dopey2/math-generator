@@ -1,5 +1,5 @@
 import React from 'react';
-import { Triangle as TriangleI } from "../../generator/geometry";
+import { TriangleI } from "../../generator/geometry";
 
 import { randomTriangle, randomTriangleLength } from '../../generator/geometry/triangle/triangles';
 import Polygon from '../../math/Geometry/Polygon/Polygon';

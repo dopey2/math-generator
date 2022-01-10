@@ -1,26 +1,31 @@
 import * as math from 'mathjs';
 
-import { Triangle } from "../geometry";
+import { TriangleI } from "../geometry";
 import ExerciseBuilder from "../ExerciseBuilder";
 import MathX from "../../math/MathX/MathX";
 
+// TODO REMOVE THIS
 export type BaseOperationMethods = (...args: any) => {
     expression: string;
     latex: string;
     value?: number;
     latexValue: string;
     steps?: string[];
-    triangle?: Triangle
+    triangle?: TriangleI
 }
 
+
+// TODO REMOVE THIS
 type Fraction = {
     dividend: number;
     divisor: number;
     quotient?: number;
 }
 
+// TODO REMOVE THIS
 type BaseOperator = '+' | '-' | '*' | ':';
 
+// TODO REMOVE THIS
 const baseOperation = (term1: number, term2: number, operator: BaseOperator) => {
     switch (operator) {
         case "+":

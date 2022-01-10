@@ -2,7 +2,7 @@ import React, {useCallback} from 'react';
 import Polygon from '../../math/Geometry/Polygon/Polygon';
 import Vector2 from '../../math/Vector2';
 
-import {Triangle as TriangleI} from "../geometry";
+import { TriangleI } from "../geometry";
 
 const x_adjust = 50;
 const y_adjust = 50;
