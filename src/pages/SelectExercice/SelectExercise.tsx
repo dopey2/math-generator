@@ -35,7 +35,7 @@ import {
 } from "../../generator/enumeration/enumeration";
 import ExerciseComponent from "../../component/Exercice.component";
 import { vectors1 } from "../../generator/linear_algebra/vectors";
-import { pythagore } from "../../generator/geometry";
+import { pythagore, triangleExercice } from "../../generator/geometry";
 import MathX from "../../math/MathX/MathX";
 import {degToRadian} from "../../generator/trigonometry/trigonometry";
 
@@ -70,6 +70,7 @@ const exerciseList: ExerciseItem[] = [
     { label: "Probability with intersection", fun: () => probabilityWithIntersection() },
     { label: "Vecteurs", fun: () => vectors1() },
     { label: "Pythagore", fun: () => pythagore() },
+    { label: "Triangle test", fun: () => triangleExercice() },
     { label: "Convert degree to radian", fun: () => degToRadian() }
 
 ];
@@ -120,11 +121,6 @@ class SelectExercise extends React.PureComponent<RouteComponentProps<{ id: strin
     };
 
     render() {
-
-
-        console.log("atan2",MathX.radianToDeg(Math.atan2(-1,1)));
-        console.log("atan", MathX.radianToDeg(Math.atan(-1/1)));
-
         return (
             <div className={styles.pageContainer}>
 

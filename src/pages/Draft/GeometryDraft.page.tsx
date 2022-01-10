@@ -1,8 +1,8 @@
 import React from 'react';
 import { Triangle as TriangleI } from "../../generator/geometry";
-import { Polygon } from "../../math";
 
 import { randomTriangle, randomTriangleLength } from '../../generator/geometry/triangle/triangles';
+import Polygon from '../../math/Geometry/Polygon/Polygon';
 
 export default class GeometryDraftPage extends React.PureComponent {
     triangle!: TriangleI;

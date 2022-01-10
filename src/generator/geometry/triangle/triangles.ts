@@ -1,7 +1,6 @@
 import { toMultilineLatex } from "../../utils";
 import Circle from "../../../math/Circle";
-import { Vector2 } from "../../../math";
-import { Coordinates2D } from "../../../math/Vector2";
+import Vector2, { Coordinates2D } from "../../../math/Vector2";
 import MathX from "../../../math/MathX/MathX";
 
 export const randomTriangleLength = () => {
@@ -60,7 +59,7 @@ export const randomTriangle = () => {
 };
 
 
-const vectorsFromPoints = (points: Coordinates2D[]) => {
+export const vectorsFromPoints = (points: Coordinates2D[]) => {
     const vectors: Vector2[] = [];
 
     for (let i = 0; i < points.length; i++) {

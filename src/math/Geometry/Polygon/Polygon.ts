@@ -1,4 +1,4 @@
-import Vector2 from "./Vector2";
+import Vector2 from "../../Vector2";
 
 export default class Polygon {
     points!: number[][];
@@ -43,6 +43,21 @@ export default class Polygon {
         }
         return this;
     };
+
+    getCentroid = () => {
+        let x = 0;
+        let y = 0;
+
+        this.points.forEach((p) => {
+            x += p[0];
+            y += p[1];
+        })
+
+        x /= this.points.length;
+        y /= this.points.length;
+
+        return [x, y];
+    }
 
     toString = () => {
         let str = '';
