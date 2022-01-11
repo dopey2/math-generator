@@ -59,7 +59,7 @@ export default class GraphsComponent extends React.PureComponent<Props> {
                         units={this.units}
                         origin={{ x: this.width / 2, y: this.height / 2 }}
                     />
-                    ))}
+                ))}
 
             </svg>
         );

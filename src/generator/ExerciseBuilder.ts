@@ -1,5 +1,5 @@
 import React from "react";
-import { toMultilineLatex } from "./utils";
+import Tex from "../math/Tex";
 
 export interface VisualRepresentationI {
     type: "latex" | "canvas" | "html" | "custom" | "row",
@@ -26,7 +26,7 @@ export default class ExerciseBuilder {
     };
 
     addQuestionLatex(...args: any) {
-        this.output.question.push({ type: "latex", latex: toMultilineLatex(args) });
+        this.output.question.push({ type: "latex", latex: Tex.toMultilineLatex(args) });
         return this;
     }
 
@@ -44,7 +44,7 @@ export default class ExerciseBuilder {
     }
 
     addAnswerLatex(...args: any) {
-        this.output.answer.push({ type: "latex", latex: toMultilineLatex(args) });
+        this.output.answer.push({ type: "latex", latex: Tex.toMultilineLatex(args) });
         return this;
     }
 
@@ -65,7 +65,7 @@ export default class ExerciseBuilder {
         if (!this.output.stepAnswer) {
             this.output.stepAnswer = [];
         }
-        this.output.stepAnswer.push({ type: "latex", latex: toMultilineLatex(args) });
+        this.output.stepAnswer.push({ type: "latex", latex: Tex.toMultilineLatex(args) });
         return this;
     }
 

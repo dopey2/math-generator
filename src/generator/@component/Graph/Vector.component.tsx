@@ -1,5 +1,5 @@
 import React from 'react';
-import Line from "../../math/Line/Line";
+import Line from "../../../math/Line/Line";
 
 interface Props {
     x: number;

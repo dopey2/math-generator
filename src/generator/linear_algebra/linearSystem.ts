@@ -1,7 +1,7 @@
 import MathX from "../../math/MathX/MathX";
 import ExerciseBuilder from "../ExerciseBuilder";
-import { toMultilineLatex } from "../utils";
 import Constant from "../../math/Operation/Constant/Constant";
+import Tex from "../../math/Tex";
 
 
 /**
@@ -10,26 +10,26 @@ import Constant from "../../math/Operation/Constant/Constant";
  */
 
 export const systemWith2Unknown = () => {
-  const [x, y, a, b, c, d] = MathX.randomValues(6, -10, 10, [0]);
+    const [x, y, a, b, c, d] = MathX.randomValues(6, -10, 10, [0]);
 
-  const expression = toMultilineLatex([
-    `${a}x ${new Constant(b).toTex({ constant: { showSign: true } })}y = ${a * x + b * y}`,
-    `${c}x ${new Constant(d).toTex({ constant: { showSign: true } })}y = ${c * x + d * y}`
-  ]);
-
-
-  const lcmAB = MathX.lcm(a, b);
-  const aa = lcmAB / a;
-  const bb = lcmAB / b;
+    const expression = Tex.toMultilineLatex([
+        `${a}x ${new Constant(b).toTex({ constant: { showSign: true } })}y = ${a * x + b * y}`,
+        `${c}x ${new Constant(d).toTex({ constant: { showSign: true } })}y = ${c * x + d * y}`
+    ]);
 
 
-  const step1 = '2x';
-  const step4 = 'blabla';
+    const lcmAB = MathX.lcm(a, b);
+    const aa = lcmAB / a;
+    const bb = lcmAB / b;
 
 
-  return new ExerciseBuilder()
-      .addQuestionLatex(expression)
-      .addAnswerLatex(expression, step4)
-      .addStepAnswerLatex(expression, step1, step4)
-      .toJSON();
+    const step1 = '2x';
+    const step4 = 'blabla';
+
+
+    return new ExerciseBuilder()
+        .addQuestionLatex(expression)
+        .addAnswerLatex(expression, step4)
+        .addStepAnswerLatex(expression, step1, step4)
+        .toJSON();
 };

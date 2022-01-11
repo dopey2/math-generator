@@ -43,16 +43,16 @@ export default class DraftOperationPage extends React.PureComponent<any, State> 
                 lastStep,
             };
         });
-    }
+    };
 
     solveAll = () => {
         const steps = this.state.expressions[this.state.selected].solveAllToTex();
         this.setState({ steps });
-    }
+    };
 
     prevExpression = () => {
         // @ts-ignore
-            this.setState((prevState) => {
+        this.setState((prevState) => {
             const selected = Math.max(0, prevState.selected - 1);
 
             return {
@@ -61,7 +61,7 @@ export default class DraftOperationPage extends React.PureComponent<any, State> 
                 steps: [expressionsList[selected].toTex()],
             };
         });
-    }
+    };
 
 
     nextExpression = () => {
@@ -76,7 +76,7 @@ export default class DraftOperationPage extends React.PureComponent<any, State> 
                 steps: [expressionsList[selected].toTex()],
             };
         });
-    }
+    };
 
     render() {
 

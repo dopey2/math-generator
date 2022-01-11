@@ -1,9 +1,12 @@
-import { times } from "../../utils";
 import { randomTriangleLength } from "./triangles";
 
 describe("TRIANGLE LENGTH GENERATOR", () => {
     const data: Array<Array<number>> = [];
-    times(10, () => data.push(randomTriangleLength()));
+
+    for(let i = 0 ; i < 10; i++) {
+        data.push(randomTriangleLength())
+    }
+
     data.forEach((length) => {
         const [A, B, C] = length;
         it("A + B > C", () => {

@@ -16,4 +16,19 @@ export default class Tex {
         return '\\noindent\\makebox[\\linewidth]{\\rule{\\paperwidth}{0.4pt}}';
     }
 
+    static toMultilineLatex = (lines: string[]) => {
+        let latex = `\\begin{split}`;
+
+        lines.forEach((l) => {
+            latex += " \&";
+            const words = l.split(' ');
+            words.forEach((w) => {
+                latex += ` ${w} \\space`;
+            });
+            latex += " \\newline";
+        });
+        latex += " \\end{split}";
+        return latex;
+    };
 }
+

@@ -1,7 +1,7 @@
 import ExerciseBuilder from "../ExerciseBuilder";
 import MathX from "../../math/MathX/MathX";
-import GraphsComponent from "../@component/Graphs.component";
-import { toMultilineLatex } from "../utils";
+import GraphsComponent from "../@component/Graph/Graphs.component";
+import Tex from "../../math/Tex";
 
 
 export const vectors1 = () => {
@@ -20,7 +20,7 @@ export const vectors1 = () => {
         { x: x3, y: y3, label: 'w', color: 'red' }
     ];
 
-    const answer = toMultilineLatex([
+    const answer = Tex.toMultilineLatex([
         `\\overrightarrow{u} = (${x1}, ${y1})`,
         `\\overrightarrow{v} = (${x2}, ${y2})`,
         `\\overrightarrow{w} = (${x3}, ${y3})`

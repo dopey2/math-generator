@@ -34,9 +34,9 @@ import {
     enumerationPinCode
 } from "../../generator/enumeration/enumeration";
 import ExerciseComponent from "../../component/Exercice.component";
-import { pythagore, triangleExercice } from "../../generator/geometry";
+import { getSquareArea, pythagore, triangleExercice } from "../../generator/geometry";
 import { degToRadian } from "../../generator/trigonometry/trigonometry";
-import {vectors1} from "../../generator/linear_algebra/vectors";
+import { vectors1 } from "../../generator/linear_algebra/vectors";
 
 type ExerciseItem = { label: string, fun: () => ExerciseI };
 
@@ -70,14 +70,14 @@ const exerciseList: ExerciseItem[] = [
     { label: "Vecteurs", fun: () => vectors1() },
     { label: "Pythagore", fun: () => pythagore() },
     { label: "Triangle test", fun: () => triangleExercice() },
+    { label: "Square area", fun: () => getSquareArea() },
     { label: "Convert degree to radian", fun: () => degToRadian() }
-
 ];
 
 interface State {
     exerciseName: string;
-    exerciseKey: number | string;
     exercise: ExerciseI | null;
+    refreshKey: number;
 }
 
 class SelectExercise extends React.PureComponent<RouteComponentProps<{ id: string }>, State> {
@@ -89,6 +89,7 @@ class SelectExercise extends React.PureComponent<RouteComponentProps<{ id: strin
         const state: any = {
             exerciseName: '',
             exercise: null,
+            refreshKey: 0,
         };
 
         const pathId = this.props.match.params.id;
@@ -115,7 +116,11 @@ class SelectExercise extends React.PureComponent<RouteComponentProps<{ id: strin
         const exercise = exerciseList[key];
 
         if (exercise) {
-            this.setState({ exerciseName: exercise.label, exercise: exercise.fun() });
+            this.setState((prevState) => ({
+                exerciseName: exercise.label,
+                exercise: exercise.fun(),
+                refreshKey: prevState.refreshKey + 1,
+            }));
         }
     };
 
@@ -129,9 +134,9 @@ class SelectExercise extends React.PureComponent<RouteComponentProps<{ id: strin
                             <li
                                 key={i}
                                 className={clsx({
-                                [styles.navItemSelected]: i === parseInt(this.props.match.params.id),
-                                [styles.navItem]: true,
-                            })}>
+                                    [styles.navItemSelected]: i === parseInt(this.props.match.params.id),
+                                    [styles.navItem]: true,
+                                })}>
                                 <Link to={`/select/${i}`}>{i} - {ex.label}</Link>
                             </li>
                         ))}
@@ -144,7 +149,7 @@ class SelectExercise extends React.PureComponent<RouteComponentProps<{ id: strin
                     <div className={'mt-8'}>
                         {this.state.exercise && (
                             <ExerciseComponent
-                                key={this.state.exerciseKey}
+                                key={this.state.refreshKey}
                                 title={this.state.exerciseName}
                                 exercise={[this.state.exercise]}
                             />

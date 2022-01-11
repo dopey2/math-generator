@@ -18,7 +18,7 @@ export default class GraphGrid extends React.PureComponent<Props> {
         }
 
         return rows;
-    }
+    };
 
     renderCols = () => {
         const cols = [];
@@ -28,7 +28,7 @@ export default class GraphGrid extends React.PureComponent<Props> {
         }
 
         return cols;
-    }
+    };
 
     renderUnit = () => {
 
@@ -112,7 +112,7 @@ export default class GraphGrid extends React.PureComponent<Props> {
         }
 
         return units;
-    }
+    };
 
     render() {
         return (

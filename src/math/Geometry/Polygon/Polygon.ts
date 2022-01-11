@@ -1,28 +1,10 @@
 import MathX from "../../MathX/MathX";
-import Vector2 from "../../Vector2";
 
 export default class Polygon {
     points!: number[][];
-    labels = [];
 
-    constructor(vectors: Vector2[]);
-    constructor(points: number[][]);
-    constructor(...args: any[]) {
-        if (args[0] && args[0][0] && typeof args[0][0][0] === 'number') {
-            this.points = args[0];
-        } else if (args[0] && args[0][0] && Object.getPrototypeOf(args[0][0]) === Vector2.prototype) {
-            const points = [[0, 0]];
-            let vector = args[0][0];
-            points.push([vector.x, vector.y]);
-
-            for (let i = 1; i < args[0].length; i++) {
-                vector = vector.add(args[0][i]);
-                points.push([vector.x, vector.y]);
-            }
-            this.points = points;
-        }
-
-        return this;
+    constructor(points: number[][]) {
+        this.points = points;
     }
 
     scale = (k: number) => {
@@ -30,9 +12,10 @@ export default class Polygon {
         for (let i = 0; i < this.points.length; i++) {
             points.push([
                 this.points[i][0] * k,
-                this.points[i][1] * k,
+                this.points[i][1] * k
             ]);
         }
+
         return new Polygon(points);
     };
 
@@ -41,31 +24,22 @@ export default class Polygon {
         for (let i = 0; i < this.points.length; i++) {
             points.push([
                 this.points[i][0] *= x,
-                this.points[i][1] *= y,
+                this.points[i][1] *= y
             ]);
         }
         return new Polygon(points);
     };
 
-
     adjustToFit = () => {
         const [cX, cY] = this.getCentroid();
-        const [x, y] = this.points[0];
-
-        const diffX = cX - x;
-        const diffY = cY - y;
-
-        const longestPairOfVertices = this.longestPairOfVertices();
-
-
-        return this.adjustX(longestPairOfVertices / 2 - cX).adjustY(longestPairOfVertices / 2 - cY);
-
-    }
+        const longestVerticesFromCenterLength = this.getCircumcircleRadius();
+        return this.adjustX(longestVerticesFromCenterLength - cX).adjustY(longestVerticesFromCenterLength - cY);
+    };
 
     scaleToFit = (width: number, height: number) => {
-        const l = this.longestPairOfVertices();
-        return this.scaleXY(width / l, height / l)
-    }
+        const l = this.getLongestEdge();
+        return this.scaleXY(width / l, height / l);
+    };
 
     adjustX = (x: number) => {
         let points = [];
@@ -90,11 +64,11 @@ export default class Polygon {
     };
 
     rotate = (deg: number = 0) => {
-        const [x, y] = this.getCentroid()
-        return this.rotateArround(deg, x, y);
-    }
+        const [x, y] = this.getCentroid();
+        return this.rotateAround(deg, x, y);
+    };
 
-    rotateArround = (deg: number, xC: number, yC: number) => {
+    rotateAround = (deg: number, xC: number, yC: number) => {
         let points: number[][] = [];
 
         const rad = MathX.degToRadian(deg);
@@ -105,12 +79,11 @@ export default class Polygon {
             points.push([
                 (x - xC) * Math.cos(rad) - (y - yC) * Math.sin(rad) + xC,
                 (y - yC) * Math.cos(rad) + (x - xC) * Math.sin(rad) + yC
-            ])
-        })
+            ]);
+        });
 
         return new Polygon(points);
-    }
-
+    };
 
     getCentroid = () => {
         let x = 0;
@@ -119,15 +92,15 @@ export default class Polygon {
         this.points.forEach((p) => {
             x += p[0];
             y += p[1];
-        })
+        });
 
         x /= this.points.length;
         y /= this.points.length;
 
         return [x, y];
-    }
+    };
 
-    longestPairOfVertices = () => {
+    getLongestEdge = () => {
         let max = 0;
 
         for (let i = 0; i < this.points.length; i++) {
@@ -141,9 +114,9 @@ export default class Polygon {
             }
         }
         return max;
-    }
+    };
 
-    longestVerticesFromCenterLenght = () => {
+    getCircumcircleRadius = () => {
         let max = 0;
 
         const [xC, yC] = this.getCentroid();
@@ -156,16 +129,22 @@ export default class Polygon {
             }
         }
         return max;
-    }
+    };
 
+    getEdgesMidpoint = () => {
+        const midpoints = [];
 
-    getDimensions = () => {
-        const xValues = this.points.map((p) => p[0]);
-        const yValues = this.points.map((p) => p[1]);
-        const x = Math.max(...xValues) - Math.min(...xValues);
-        const y = Math.max(...yValues) - Math.min(...yValues);
-        return [x, y];
-    }
+        for(let i = 0; i < this.points.length; i++) {
+            const p1 = this.points[i];
+            const p2 = i === this.points.length - 1 ? this.points[0] : this.points[i + 1];
+            const x = (p2[0] + p1[0]) / 2;
+            const y = (p2[1] + p1[1]) / 2;
+            midpoints.push([x, y]);
+        }
+
+        return midpoints;
+    };
+
 
     toString = () => {
         let str = '';

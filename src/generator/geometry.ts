@@ -1,10 +1,10 @@
 import MathX from "../math/MathX/MathX";
 import ExerciseBuilder from "./ExerciseBuilder";
-import TriangleComponent from "./@component/Triangle.component";
-import PolygonComponent from "./@component/Polygon.component";
+import PolygonComponent from "./@component/Polygon/Polygon.component";
 import { randomTriangleLength } from "./geometry/triangle/triangles";
 import Triangle from "../math/Geometry/Triangle/Triangle.math";
 import Vector2 from "../math/Vector2";
+import Square from "../math/Geometry/Square/Square";
 
 export interface TriangleI {
     points: { x: number, y: number, label?: string }[]
@@ -22,19 +22,6 @@ export const pythagore = () => {
     const BC = Math.floor(tan * AB);
     const AC = Math.hypot(AB, BC);
 
-
-    const points = [
-        { x: 0, y: 0, label: 'A' },
-        { x: 0, y: AB, label: 'B' },
-        { x: BC, y: AB, label: 'C' }
-    ];
-
-    const vectors = [
-        new Vector2(0, AB),
-        new Vector2(BC, 0),
-        new Vector2(0 - BC, 0 - AB)
-    ];
-
     const ABsquare = Math.pow(AB, 2);
     const BCSquare = Math.pow(BC, 2);
     const result = Math.sqrt(ABsquare + BCSquare);
@@ -48,44 +35,90 @@ export const pythagore = () => {
 
     result === Math.floor(result) && steps.push(`AC = ${result}`);
 
-    const expression = `Soit ABC un triangle rectangle en B. AB=${AB} et BC=${BC}. Calculer AC`;
-    const triangleProps = {
-        triangle: {
-            points,
-            vectors,
-            AB,
-            BC,
-            AC,
-            knowSide: [0, 1],
-        },
+
+    const triangle = Triangle.withSize(AB, BC, AC);
+    const polygon = triangle.toPolygon();
+
+    const props = {
+        polygon: polygon,
+        verticesLabel: [
+            { name: "A", show: true },
+            { name: "B", show: true },
+            { name: "C", show: true }
+        ],
+        edgesLabel: [
+            { name: `${AB}`, show: true },
+            { name: `${BC}`, show: true },
+            { name: `?`, show: true }
+        ],
     };
+
+    const expression = `Soit ABC un triangle rectangle en B. AB=${AB} et BC=${BC}. Calculer AC`;
 
     return new ExerciseBuilder()
         .addQuestionHtml(expression)
-        .addCustomQuestion(TriangleComponent, triangleProps)
-        .addCustomAnswer(TriangleComponent, triangleProps)
+        .addCustomQuestion(PolygonComponent, props)
+        .addCustomAnswer(PolygonComponent, props)
         .addAnswerLatex(steps[steps.length - 1])
         .addStepAnswerLatex(...steps)
         .toJSON();
 };
 
-
 export const triangleExercice = () => {
     const [AB, BC, AC] = randomTriangleLength();
-
-
     const triangle = Triangle.withSize(AB, BC, AC);
+    const polygon = triangle.toPolygon();
 
-    const expression = `Soit ABC un triangle rectangle en B. AB=${AB} et BC=${BC}. Calculer AC`
+    const expression = `Soit ABC un triangle rectangle en B. AB=${AB} et BC=${BC}. Calculer AC`;
 
     const props = {
-        polygon: triangle.toPolygon()
-    }
+        polygon: polygon,
+        verticesLabel: [
+            { name: "A", show: true },
+            { name: "B", show: true },
+            { name: "C", show: true }
+        ],
+        edgesLabel: [
+            { name: `${AB}`, show: true },
+            { name: `${BC}`, show: true },
+            { name: `${AC}`, show: true }
+        ],
+    };
 
     return new ExerciseBuilder()
         .addQuestionHtml(expression)
         .addCustomQuestion(PolygonComponent, props)
         .addCustomAnswer(PolygonComponent, props)
         .addStepAnswerLatex("test")
-        .toJSON()
+        .toJSON();
+};
+
+export const getSquareArea = () => {
+    const side = MathX.random(2, 10);
+
+    const expression = `Soit le carré ABCD avec AB = ${side}`;
+    const square = new Square(side);
+
+    const props = {
+        polygon: square.toPolygon(),
+        verticesLabel: [
+            { name: "A", show: true },
+            { name: "B", show: true },
+            { name: "C", show: true },
+            { name: "D", show: true }
+        ],
+        edgesLabel: [
+            { name: `${side}`, show: true },
+            { name: `${side}`, show: true },
+            { name: `${side}`, show: true },
+            { name: `${side}`, show: true }
+        ],
+    };
+
+    return new ExerciseBuilder()
+        .addQuestionHtml(expression)
+        .addCustomQuestion(PolygonComponent, props)
+        .addCustomAnswer(PolygonComponent, props)
+        .addAnswerHtml(square.getArea())
+        .toJSON();
 };

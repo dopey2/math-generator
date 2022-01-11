@@ -31,7 +31,7 @@
       "ignoreTemplateLiterals": true,
       "tabWidth": 4
     }],
-
+    "indent": ["warn", 4],
     "no-multi-spaces": "warn",
     "no-multiple-empty-lines": "warn",
     "no-redeclare": "warn",

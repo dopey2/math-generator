@@ -2,10 +2,6 @@ import Circle from "../../Circle";
 import MathX from "../../MathX/MathX";
 import Polygon from "../Polygon/Polygon";
 
-type TriangleMathParams = {
-    sides?: number[];
-}
-
 export default class Triangle {
     sides: number[] = [];
 
@@ -18,7 +14,7 @@ export default class Triangle {
     // SSS
     static withSize = (AB: number, BC: number, AC: number) => {
         return new Triangle(AB, BC, AC);
-    }
+    };
 
 
     getAngles: () => number[] = () => {
@@ -33,19 +29,19 @@ export default class Triangle {
         const C = 180 - (A + B);
 
         return [A, B, C];
-    }
+    };
 
     getAngleA: () => number = () => {
         return this.getAngles()[0];
-    }
+    };
 
     getAngleB: () => number = () => {
         return this.getAngles()[1];
-    }
+    };
 
     getAngleC: () => number = () => {
         return this.getAngles()[2];
-    }
+    };
 
     toPolygon : () => Polygon = () => {
         const [a, b, c] = this.sides;
@@ -58,7 +54,7 @@ export default class Triangle {
         return new Polygon([
             [0, 0],
             [a, 0],
-            [intersection.x, intersection.y],
-        ])
+            [intersection.x, intersection.y]
+        ]);
     }
 }

@@ -1,7 +1,7 @@
-import { toMultilineLatex } from "../../utils";
 import Circle from "../../../math/Circle";
 import Vector2, { Coordinates2D } from "../../../math/Vector2";
 import MathX from "../../../math/MathX/MathX";
+import Tex from "../../../math/Tex";
 
 export const randomTriangleLength = () => {
     const A = MathX.random(2, 10);
@@ -49,7 +49,7 @@ export const randomTriangle = () => {
             AC,
             knowSide: [0, 1, 2],
         },
-        latex: toMultilineLatex([
+        latex: Tex.toMultilineLatex([
             `Test`
         ]),
         latexValue: "",

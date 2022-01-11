@@ -1,8 +1,9 @@
+/* eslint-disable */
+
 import React from 'react';
 import { TriangleI } from "../../generator/geometry";
 
 import { randomTriangle, randomTriangleLength } from '../../generator/geometry/triangle/triangles';
-import Polygon from '../../math/Geometry/Polygon/Polygon';
 
 export default class GeometryDraftPage extends React.PureComponent {
     triangle!: TriangleI;
@@ -19,11 +20,7 @@ export default class GeometryDraftPage extends React.PureComponent {
         const { vectors } = triangle;
         const size_adjust = 100 / vectors[0].magnitude();
 
-        return new Polygon(vectors)
-            .scale(size_adjust)
-            .adjustX(100)
-            .adjustY(150)
-            .toString();
+        return "";
     };
 
     newTriangle = () => {
@@ -34,6 +31,8 @@ export default class GeometryDraftPage extends React.PureComponent {
         const lengths = randomTriangleLength();
         console.log("length", lengths);
     }
+
+    // TODO delete
 
     render() {
 
