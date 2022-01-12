@@ -71,7 +71,7 @@ const exerciseList: ExerciseItem[] = [
     { label: "Vecteurs", fun: () => vectors1() },
     { label: "Pythagore", fun: () => pythagore() },
     { label: "Triangle test", fun: () => triangleExercice() },
-    { label: "Triangle test 2", fun: () => triangleAAS() },
+    { label: "Triangle AAS", fun: () => triangleAAS() },
     { label: "Square area", fun: () => getSquareArea() },
     { label: "Convert degree to radian", fun: () => degToRadian() }
 ];

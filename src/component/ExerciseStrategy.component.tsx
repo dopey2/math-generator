@@ -16,6 +16,8 @@ const ExerciseStrategy: React.FC<Props> = (props) => {
                     "CommonHTML": { linebreaks: { automatic: true } },
                     "SVG": { linebreaks: { automatic: true } },
                     "HTML-CSS": { linebreaks: { automatic: true } },
+                    "loader": { load: ['[tex]/cancel'] },
+                    "tex": { packages: { '[+]': ['cancel'] } },
                 }}
             >
                 <MathJax.Node>{props.visualRepresentation.latex}</MathJax.Node>

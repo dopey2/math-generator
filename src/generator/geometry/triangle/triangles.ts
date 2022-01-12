@@ -119,41 +119,67 @@ export const triangleExercice = () => {
 };
 
 export const triangleAAS = () => {
-    const [A, B, C] = [35, 55, 90]; // generateTriangleAngle();
-    const a = 5; // MathX.random(2, 10);
+    const [A, B, C] = generateTriangleAngle();
+    const side = MathX.random(2, 10);
 
-    const triangle = Triangle.with3AnglesAnd1Side(A, B, C, a, null, null);
+    const triangle = Triangle.with3AnglesAnd1Side(A, B, C, null, side, null);
     const sides = triangle.sides;
 
     const polygon = triangle.toPolygon();
-    const expression = `Soit le triangle ABC avec \\angle A = ${A}°, \\angle B = ${B}°, \\angle C = ${C}° et c = ${a}`;
+    const expression = `Soit le triangle ABC avec \\angle A = ${A}°, \\angle B = ${B}°, et b = ${side}; 
+    Calculer l'angle C, le coté a et le côté b`;
 
     let props: any = {
         polygon,
+        verticesLabel: [
+            { name: "A", show: true },
+            { name: "B", show: true },
+            { name: "C", show: true }
+        ],
+        edgesLabel: [
+            { name: `c`, show: true },
+            { name: `a`, show: true },
+            { name: `${parseFloat(sides[2].toFixed(1))}`, show: true }
+        ],
     };
 
-    try {
-        props = {
-            ...props,
-            verticesLabel: [
-                { name: "A", show: true },
-                { name: "B", show: true },
-                { name: "C", show: true }
-            ],
-            edgesLabel: [
-                { name: `${parseFloat(sides[0].toFixed(1))}`, show: true },
-                { name: `${parseFloat(sides[1].toFixed(1))}`, show: true },
-                { name: `${parseFloat(sides[2].toFixed(1))}`, show: true }
-            ],
-        };
-    } catch (e) {
+    const stepsCAngle = [
+        `C = 180 - (${A} + ${B}) = ${180 - (A + B)}`
+    ];
 
-    }
+    let bSinB = side / Math.sin(MathX.degToRadian(B));
+    bSinB = parseFloat(bSinB.toFixed(2));
+
+    let bSinBSinA = bSinB * Math.sin(MathX.degToRadian(A));
+    bSinBSinA = parseFloat(bSinBSinA.toFixed(2));
+
+    let bSinBSinC = bSinB * Math.sin(MathX.degToRadian(C));
+    bSinBSinC = parseFloat(bSinBSinC.toFixed(2));
+
+    const stepsSideA = [
+        `Nous allons calculer le côté a grace à la loi du sinus`,
+        `\\frac{a}{sin A} = \\frac{b}{sin B}`,
+        `\\frac{a}{sin ${A}} = \\frac{${side}}{sin ${B}}`,
+        `\\frac{a}{sin ${A}} = ${bSinB}`,
+        `\\frac{a}{sin ${A}} * sin ${A} = ${bSinB} * {sin ${A}}`,
+        `a = ${bSinBSinA}`
+    ];
+
+    const stepsSideC = [
+        `Nous allons calculer le côté a grace à la loi du sinus`,
+        `\\frac{c}{sin C} = \\frac{b}{sin B}`,
+        `\\frac{c}{sin ${C}} = \\frac{${side}}{sin ${B}}`,
+        `\\frac{c}{sin ${C}} = ${bSinB}`,
+        `\\frac{c}{sin ${C}} * sin ${C} = ${bSinB} * {sin ${C}}`,
+        `c = ${bSinBSinC}`
+    ];
 
     return new ExerciseBuilder()
         .addQuestionLatex(expression)
         .addCustomQuestion(PolygonComponent, props)
         .addCustomAnswer(PolygonComponent, props)
-        .addStepAnswerLatex("test test")
+        .addStepAnswerLatex(...stepsCAngle)
+        .addStepAnswerLatex(...stepsSideA)
+        .addStepAnswerLatex(...stepsSideC)
         .toJSON();
 };
