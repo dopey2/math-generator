@@ -1,10 +1,10 @@
-import { randomTriangleLength } from "./triangles";
+import { generateTriangleLength } from "./triangles";
 
 describe("TRIANGLE LENGTH GENERATOR", () => {
     const data: Array<Array<number>> = [];
 
     for(let i = 0; i < 10; i++) {
-        data.push(randomTriangleLength());
+        data.push(generateTriangleLength());
     }
 
     data.forEach((length) => {

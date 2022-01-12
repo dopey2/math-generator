@@ -45,15 +45,15 @@ export default class Triangle {
 
         const solvedSides: number[] = [];
 
-        for(let i = 1; i < 3; i++) {
-            const index = knownSideIndex + i % 3;
+        for(let i = 0; i < 3; i++) {
+            const index = (knownSideIndex + i) % 3;
             const angle = angles[index];
             const side = sinX * Math.sin(MathX.degToRadian(angle));
             solvedSides[index] = side;
         }
 
         solvedSides[knownSideIndex] = sides[knownSideIndex] as number;
-        return Triangle.withSide(solvedSides[1], solvedSides[2], solvedSides[0]);
+        return Triangle.withSide(solvedSides[2], solvedSides[0], solvedSides[1]);
     };
 
 

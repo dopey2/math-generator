@@ -3,8 +3,8 @@ import Triangle from "../../../math/Geometry/Triangle/Triangle.math";
 import ExerciseBuilder from "../../ExerciseBuilder";
 import PolygonComponent from "../../@component/Polygon/Polygon.component";
 
-export const randomTriangleLength = () => {
-    const A = MathX.random(2, 10);
+export const generateTriangleLength = (minSize = 2, maxSize = 10) => {
+    const A = MathX.random(minSize, maxSize);
     let minB = A - 1;
     let maxB = A + 1;
 
@@ -19,6 +19,23 @@ export const randomTriangleLength = () => {
     const max = Math.max(A, B);
 
     const C = MathX.random((max - min + 1), (A + B - 1));
+    return [A, B, C];
+};
+
+export const generateTriangleAngle = () => {
+    let [A, B] = MathX.randomValues(2, 25, 60);
+    let C = 180 - (A + B);
+
+    if(C === 90) {
+        C -= 5;
+
+        if(A < B) {
+            A += 5;
+        } else {
+            B += 5;
+        }
+    }
+
     return [A, B, C];
 };
 
@@ -73,7 +90,7 @@ export const pythagore = () => {
 };
 
 export const triangleExercice = () => {
-    const [AB, BC, AC] = randomTriangleLength();
+    const [AB, BC, AC] = generateTriangleLength();
     const triangle = Triangle.withSide(AB, BC, AC);
     const polygon = triangle.toPolygon();
 
@@ -102,39 +119,36 @@ export const triangleExercice = () => {
 };
 
 export const triangleAAS = () => {
-    let [A, B] = MathX.randomValues(2, 25, 60);
-    let C = 180 - (A + B);
+    const [A, B, C] = [35, 55, 90]; // generateTriangleAngle();
+    const a = 5; // MathX.random(2, 10);
 
-    if(C === 90) {
-        C -= 5;
-
-        if(A < B) {
-            A += 5;
-        } else {
-            B += 5;
-        }
-    }
-
-    const a = MathX.random(2, 10);
     const triangle = Triangle.with3AnglesAnd1Side(A, B, C, a, null, null);
     const sides = triangle.sides;
+
     const polygon = triangle.toPolygon();
+    const expression = `Soit le triangle ABC avec \\angle A = ${A}°, \\angle B = ${B}°, \\angle C = ${C}° et c = ${a}`;
 
-    const expression = `Soit le triangle ABC avec \\angle A = ${A}°, \\angle B = ${B}°, \\angle C = ${C}° et a = ${a}`;
-
-    const props = {
-        polygon: polygon,
-        verticesLabel: [
-            { name: "C", show: true },
-            { name: "A", show: true },
-            { name: "B", show: true }
-        ],
-        edgesLabel: [
-            { name: `${parseFloat(sides[0].toFixed(1))}`, show: true },
-            { name: `${parseFloat(sides[1].toFixed(1))}`, show: true },
-            { name: `${parseFloat(sides[2].toFixed(1))}`, show: true }
-        ],
+    let props: any = {
+        polygon,
     };
+
+    try {
+        props = {
+            ...props,
+            verticesLabel: [
+                { name: "A", show: true },
+                { name: "B", show: true },
+                { name: "C", show: true }
+            ],
+            edgesLabel: [
+                { name: `${parseFloat(sides[0].toFixed(1))}`, show: true },
+                { name: `${parseFloat(sides[1].toFixed(1))}`, show: true },
+                { name: `${parseFloat(sides[2].toFixed(1))}`, show: true }
+            ],
+        };
+    } catch (e) {
+
+    }
 
     return new ExerciseBuilder()
         .addQuestionLatex(expression)
