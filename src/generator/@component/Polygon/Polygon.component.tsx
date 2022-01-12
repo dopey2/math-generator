@@ -24,7 +24,7 @@ export default class PolygonComponent extends React.PureComponent<Props> {
     }
 
     initLocalPolygon = () => {
-        this.polygon = this.props.polygon.scaleToFit(200, 200)
+        this.polygon = this.props.polygon.scaleToFit(150, 150)
             .adjustToFit()
             // .rotate(MathX.random(0, 360))
             .adjustX(30) // fix for labels
@@ -106,15 +106,20 @@ export default class PolygonComponent extends React.PureComponent<Props> {
         return (
             <div>
                 <svg
-                    style={{ width: 400, height: 400 }}
-                    viewBox="0 0 400 400"
+                    style={{ width: 250, height: 250 }}
+                    viewBox="0 0 250 250"
                     xmlns="http://www.w3.org/2000/svg"
                 >
                     <polygon points={this.polygon.toString()} stroke="black" fill="white" strokeWidth={1}/>
 
                     <style>{`
-                        .polygon-label {
+                        .vertices-label {
                             font-weight: 600;
+                            font-family: Computer Modern;
+                        } 
+                        .edges-label {
+                            font-weight: 600;
+                            font-family: Computer Modern;
                         }
                     `}</style>
 
@@ -123,7 +128,7 @@ export default class PolygonComponent extends React.PureComponent<Props> {
                             key={i}
                             x={label.x}
                             y={label.y}
-                            className="polygon-label"
+                            className="vertices-label"
                             textAnchor="middle"
                         >{label.name}</text>
                     ))}
@@ -132,9 +137,9 @@ export default class PolygonComponent extends React.PureComponent<Props> {
                             key={i}
                             x={label.x}
                             y={label.y}
-                            
+
+                            className="edges-label"
                             textAnchor="middle"
-                            fill="#333"
                         >{label.name}</text>
                     ))}
                 </svg>
