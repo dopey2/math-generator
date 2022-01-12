@@ -1,7 +1,7 @@
-import Circle from "../../../math/Circle";
-import Vector2, { Coordinates2D } from "../../../math/Vector2";
 import MathX from "../../../math/MathX/MathX";
-import Tex from "../../../math/Tex";
+import Triangle from "../../../math/Geometry/Triangle/Triangle.math";
+import ExerciseBuilder from "../../ExerciseBuilder";
+import PolygonComponent from "../../@component/Polygon/Polygon.component";
 
 export const randomTriangleLength = () => {
     const A = MathX.random(2, 10);
@@ -22,53 +22,81 @@ export const randomTriangleLength = () => {
     return [A, B, C];
 };
 
-export const randomTriangle = () => {
-    const [AB, BC, AC] = randomTriangleLength();
 
-    const circle1 = new Circle(0, 0, AC);
-    const circle2 = new Circle(AB, 0, BC);
-    const intersections = Circle.intersection(circle1, circle2);
-    const intersection = MathX.random(0, 1) ? intersections[0] : intersections[1];
+export const pythagore = () => {
+    const AB = MathX.random(2, 20);
+    const angleA = MathX.random(35, 65);
+    const tan = Math.tan(angleA * Math.PI / 180);
+    const BC = Math.floor(tan * AB);
+    const AC = Math.hypot(AB, BC);
 
-    const points = [
-        { x: 0, y: 0, label: 'A' },
-        { x: AB, y: 0, label: 'B' },
-        { x: intersection.x, y: intersection.y, label: 'C' }
+    const ABsquare = Math.pow(AB, 2);
+    const BCSquare = Math.pow(BC, 2);
+    const result = Math.sqrt(ABsquare + BCSquare);
+
+    const steps = [
+        `AC^2 = AB^2 + BC^2`,
+        `AC = \\sqrt{${AB}^2 + ${BC}^2}`,
+        `AC = \\sqrt{${ABsquare} + ${BCSquare}}`,
+        `AC = \\sqrt{${ABsquare + BCSquare}}`
     ];
 
-    const vectors = vectorsFromPoints(points);
+    result === Math.floor(result) && steps.push(`AC = ${result}`);
 
-    return {
-        type: "geometry",
-        expression: "",
-        triangle: {
-            points,
-            vectors,
-            AB,
-            BC,
-            AC,
-            knowSide: [0, 1, 2],
-        },
-        latex: Tex.toMultilineLatex([
-            `Test`
-        ]),
-        latexValue: "",
-        steps: [],
+
+    const triangle = Triangle.withSize(AB, BC, AC);
+    const polygon = triangle.toPolygon();
+
+    const props = {
+        polygon: polygon,
+        verticesLabel: [
+            { name: "A", show: true },
+            { name: "B", show: true },
+            { name: "C", show: true }
+        ],
+        edgesLabel: [
+            { name: `${AB}`, show: true },
+            { name: `${BC}`, show: true },
+            { name: `?`, show: true }
+        ],
     };
 
+    const expression = `Soit ABC un triangle rectangle en B. AB=${AB} et BC=${BC}. Calculer AC`;
+
+    return new ExerciseBuilder()
+        .addQuestionHtml(expression)
+        .addCustomQuestion(PolygonComponent, props)
+        .addCustomAnswer(PolygonComponent, props)
+        .addAnswerLatex(steps[steps.length - 1])
+        .addStepAnswerLatex(...steps)
+        .toJSON();
 };
 
+export const triangleExercice = () => {
+    const [AB, BC, AC] = randomTriangleLength();
+    const triangle = Triangle.withSize(AB, BC, AC);
+    const polygon = triangle.toPolygon();
 
-export const vectorsFromPoints = (points: Coordinates2D[]) => {
-    const vectors: Vector2[] = [];
+    const expression = `Soit ABC un triangle rectangle en B. AB=${AB} et BC=${BC}. Calculer AC`;
 
-    for (let i = 0; i < points.length; i++) {
-        if (i === points.length - 1) {
-            vectors.push(new Vector2(points[0].x - points[i].x, points[0].y - points[i].y));
+    const props = {
+        polygon: polygon,
+        verticesLabel: [
+            { name: "A", show: true },
+            { name: "B", show: true },
+            { name: "C", show: true }
+        ],
+        edgesLabel: [
+            { name: `${AB}`, show: true },
+            { name: `${BC}`, show: true },
+            { name: `${AC}`, show: true }
+        ],
+    };
 
-        } else {
-            vectors.push(new Vector2(points[i + 1].x - points[i].x, points[i + 1].y - points[i].y));
-        }
-    }
-    return vectors;
+    return new ExerciseBuilder()
+        .addQuestionHtml(expression)
+        .addCustomQuestion(PolygonComponent, props)
+        .addCustomAnswer(PolygonComponent, props)
+        .addStepAnswerLatex("test")
+        .toJSON();
 };
