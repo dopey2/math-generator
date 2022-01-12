@@ -5,15 +5,55 @@ import Polygon from "../Polygon/Polygon";
 export default class Triangle {
     sides: number[] = [];
 
-    constructor(A: number, B: number, C: number) {
-        this.sides.push(A);
-        this.sides.push(B);
-        this.sides.push(C);
+    constructor(a: number, b: number, c: number) {
+        this.sides.push(a);
+        this.sides.push(b);
+        this.sides.push(c);
     }
 
     // SSS
-    static withSize = (AB: number, BC: number, AC: number) => {
-        return new Triangle(AB, BC, AC);
+    static withSide = (a: number, b: number, c: number) => {
+        return new Triangle(a, b, c);
+    };
+
+    /**
+     * @param {number} A The first angle
+     * @param {number} B The second angle
+     * @param {number} B The third angle
+     * @param {number} a The side opposite to angle A
+     * @param {number} b The side opposite to angle B
+     * @param {number} c The side opposite to angle C
+     */
+    static with3AnglesAnd1Side = (
+        A: number,
+        B: number,
+        C: number,
+        a: number | null,
+        b: number | null,
+        c: number | null
+    ) => {
+        if(a === null && b === null && c === null) {
+            throw new Error("You need at least one side");
+        }
+        const angles = [A, B, C];
+        const sides = [a, b, c];
+
+        // a / sin A === b / sin B === c / sin C
+
+        const knownSideIndex: number = sides.findIndex((v: number | null) => v !== null);
+        const sinX = sides[knownSideIndex] as number / Math.sin(MathX.degToRadian(angles[knownSideIndex]));
+
+        const solvedSides: number[] = [];
+
+        for(let i = 1; i < 3; i++) {
+            const index = knownSideIndex + i % 3;
+            const angle = angles[index];
+            const side = sinX * Math.sin(MathX.degToRadian(angle));
+            solvedSides[index] = side;
+        }
+
+        solvedSides[knownSideIndex] = sides[knownSideIndex] as number;
+        return Triangle.withSide(solvedSides[1], solvedSides[2], solvedSides[0]);
     };
 
 
@@ -28,7 +68,7 @@ export default class Triangle {
         const B = MathX.radianToDeg(Math.acos(cosB));
         const C = 180 - (A + B);
 
-        return [A, B, C];
+        return [C, A, B];
     };
 
     getAngleA: () => number = () => {

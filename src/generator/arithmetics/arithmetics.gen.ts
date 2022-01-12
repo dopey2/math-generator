@@ -4,7 +4,6 @@ import ExerciseBuilder from "../ExerciseBuilder";
 import MathX from "../../math/MathX/MathX";
 
 
-
 // TODO REMOVE THIS
 type Fraction = {
     dividend: number;
@@ -18,14 +17,14 @@ type BaseOperator = '+' | '-' | '*' | ':';
 // TODO REMOVE THIS
 const baseOperation = (term1: number, term2: number, operator: BaseOperator) => {
     switch (operator) {
-        case "+":
-            return term1 + term2;
-        case "-":
-            return term1 - term2;
-        case "*":
-            return term1 * term2;
-        case ":":
-            return term1 / term2;
+    case "+":
+        return term1 + term2;
+    case "-":
+        return term1 - term2;
+    case "*":
+        return term1 * term2;
+    case ":":
+        return term1 / term2;
     }
 };
 
@@ -217,6 +216,8 @@ const solveFractionOperation = (
     }
 };
 
+
+// TODO use math/Operation/Fraction
 export const fractionRulesExpression = () => {
     const fractionA = {
         dividend: MathX.random(1, 10),

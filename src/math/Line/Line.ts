@@ -30,8 +30,8 @@ export default class Line {
             point2 = new Point2D(args[2], args[3]);
         }
 
-        const yDiff = point2.y - point1.y;
-        const xDiff = point2.x - point1.x;
+        const yDiff = parseFloat(point2.y.toFixed(2)) - parseFloat(point1.y.toFixed(2));
+        const xDiff = parseFloat(point2.x.toFixed(2)) - parseFloat(point1.x.toFixed(2));
 
         this.m = yDiff / xDiff;
 

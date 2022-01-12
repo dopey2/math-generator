@@ -44,7 +44,7 @@ export const pythagore = () => {
     result === Math.floor(result) && steps.push(`AC = ${result}`);
 
 
-    const triangle = Triangle.withSize(AB, BC, AC);
+    const triangle = Triangle.withSide(AB, BC, AC);
     const polygon = triangle.toPolygon();
 
     const props = {
@@ -74,7 +74,7 @@ export const pythagore = () => {
 
 export const triangleExercice = () => {
     const [AB, BC, AC] = randomTriangleLength();
-    const triangle = Triangle.withSize(AB, BC, AC);
+    const triangle = Triangle.withSide(AB, BC, AC);
     const polygon = triangle.toPolygon();
 
     const expression = `Soit ABC un triangle rectangle en B. AB=${AB} et BC=${BC}. Calculer AC`;
@@ -98,5 +98,48 @@ export const triangleExercice = () => {
         .addCustomQuestion(PolygonComponent, props)
         .addCustomAnswer(PolygonComponent, props)
         .addStepAnswerLatex("test")
+        .toJSON();
+};
+
+export const triangleAAS = () => {
+    let [A, B] = MathX.randomValues(2, 25, 60);
+    let C = 180 - (A + B);
+
+    if(C === 90) {
+        C -= 5;
+
+        if(A < B) {
+            A += 5;
+        } else {
+            B += 5;
+        }
+    }
+
+    const a = MathX.random(2, 10);
+    const triangle = Triangle.with3AnglesAnd1Side(A, B, C, a, null, null);
+    const sides = triangle.sides;
+    const polygon = triangle.toPolygon();
+
+    const expression = `Soit le triangle ABC avec \\angle A = ${A}°, \\angle B = ${B}°, \\angle C = ${C}° et a = ${a}`;
+
+    const props = {
+        polygon: polygon,
+        verticesLabel: [
+            { name: "C", show: true },
+            { name: "A", show: true },
+            { name: "B", show: true }
+        ],
+        edgesLabel: [
+            { name: `${parseFloat(sides[0].toFixed(1))}`, show: true },
+            { name: `${parseFloat(sides[1].toFixed(1))}`, show: true },
+            { name: `${parseFloat(sides[2].toFixed(1))}`, show: true }
+        ],
+    };
+
+    return new ExerciseBuilder()
+        .addQuestionLatex(expression)
+        .addCustomQuestion(PolygonComponent, props)
+        .addCustomAnswer(PolygonComponent, props)
+        .addStepAnswerLatex("test test")
         .toJSON();
 };
