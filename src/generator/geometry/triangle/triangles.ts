@@ -89,34 +89,6 @@ export const pythagore = () => {
         .toJSON();
 };
 
-export const triangleExercice = () => {
-    const [AB, BC, AC] = generateTriangleLength();
-    const triangle = Triangle.withSide(AB, BC, AC);
-    const polygon = triangle.toPolygon();
-
-    const expression = `Soit ABC un triangle rectangle en B. AB=${AB} et BC=${BC}. Calculer AC`;
-
-    const props = {
-        polygon: polygon,
-        verticesLabel: [
-            { name: "A", show: true },
-            { name: "B", show: true },
-            { name: "C", show: true }
-        ],
-        edgesLabel: [
-            { name: `${AB}`, show: true },
-            { name: `${BC}`, show: true },
-            { name: `${AC}`, show: true }
-        ],
-    };
-
-    return new ExerciseBuilder()
-        .addQuestionHtml(expression)
-        .addCustomQuestion(PolygonComponent, props)
-        .addCustomAnswer(PolygonComponent, props)
-        .addStepAnswerLatex("test")
-        .toJSON();
-};
 
 export const triangleAAS = () => {
     const [A, B, C] = generateTriangleAngle();

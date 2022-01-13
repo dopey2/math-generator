@@ -1,6 +1,6 @@
 import React from "react";
-import * as MathJax from "@nteract/mathjax";
 import { VisualRepresentationI } from "../generator/ExerciseBuilder";
+import KatexComponent from "./Katex.component";
 
 interface Props {
     visualRepresentation: VisualRepresentationI;
@@ -11,17 +11,7 @@ const ExerciseStrategy: React.FC<Props> = (props) => {
 
     if (props.visualRepresentation.type === "latex" && props.visualRepresentation.latex) {
         return (
-            <MathJax.Provider
-                options={{
-                    "CommonHTML": { linebreaks: { automatic: true } },
-                    "SVG": { linebreaks: { automatic: true } },
-                    "HTML-CSS": { linebreaks: { automatic: true } },
-                    "loader": { load: ['[tex]/cancel'] },
-                    "tex": { packages: { '[+]': ['cancel'] } },
-                }}
-            >
-                <MathJax.Node>{props.visualRepresentation.latex}</MathJax.Node>
-            </MathJax.Provider>
+            <KatexComponent tex={props.visualRepresentation.latex} />
         );
     }
 

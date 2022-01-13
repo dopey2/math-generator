@@ -34,10 +34,10 @@ import {
     enumerationPinCode
 } from "../../generator/enumeration/enumeration";
 import ExerciseComponent from "../../component/Exercice.component";
-import { getSquareArea} from "../../generator/geometry/geometry";
+import { getSquareArea } from "../../generator/geometry/geometry";
 import { degToRadian } from "../../generator/trigonometry/trigonometry";
 import { vectors1 } from "../../generator/linear_algebra/vectors";
-import {pythagore, triangleExercice, triangleAAS} from "../../generator/geometry/triangle/triangles";
+import { pythagore, triangleAAS } from "../../generator/geometry/triangle/triangles";
 
 type ExerciseItem = { label: string, fun: () => ExerciseI };
 
@@ -70,7 +70,6 @@ const exerciseList: ExerciseItem[] = [
     { label: "Probability with intersection", fun: () => probabilityWithIntersection() },
     { label: "Vecteurs", fun: () => vectors1() },
     { label: "Pythagore", fun: () => pythagore() },
-    { label: "Triangle test", fun: () => triangleExercice() },
     { label: "Triangle AAS", fun: () => triangleAAS() },
     { label: "Square area", fun: () => getSquareArea() },
     { label: "Convert degree to radian", fun: () => degToRadian() }

@@ -1,8 +1,8 @@
 import React from 'react';
 
-import * as MathJax from "@nteract/mathjax";
 import MathObj from "../../math/Operation/MathObj/MathObj";
 import { expressionsList } from "./expressionsList";
+import KatexComponent from "../../component/Katex.component";
 
 interface State {
     expressions: MathObj[];
@@ -88,17 +88,11 @@ export default class DraftOperationPage extends React.PureComponent<any, State> 
                 </div>
 
                 {this.state.steps.map((s) => {
-                    return <MathJax.Node>{s}</MathJax.Node>;
+                    return <KatexComponent tex={s} />;
                 })}
 
                 <button onClick={this.solveNext}>Test function</button>
                 <button onClick={this.solveAll}>Solve all</button>
-
-
-                <svg>
-
-                </svg>
-
             </div>
         );
     }
