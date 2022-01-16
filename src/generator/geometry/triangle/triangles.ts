@@ -155,3 +155,11 @@ export const triangleAAS = () => {
         .addStepAnswerLatex(...stepsSideC)
         .toJSON();
 };
+
+const triangleSSA = () => {
+    // TODO https://www.mathsisfun.com/algebra/trig-solving-sas-triangles.html
+}
+
+const triangle SSS = () => {
+    // TODO https://www.mathsisfun.com/algebra/trig-solving-sss-triangles.html
+}
