@@ -160,6 +160,6 @@ const triangleSSA = () => {
     // TODO https://www.mathsisfun.com/algebra/trig-solving-sas-triangles.html
 }
 
-const triangle SSS = () => {
+const triangleSSS = () => {
     // TODO https://www.mathsisfun.com/algebra/trig-solving-sss-triangles.html
 }
