@@ -1,4 +1,4 @@
-import MathObj, { MathObjEnum } from "../MathObj/MathObj";
+import MathObj, {MathObjEnum} from "../MathObj/MathObj";
 import Constant from "../Constant/Constant";
 import Fraction from "../Fraction/Fraction";
 import Subtract from "../Subtract/Subtract";
@@ -31,11 +31,12 @@ export default class Add extends MathObj {
             return new Add(this.left, (this.right as Constant).toFraction());
         } else if (this.left.constant && this.right.fraction) {
             return new Add((this.left as Constant).toFraction(), this.right);
+        } else if (!this.left.atomic || !this.right.atomic) {
+            return new Add(this.left.next(), this.right.next());
         }
 
         return this;
     }
-
 
     toNode() {
         return {

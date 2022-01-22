@@ -58,6 +58,10 @@ const fraction7 = new Multiply(
 const add1 = new Add(new Constant(-5), new Constant(-3));
 const subtract1 = new Subtract(new Constant(5), new Constant(-3));
 
+const fractionMultiplyAndAdd = new Add(
+    fraction5,
+    new Fraction(new Constant(6), new Constant(4))
+)
 
 const fraction8 = new Fraction(
     new Subtract(new Constant(-2), new Constant(-8)),
@@ -79,5 +83,6 @@ export const expressionsList: MathObj[] = [
     fraction4, // 30/12
     fraction5, // 36/6 => 6
     fraction6, // 15/2
-    fraction7
+    fraction7,
+    fractionMultiplyAndAdd
 ];

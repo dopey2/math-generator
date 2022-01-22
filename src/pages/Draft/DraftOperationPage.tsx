@@ -36,7 +36,6 @@ export default class DraftOperationPage extends React.PureComponent<any, State> 
     };
 
     render() {
-
         return (
             <div className={"flex flex-col f1 w-full h-full items-center pb-8"}>
                 <div className="flex flex-row">
