@@ -68,7 +68,7 @@ const fraction8 = new Fraction(
 const multiplyFraction = new Multiply(new Constant(2), fraction8);
 
 
-export const expressionsList = [
+export const expressionsList: MathObj[] = [
     multiplyFraction,
     add1,
     subtract1,
