@@ -1,10 +1,10 @@
-import MathObj, { MathObjEnum } from "../MathObj/MathObj";
+import MathObj, { MathObjType } from "../MathObj/MathObj";
 import Constant from "../Constant/Constant";
 import Fraction from "../Fraction/Fraction";
 
 
 export default class Multiply extends MathObj {
-    type = MathObjEnum.multiply;
+    type = MathObjType.multiply;
 
     left: MathObj;
     right: MathObj;

@@ -38,6 +38,7 @@ import { getSquareArea } from "../../generator/geometry/geometry";
 import { degToRadian } from "../../generator/trigonometry/trigonometry";
 import { vectors1 } from "../../generator/linear_algebra/vectors";
 import { pythagore, triangleAAS } from "../../generator/geometry/triangle/triangles";
+import {addMatrix} from "../../generator/linear_algebra/matrix";
 
 type ExerciseItem = { label: string, fun: () => ExerciseI };
 
@@ -69,6 +70,7 @@ const exerciseList: ExerciseItem[] = [
     { label: "Enumeration pin code", fun: () => enumerationPinCode() },
     { label: "Probability with intersection", fun: () => probabilityWithIntersection() },
     { label: "Vecteurs", fun: () => vectors1() },
+    { label: "Add matrix", fun: () => addMatrix() },
     { label: "Pythagore", fun: () => pythagore() },
     { label: "Triangle AAS", fun: () => triangleAAS() },
     { label: "Square area", fun: () => getSquareArea() },

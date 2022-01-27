@@ -1,6 +1,6 @@
 import Add from "./Add";
 import Constant from "../Constant/Constant";
-import { MathObjEnum } from "../MathObj/MathObj";
+import { MathObjType } from "../MathObj/MathObj";
 
 describe("Adding constant", () => {
     it("1 + 1", () => {
@@ -28,7 +28,7 @@ describe("Adding constant", () => {
         const expression = new Add(new Constant(3), new Constant(-2));
         const solved = expression.next();
 
-        expect(expression.type).toBe(MathObjEnum.subtract);
+        expect(expression.type).toBe(MathObjType.subtract);
         expect(solved).toBeDefined();
         expect(solved.atomic).toBe(true);
         expect(solved.constant).toBeDefined();

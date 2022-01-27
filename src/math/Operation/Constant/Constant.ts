@@ -1,4 +1,4 @@
-import MathObj, { MathObjEnum } from "../MathObj/MathObj";
+import MathObj, { MathObjType } from "../MathObj/MathObj";
 import Fraction, { ToFraction } from "../Fraction/Fraction";
 
 
@@ -8,7 +8,7 @@ export interface ConstantData {
 }
 
 export default class Constant extends MathObj implements ToFraction {
-    type = MathObjEnum.constant;
+    type = MathObjType.constant;
     atomic = true;
     constant: ConstantData;
 

@@ -1,5 +1,5 @@
 import Tex from "../../Tex";
-import MathObj, { MathObjEnum } from "../MathObj/MathObj";
+import MathObj, { MathObjType } from "../MathObj/MathObj";
 import Constant from "../Constant/Constant";
 import Add from "../Add/Add";
 import MathX from "../../MathX/MathX";
@@ -17,7 +17,7 @@ export interface FractionData {
 }
 
 export default class Fraction extends MathObj implements ToFraction {
-    type = MathObjEnum.fraction;
+    type = MathObjType.fraction;
     atomic = false;
 
     fraction: FractionData;

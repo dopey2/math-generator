@@ -1,10 +1,10 @@
-import MathObj, { MathObjEnum } from "../MathObj/MathObj";
+import MathObj, { MathObjType } from "../MathObj/MathObj";
 import Constant from "../Constant/Constant";
 import Fraction from "../Fraction/Fraction";
 import Add from "../Add/Add";
 
 export default class Subtract extends MathObj {
-    type = MathObjEnum.subtract;
+    type = MathObjType.subtract;
 
     left: MathObj;
     right: MathObj;

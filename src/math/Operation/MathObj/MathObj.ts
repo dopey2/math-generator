@@ -1,16 +1,17 @@
 import { ConstantData } from "../Constant/Constant";
 import { FractionData } from "../Fraction/Fraction";
 
-export enum MathObjEnum {
+export enum MathObjType {
     constant = "constant",
     fraction = "fraction",
     add = "add",
     subtract = "subtract",
-    multiply = "multiply"
+    multiply = "multiply",
+    matrix = "matrix"
 }
 
 export default abstract class MathObj {
-    abstract type: MathObjEnum;
+    abstract type: MathObjType;
     abstract atomic: boolean;
 
     constant?: ConstantData;
