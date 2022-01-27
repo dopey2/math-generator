@@ -138,7 +138,7 @@ export const triangleAAS = () => {
     ];
 
     const stepsSideC = [
-        `Nous allons calculer le côté a grace à la loi du sinus`,
+        `Nous allons calculer le côté c grace à la loi du sinus`,
         `\\frac{c}{sin C} = \\frac{b}{sin B}`,
         `\\frac{c}{sin ${C}} = \\frac{${side}}{sin ${B}}`,
         `\\frac{c}{sin ${C}} = ${bSinB}`,
@@ -158,8 +158,8 @@ export const triangleAAS = () => {
 
 const triangleSSA = () => {
     // TODO https://www.mathsisfun.com/algebra/trig-solving-sas-triangles.html
-}
+};
 
 const triangleSSS = () => {
     // TODO https://www.mathsisfun.com/algebra/trig-solving-sss-triangles.html
-}
+};
