@@ -34,12 +34,12 @@ export const equation1 = () => {
     const step3Right = `\\frac{${withNegativeSigne(res1)}}{\\color{red}{${withNegativeSigne(a)}}}`;
     const step3 = `${step3Left} = ${step3Right}`;
     const res3 = res1 / a;
-    const step4 = `x = ${res3}`;
+    const step4 = `\\boxed{x = ${res3}}`;
 
     return new ExerciseBuilder()
         .addQuestionLatex(expression)
-        .addAnswerLatex(expression, step4)
-        .addStepAnswerLatex(expression, step1, step2, step3, step4)
+        .addAnswerLatex(step4)
+        .addStepAnswerLatex(step1, step2, step3, step4)
         .toJSON();
 };
 
@@ -82,12 +82,12 @@ export const equation2 = () => {
     const step5Left = `\\frac{${withNegativeSigne(a2)}x}{\\color{red}{${withNegativeSigne(a2)}}}`;
     const step5Right = `\\frac{${withNegativeSigne(k4)}}{\\color{red}{${withNegativeSigne(a2)}}}`;
     const step5 = `${step5Left} = ${step5Right}`;
-    const step6 = `x = ${withNegativeSigne(k4 / a2)}`;
+    const step6 = `\\boxed{x = ${withNegativeSigne(k4 / a2)}}`;
 
     return new ExerciseBuilder()
         .addQuestionLatex(expression)
-        .addAnswerLatex(expression, step6)
-        .addStepAnswerLatex(expression, step1, step2, step3, step4, step5, step6)
+        .addAnswerLatex(step6)
+        .addStepAnswerLatex(step1, step2, step3, step4, step5, step6)
         .toJSON();
 };
 
@@ -108,12 +108,12 @@ export const equation3 = () => {
     const res3 = res - ab;
     const step3 = `${withNegativeSigne(a)}x = ${res3}`;
     const step4 = `\\frac{${withNegativeSigne(a)}x}{\\color{red}{${withNegativeSigne(a)}}} = \\frac{${res3}}{\\color{red}{${withNegativeSigne(a)}}}`;
-    const step5 = `x = ${res3 / a}`;
+    const step5 = `\\boxed{x = ${res3 / a}}`;
 
     return new ExerciseBuilder()
         .addQuestionLatex(expression)
-        .addAnswerLatex(expression, step5)
-        .addStepAnswerLatex(expression, step1, step2, step3, step4, step5)
+        .addAnswerLatex(step5)
+        .addStepAnswerLatex(step1, step2, step3, step4, step5)
         .toJSON();
 };
 
@@ -135,12 +135,12 @@ export const equation4 = () => {
     const aStep3 = a < 0 ? `(${a})` : a;
     const step3 = `\\frac{x}{${a}} \\color{red}{ * ${aStep3}} = ${res2} \\color{red}{ * ${aStep3}}`;
     const res4 = res2 * a;
-    const step4 = `x = ${res4}`;
+    const step4 = `\\boxed{x = ${res4}}`;
 
     return new ExerciseBuilder()
         .addQuestionLatex(expression)
-        .addAnswerLatex(expression, step4)
-        .addStepAnswerLatex(expression, step1, step2, step3, step4)
+        .addAnswerLatex(step4)
+        .addStepAnswerLatex(step1, step2, step3, step4)
         .toJSON();
 };
 
@@ -160,12 +160,12 @@ export const equation5 = () => {
     const step2 = `x ${withSigne(b)} = ${res2}`;
     const step3 = `x ${withSigne(b)} \\color{red}{${inverseSigne(b)}} = ${res2} \\color{red}{${inverseSigne(b)}}`;
     const res4 = res2 - b;
-    const step4 = `x = ${res4} `;
+    const step4 = `\\boxed{x = ${res4}}`;
 
     return new ExerciseBuilder()
         .addQuestionLatex(expression)
-        .addAnswerLatex(expression, step4)
-        .addStepAnswerLatex(expression, step1, step2, step3, step4)
+        .addAnswerLatex(step4)
+        .addStepAnswerLatex(step1, step2, step3, step4)
         .toJSON();
 };
 
@@ -178,17 +178,17 @@ export const equation6 = () => {
     const a = x * xMultiplier;
 
     const res = a / x;
-    const expression = `\\frac{${a}}{x} = ${res}`;
-    const step1 = `\\frac{${a}}{x} \\color{red}{* x} = ${res} \\color{red}{* x}`;
-    const step2 = `${a} = ${res}x`;
+    const expression = `${res} = \\frac{${a}}{x}`;
+    const step1 = `${res} \\color{red}{* x} = \\frac{${a}}{x} \\color{red}{* x}`;
+    const step2 = `${res}x = ${a}`;
     const res3 = a / res;
-    const step3 = `\\frac{${a}}{\\color{red}{${res}}} = \\frac{${res}x}{\\color{red}{${res}}}`;
-    const step4 = `${res3} = x`;
+    const step3 = `\\frac{${res}x}{\\color{red}{${res}}} = \\frac{${a}}{\\color{red}{${res}}}`;
+    const step4 = `\\boxed{x = ${res3}}`;
 
     return new ExerciseBuilder()
         .addQuestionLatex(expression)
-        .addAnswerLatex(expression, step4)
-        .addStepAnswerLatex(expression, step1, step2, step3, step4)
+        .addAnswerLatex(step4)
+        .addStepAnswerLatex(step1, step2, step3, step4)
         .toJSON();
 };
 
@@ -209,12 +209,12 @@ export const equation7 = () => {
     const step2 = `x ${withSigne(b)} = ${res2}`;
     const step3 = `x ${withSigne(b)} \\color{red}{${inverseSigne(b)}} = ${res2} \\color{red}{${inverseSigne(b)}}`;
     const res4 = res2 - b;
-    const step4 = `x = ${res4}`;
+    const step4 = `\\boxed{x = ${res4}}`;
 
     return new ExerciseBuilder()
         .addQuestionLatex(expression)
-        .addAnswerLatex(expression, step4)
-        .addStepAnswerLatex(expression, step1, step2, step3, step4)
+        .addAnswerLatex(step4)
+        .addStepAnswerLatex(step1, step2, step3, step4)
         .toJSON();
 
 };
@@ -254,11 +254,11 @@ export const lineEquationFromPoints = () => {
 
 
     const bStepsLatex = [`${b.toTex()} = b`, `b = ${bSolved.toTex()}`];
-    const yEquation = `y = ${mSolved.toTex()}x + ${bSolved.toTex({ constant: { showNegativeInParenthesis: true } })}`;
+    const yEquation = `\\boxed{y = ${mSolved.toTex()}x + ${bSolved.toTex({ constant: { showNegativeInParenthesis: true } })}}`;
 
     return new ExerciseBuilder()
         .addQuestionLatex(...expression)
-        .addAnswerLatex(...expression, yEquation)
-        .addStepAnswerLatex(...[...expression, mFormula, ...mStepsLatex, ...mxStepsLatex, ...bStepsLatex, yEquation])
+        .addAnswerLatex(yEquation)
+        .addStepAnswerLatex(...[mFormula, ...mStepsLatex, ...mxStepsLatex, ...bStepsLatex, yEquation])
         .toJSON();
 };
