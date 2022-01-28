@@ -18,6 +18,10 @@ const ExerciseStrategy: React.FC<Props> = (props) => {
     if (props.visualRepresentation.type === "html" && props.visualRepresentation.html) {
         return props.visualRepresentation.html;
     }
+    
+    if(props.visualRepresentation.type === "latex-text" && props.visualRepresentation.latexText) {
+        return <div className={"text-html-latex"}>{props.visualRepresentation.latexText}</div>;
+    }
 
     if (props.visualRepresentation.type === "custom" && props.visualRepresentation.custom) {
         const C = props.visualRepresentation.custom.component;

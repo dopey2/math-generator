@@ -2,7 +2,7 @@ import React from "react";
 import Tex from "../math/Tex";
 
 export interface VisualRepresentationI {
-    type: "latex" | "canvas" | "html" | "custom" | "row",
+    type: "latex" | "canvas" | "html" | "custom" | "row" | "latex-text",
     latex?: string;
     canvas?: any;
     html?: string;
@@ -11,6 +11,7 @@ export interface VisualRepresentationI {
         props?: any;
     }
     row: VisualRepresentationI[]
+    latexText?: string;
 }
 
 export interface ExerciseI {
@@ -24,6 +25,11 @@ export default class ExerciseBuilder {
         question: [],
         answer: [],
     };
+    
+    addQuestionLatexText(text: string) {
+        this.output.question.push({ type: "latex-text", latexText: text });
+        return this;
+    }
 
     addQuestionLatex(...args: any) {
         this.output.question.push({ type: "latex", latex: Tex.toMultilineLatex(args) });

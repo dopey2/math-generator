@@ -98,8 +98,7 @@ export const triangleAAS = () => {
     const sides = triangle.sides;
 
     const polygon = triangle.toPolygon();
-    const expression = `Soit le triangle ABC avec \\angle A = ${A}°, \\angle B = ${B}°, et b = ${side}; 
-    Calculer l'angle C, le coté a et le côté b`;
+    const expression = `Soit le triangle ABC avec ∠ A = ${A}°,∠  B = ${B}°, et b = ${side}; Calculer l'angle C, le coté a et le côté b`;
 
     let props: any = {
         polygon,
@@ -147,7 +146,7 @@ export const triangleAAS = () => {
     ];
 
     return new ExerciseBuilder()
-        .addQuestionLatex(expression)
+        .addQuestionLatexText(expression)
         .addCustomQuestion(PolygonComponent, props)
         .addCustomAnswer(PolygonComponent, props)
         .addStepAnswerLatex(...stepsCAngle)

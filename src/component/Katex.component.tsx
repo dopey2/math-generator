@@ -17,7 +17,7 @@ export default class KatexComponent extends React.PureComponent<Props> {
 
     render() {
         return (
-            <div ref={(ref) => this.ref = ref}></div>
+            <div className="flex flex-1 w-full" ref={(ref) => this.ref = ref}></div>
         );
     }
 }

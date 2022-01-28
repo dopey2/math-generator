@@ -38,10 +38,10 @@ const ExerciseComponent: React.FC<Props> = (props) => {
 
             </div>
 
-            <div className={"flex flex-col pl-4 pr-24"}>
+            <div className={"inline-block pl-4 pr-24 overflow-x-scroll"}>
                 {props.exercise.map((exercise, i) => {
                     return (
-                        <div style={{ minHeight: 55 }} className={"flex flex-col items-start border-0 border-b"} key={i}>
+                        <div style={{ minHeight: 55 }} className={"items-start border-0 border-b"} key={i}>
 
 
                             {exercise.question.map((q, i) => (
@@ -101,7 +101,7 @@ const styles = {
         hover: border-white
         hover:border-green-300 
     `,
-    container: "shadow-md rounded-md overflow-hidden",
+    container: "flex flex-1 flex-col w-full shadow-md rounded-md overflow-hidden",
     topRow: "bg-gray-100 h-12 pl-4 pr-4 flex items-center justify-between",
 };
 
