@@ -37,18 +37,21 @@ const generateRandomMatrix = (args?: {
 };
 
 export const addMatrix = () => {
-    const expression = 'Test matrices';
+    const expression = 'Additionner les matrices A et B';
 
-    const matrixValues = generateRandomMatrix({ row: 3, col: 3 });
-    const matrix = new Matrix(matrixValues);
+    const matrixValuesA = generateRandomMatrix({ row: 3, col: 3 });
+    const matrixValuesB = generateRandomMatrix({ row: 3, col: 3 });
+    const matrixA = new Matrix(matrixValuesA);
+    const matrixB = new Matrix(matrixValuesB);
 
+    const latexExpression = `A = ${matrixA.toTex()} ; B = ${matrixB.toTex()}`;
 
-    const latexExpression = matrix.toTex();
+    const res = `A + B = ${matrixA.add(matrixB).toTex()}`;
 
 
     return new ExerciseBuilder()
         .addQuestionHtml(expression)
         .addQuestionLatex(latexExpression)
-        .addAnswerLatex("Todo answer")
+        .addAnswerLatex(res)
         .toJSON();
 };
