@@ -13,6 +13,17 @@ export enum MathObjType {
 
 export default abstract class MathObj {
     abstract type: MathObjType;
+
+    /**
+     * Tell if an expression can be simplified or not.
+     * If atomic === true
+     *   The expression can't be simplified. For example a constant is atomic
+     *   Calling the next() function will return the same instance.
+     *
+     * If atomic === false;
+     *   The expression can be simplified. For example "4 + 3" is not atomic and can be simplified in "7"
+     *   Calling the next() function will simplify the expression, or return the next step.
+     */
     abstract atomic: boolean;
 
     constant?: ConstantData;

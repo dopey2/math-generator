@@ -1,20 +1,28 @@
 import MathObj, { MathObjType } from "../MathObj/MathObj";
 import Constant from "../Constant/Constant";
+import Add from "../Add/Add";
+import Subtract from "../Subtract/Subtract";
+import Multiply from "../Multiply/Multiply";
 
 export interface MatrixData {
+  /**
+   * The values of the matrix as a two dimensional array.
+   * The first dimension represent the row.
+   * The second dimension represent the column
+   */
   values: MathObj[][]
 }
 
 
 export default class Matrix extends MathObj {
   type = MathObjType.matrix;
-  atomic = true;
 
   /**
-   * The values of the matrix as a two dimensional array.
-   * The first dimension represent the row.
-   * The second dimension represent the column
+   * A matrix is atomic when every element composing the matrix are constants
    */
+  atomic = true;
+
+
   private matrix: MatrixData = {
       values: [],
   };
@@ -42,18 +50,17 @@ export default class Matrix extends MathObj {
 
   }
 
-  // TODO use MathObj Add operation
   add = (matrix: Matrix) => {
-      const newMatrixValues: number[][] = [];
+      const newMatrixValues: MathObj[][] = [];
     
       for(let r = 0; r < this.matrix.values.length; r++) {
-          const newRow: number[] = [];
+          const newRow: MathObj[] = [];
         
           for(let c = 0; c < this.matrix.values[r].length; c++) {
-              const constA = this.matrix.values[r][c].constant;
-              const constB = matrix.matrix.values[r][c].constant;
+              const constA = this.matrix.values[r][c];
+              const constB = matrix.matrix.values[r][c];
               if(constA && constB) {
-                  newRow.push(constA.value + constB.value);
+                  newRow.push(new Add(constA, constB));
               }
           }
 
@@ -65,18 +72,17 @@ export default class Matrix extends MathObj {
       return newMatrix;
   }
 
-  // TODO use MathObj Add operation
   subtract = (matrix: Matrix) => {
-      const newMatrixValues: number[][] = [];
+      const newMatrixValues: MathObj[][] = [];
 
       for(let r = 0; r < this.matrix.values.length; r++) {
-          const newRow: number[] = [];
+          const newRow: MathObj[] = [];
 
           for(let c = 0; c < this.matrix.values[r].length; c++) {
-              const constA = this.matrix.values[r][c].constant;
-              const constB = matrix.matrix.values[r][c].constant;
+              const constA = this.matrix.values[r][c];
+              const constB = matrix.matrix.values[r][c];
               if(constA && constB) {
-                  newRow.push(constA.value - constB.value);
+                  newRow.push(new Subtract(constA, constB));
               }
           }
 
@@ -88,9 +94,71 @@ export default class Matrix extends MathObj {
       return newMatrix;
   }
 
-  // TODO code this
+  
+  multiplyByConstant(k: number): Matrix;
+  multiplyByConstant(k: Constant): Matrix;
+  multiplyByConstant(_k: number | Constant) {
+      let k = _k;
+      
+      if(typeof k === "number") {
+          k = new Constant(k);
+      }
+
+      const newMatrixValues: MathObj[][] = [];
+
+      for(const row of this.matrix.values) {
+          const newRow: MathObj[] = [];
+
+          for(const col of row) {
+              newRow.push(new Multiply(k, col));
+          }
+
+          newMatrixValues.push(newRow);
+      }
+
+      const newMatrix = new Matrix(newMatrixValues);
+      newMatrix.atomic = false;
+      return newMatrix;
+  }
+
+  transpose = () => {
+      const transposedValues: MathObj[][] = [];
+      
+      for(let r = 0; r < this.matrix.values.length; r++) {
+          for(let c = 0; c < this.matrix.values[r].length; c++) {
+              if(!transposedValues[c]) {
+                  transposedValues[c] = [];
+              }
+              transposedValues[c][r] = this.matrix.values[r][c];
+          }
+      }
+      
+      return new Matrix(transposedValues);      
+  }
+
   // @ts-ignore
   next = () => {
+      if(!this.atomic) {
+          let atomic = true;
+          const newMatrixValues: MathObj[][] = [];
+          
+          for(const row of this.matrix.values) {
+              const newRow: MathObj[] = [];
+
+              for(const column of row) {
+                  const solved = column.next();
+                  newRow.push(solved);
+                  atomic = atomic && solved.type === "constant" && !!solved.constant;
+              }
+
+              newMatrixValues.push(newRow);
+          }
+
+          const newMatrix = new Matrix(newMatrixValues);
+          newMatrix.atomic = atomic;
+          return newMatrix;
+      }
+
       return this;
   };
 

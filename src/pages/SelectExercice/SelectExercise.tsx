@@ -38,7 +38,12 @@ import { getSquareArea } from "../../generator/geometry/geometry";
 import { degToRadian } from "../../generator/trigonometry/trigonometry";
 import { vectors1 } from "../../generator/linear_algebra/vectors";
 import { pythagore, triangleAAS } from "../../generator/geometry/triangle/triangles";
-import { addMatrix } from "../../generator/linear_algebra/matrix";
+import {
+    addMatrix,
+    multiplyMatrixByConstant,
+    subtractMatrix,
+    transposeMatrix
+} from "../../generator/linear_algebra/matrix";
 
 type ExerciseItem = { label: string, fun: () => ExerciseI };
 
@@ -71,6 +76,9 @@ const exerciseList: ExerciseItem[] = [
     { label: "Probability with intersection", fun: () => probabilityWithIntersection() },
     { label: "Vecteurs", fun: () => vectors1() },
     { label: "Add matrix", fun: () => addMatrix() },
+    { label: "Subtract matrix", fun: () => subtractMatrix() },
+    { label: "Multiply matrix by constant", fun: () => multiplyMatrixByConstant() },
+    { label: "Transpose matrix", fun: () => transposeMatrix() },
     { label: "Pythagore", fun: () => pythagore() },
     { label: "Triangle AAS", fun: () => triangleAAS() },
     { label: "Square area", fun: () => getSquareArea() },
