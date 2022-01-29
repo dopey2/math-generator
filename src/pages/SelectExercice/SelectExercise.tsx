@@ -40,7 +40,7 @@ import { vectors1 } from "../../generator/linear_algebra/vectors";
 import { pythagore, triangleAAS } from "../../generator/geometry/triangle/triangles";
 import {
     addMatrix,
-    multiplyMatrixByConstant,
+    multiplyMatrixByConstant, multiplyMatrixByMatrix,
     subtractMatrix,
     transposeMatrix
 } from "../../generator/linear_algebra/matrix";
@@ -78,6 +78,7 @@ const exerciseList: ExerciseItem[] = [
     { label: "Add matrix", fun: () => addMatrix() },
     { label: "Subtract matrix", fun: () => subtractMatrix() },
     { label: "Multiply matrix by constant", fun: () => multiplyMatrixByConstant() },
+    { label: "Multiply matrix by matrix", fun: () => multiplyMatrixByMatrix() },
     { label: "Transpose matrix", fun: () => transposeMatrix() },
     { label: "Pythagore", fun: () => pythagore() },
     { label: "Triangle AAS", fun: () => triangleAAS() },

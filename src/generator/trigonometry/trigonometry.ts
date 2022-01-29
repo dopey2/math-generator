@@ -24,35 +24,35 @@ import ExerciseBuilder from "../ExerciseBuilder";
 
 
 export const degToRadian = () => {
-  const deg = 180; // MathX.random(0, 36) * 10;
-  const rad = MathX.degToRadian(deg);
+    const deg = 180; // MathX.random(0, 36) * 10;
+    const rad = MathX.degToRadian(deg);
 
-  const expression = `Exprimer l'angle ${deg}° en radion.`;
+    const expression = `Exprimer l'angle ${deg}° en radion.`;
 
-  const steps = [
-    `\\pi rad = 180°`,
-    `1° = \\frac{\\pi}{180°}`,
-    `${deg} * \\frac{\\pi}{180°} <=>`,
-    `\\frac{${deg}\\pi}{180°} rad`
-  ];
+    const steps = [
+        `\\pi rad = 180°`,
+        `1° = \\frac{\\pi}{180°}`,
+        `${deg} * \\frac{\\pi}{180°} <=>`,
+        `\\frac{${deg}\\pi}{180°} rad`
+    ];
 
-  if(deg === 180) {
-    steps[steps.length - 1] = `${steps[steps.length - 1] } <=>`;
-    steps.push("\\pi");
-  } else {
+    if(deg === 180) {
+        steps[steps.length - 1] = `${steps[steps.length - 1] } <=>`;
+        steps.push("\\pi");
+    } else {
 
-  }
+    }
 
 
-  return new ExerciseBuilder()
-      .addQuestionHtml(expression)
-      .addAnswerHtml(expression)
-      .addStepAnswerLatex(...steps)
-      .toJSON();
+    return new ExerciseBuilder()
+        .addQuestionHtml(expression)
+        .addAnswerHtml(expression)
+        .addStepAnswerLatex(...steps)
+        .toJSON();
 
 };
 
 
 export const cartesianToPolar = () => {
-  const expression = 1;
+    const expression = 1;
 };

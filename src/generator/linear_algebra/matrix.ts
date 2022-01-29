@@ -2,7 +2,7 @@ import MathX from "../../math/MathX/MathX";
 import ExerciseBuilder from "../ExerciseBuilder";
 import Matrix from "../../math/Operation/Matrix/Matrix";
 
-const generateRandomMatrix = (args?: {
+export const generateRandomMatrix = (args?: {
     minValue?: number;
     maxValue?: number;
     row?: number
@@ -113,6 +113,31 @@ export const transposeMatrix = () => {
         .addQuestionLatexText(expression)
         .addQuestionLatex(latexExpression)
         .addAnswerLatex(res)
+        .toJSON();
+};
+
+export const multiplyMatrixByMatrix = () => {
+    const i = MathX.random(5, 5);
+    const j = MathX.random(5, 5);
+    const k = MathX.random(5, 5);
+    const matrixValuesA = generateRandomMatrix({ row: i, col: j });
+    const matrixValuesB = generateRandomMatrix({ row: j, col: k });
+
+    const matrixA = new Matrix(matrixValuesA);
+    const matrixB = new Matrix(matrixValuesB);
+
+    const expression = 'Calculer A * B';
+    const latexExpression = `A = ${matrixA.toTex()} ; B = ${matrixB.toTex()}`;
+
+    const result = matrixA.multiply(matrixB);
+    const steps = result.solveAllToTex();
+    const stepsLatex = steps.map((s) => `A * B = ${s}`);
+
+    return new ExerciseBuilder()
+        .addQuestionLatexText(expression)
+        .addQuestionLatex(latexExpression)
+        .addStepAnswerLatex(...stepsLatex)
+        .addAnswerLatex(stepsLatex[stepsLatex.length - 1])
         .toJSON();
 };
 
