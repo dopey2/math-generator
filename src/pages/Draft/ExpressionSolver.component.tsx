@@ -42,7 +42,7 @@ export default class ExpressionSolver extends React.PureComponent<Props, State> 
 
     solveAll = () => {
         const steps = this.props.expression.solveAllToTex();
-        this.setState({steps});
+        this.setState({ steps });
     };
 
     render() {
@@ -55,6 +55,6 @@ export default class ExpressionSolver extends React.PureComponent<Props, State> 
                 <button onClick={this.solveNext}>Test function</button>
                 <button onClick={this.solveAll}>Solve all</button>
             </div>
-        )
+        );
     }
 }

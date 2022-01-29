@@ -10,7 +10,15 @@ export interface MatrixData {
    * The first dimension represent the row.
    * The second dimension represent the column
    */
-  values: MathObj[][]
+  values: MathObj[][];
+  /**
+   * The number of rows
+   */
+  row: number;
+  /**
+   * The number of column
+   */
+  col: number;
 }
 
 
@@ -24,6 +32,8 @@ export default class Matrix extends MathObj {
 
   matrix: MatrixData = {
       values: [],
+      row: 0,
+      col: 0,
   };
 
   /**
@@ -33,7 +43,7 @@ export default class Matrix extends MathObj {
       if(!this.atomic) {
           throw "The matrix should be atomic";
       }
-    
+
       const matrixValues: number[][] = [];
       for(const row of this.matrix.values) {
           const newRow = [];
@@ -67,7 +77,8 @@ export default class Matrix extends MathObj {
           this.matrix.values = values;
       }
 
-
+      this.matrix.row = this.matrix.values.length;
+      this.matrix.col = this.matrix.values[0].length;
   }
 
   add = (matrix: Matrix) => {
@@ -114,6 +125,40 @@ export default class Matrix extends MathObj {
       return newMatrix;
   }
 
+
+  multiply = (matrix: Matrix) => {
+      if(this.matrix.col !== matrix.matrix.row) {
+          throw "The number of columns of the 1st matrix must equal the number of rows of the 2nd matrix.";
+      }
+
+      const newMatrixValues: MathObj[][] = [];
+
+      for(let i = 0; i < this.matrix.row; i++) {
+          
+          const newMatrixRow: MathObj[] = [];
+            
+          for(let j = 0; j < matrix.matrix.col; j++) {
+              const operations: MathObj[] = [];
+
+              for(let k = 0; k < matrix.matrix.row; k++) {
+                  operations.push(new Multiply(this.getRow(i)[k], matrix.getCol(j)[k]));
+              }
+              
+              let adds = new Add(operations[0], operations[1]);
+              for(let l = 2; l < operations.length; l++) {
+                  adds = new Add(adds, operations[l]);
+              }
+
+              newMatrixRow.push(adds);
+          }
+          
+          newMatrixValues.push(newMatrixRow);
+      }
+      const newMatrix = new Matrix(newMatrixValues);
+      newMatrix.atomic = false;
+      return newMatrix;
+  }
+
   
   multiplyByConstant(k: number): Matrix;
   multiplyByConstant(k: Constant): Matrix;
@@ -141,6 +186,7 @@ export default class Matrix extends MathObj {
       return newMatrix;
   }
 
+
   transpose = () => {
       const transposedValues: MathObj[][] = [];
       
@@ -155,6 +201,9 @@ export default class Matrix extends MathObj {
       
       return new Matrix(transposedValues);      
   }
+
+  getRow = (r: number) => this.matrix.values[r];
+  getCol = (c: number) => this.matrix.values.map((row) => row[c]);
 
   // @ts-ignore
   next = () => {

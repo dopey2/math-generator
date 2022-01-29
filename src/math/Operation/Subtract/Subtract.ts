@@ -29,6 +29,8 @@ export default class Subtract extends MathObj {
             return new Subtract(this.left, (this.right as Constant).toFraction() as MathObj) as MathObj;
         } else if (this.left.constant && this.right.fraction) {
             return new Subtract((this.left as Constant).toFraction() as MathObj, this.right) as MathObj;
+        } else if (!this.left.atomic || !this.right.atomic) {
+            return new Subtract(this.left.next(), this.right.next());
         }
 
         return this;
