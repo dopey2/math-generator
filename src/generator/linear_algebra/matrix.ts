@@ -117,9 +117,9 @@ export const transposeMatrix = () => {
 };
 
 export const multiplyMatrixByMatrix = () => {
-    const i = MathX.random(5, 5);
-    const j = MathX.random(5, 5);
-    const k = MathX.random(5, 5);
+    const i = MathX.random(2, 3);
+    const j = MathX.random(2, 3);
+    const k = MathX.random(2, 3);
     const matrixValuesA = generateRandomMatrix({ row: i, col: j });
     const matrixValuesB = generateRandomMatrix({ row: j, col: k });
 
@@ -136,7 +136,7 @@ export const multiplyMatrixByMatrix = () => {
     return new ExerciseBuilder()
         .addQuestionLatexText(expression)
         .addQuestionLatex(latexExpression)
-        .addStepAnswerLatex(...stepsLatex)
+        .addStepAnswerLatex(stepsLatex[0], stepsLatex[1], stepsLatex[stepsLatex.length - 1])
         .addAnswerLatex(stepsLatex[stepsLatex.length - 1])
         .toJSON();
 };
