@@ -33,19 +33,18 @@ const generateRandomMatrix = (args?: {
         values.push(rowValues);
     }
 
-    return [[6,4,24], [1, -9, 8]];
-
     return values;
 };
 
 export const addMatrix = () => {
-    const expression = 'Calculer A + B';
-
-    const matrixValuesA = generateRandomMatrix({ row: 3, col: 3 });
-    const matrixValuesB = generateRandomMatrix({ row: 3, col: 3 });
+    const row = MathX.random(2, 3);
+    const col = MathX.random(2, 3);
+    const matrixValuesA = generateRandomMatrix({ row, col });
+    const matrixValuesB = generateRandomMatrix({ row, col });
     const matrixA = new Matrix(matrixValuesA);
     const matrixB = new Matrix(matrixValuesB);
 
+    const expression = 'Calculer A + B';
     const latexExpression = `A = ${matrixA.toTex()} ; B = ${matrixB.toTex()}`;
     const steps = matrixA.add(matrixB).solveAllToTex();
     const stepsLatex: string[] = [];
@@ -60,12 +59,14 @@ export const addMatrix = () => {
 };
 
 export const subtractMatrix = () => {
-    const expression = 'Calculer A - B';
-    const matrixValuesA = generateRandomMatrix({ row: 3, col: 3 });
-    const matrixValuesB = generateRandomMatrix({ row: 3, col: 3 });
+    const row = MathX.random(2, 3);
+    const col = MathX.random(2, 3);
+    const matrixValuesA = generateRandomMatrix({ row, col });
+    const matrixValuesB = generateRandomMatrix({ row, col });
     const matrixA = new Matrix(matrixValuesA);
     const matrixB = new Matrix(matrixValuesB);
 
+    const expression = 'Calculer A - B';
     const latexExpression = `A = ${matrixA.toTex()} ; B = ${matrixB.toTex()}`;
     const steps = matrixA.subtract(matrixB).solveAllToTex();
     const stepsLatex: string[] = [];
@@ -80,8 +81,10 @@ export const subtractMatrix = () => {
 };
 
 export const multiplyMatrixByConstant = () => {
-    const matrixValues = generateRandomMatrix({ row: 3, col: 3 });
-    const k = MathX.random(-10, 10, [0, 1, -1]);
+    const row = MathX.random(2, 3);
+    const col = MathX.random(2, 3);
+    const matrixValues = generateRandomMatrix({ row, col });
+    const k = MathX.random(-9, 9, [0, 1, -1]);
     const matrix = new Matrix(matrixValues);
     const latexExpression = `${k} * ${matrix.toTex()} =`;
     const steps = matrix.multiplyByConstant(k).solveAllToTex();
@@ -96,7 +99,9 @@ export const multiplyMatrixByConstant = () => {
 };
 
 export const transposeMatrix = () => {
-    const matrixValues = generateRandomMatrix({ row: 3, col: 3 });
+    const row = MathX.random(2, 3);
+    const col = MathX.random(2, 3);
+    const matrixValues = generateRandomMatrix({ row, col });
     
     const matrix = new Matrix(matrixValues);
 
@@ -110,4 +115,3 @@ export const transposeMatrix = () => {
         .addAnswerLatex(res)
         .toJSON();
 };
-
