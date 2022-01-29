@@ -115,3 +115,4 @@ export const transposeMatrix = () => {
         .addAnswerLatex(res)
         .toJSON();
 };
+

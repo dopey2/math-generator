@@ -22,10 +22,30 @@ export default class Matrix extends MathObj {
    */
   atomic = true;
 
-
-  private matrix: MatrixData = {
+  matrix: MatrixData = {
       values: [],
   };
+
+  /**
+   * Return the values of the matrix as a 2 dimensional array of numbers
+   */
+  get values(): number[][] {
+      if(!this.atomic) {
+          throw "The matrix should be atomic";
+      }
+    
+      const matrixValues: number[][] = [];
+      for(const row of this.matrix.values) {
+          const newRow = [];
+          for(const col of row) {
+              if(col.constant) {
+                  newRow.push(col.constant.value);
+              }
+          }
+          matrixValues.push(newRow);
+      }
+      return matrixValues;
+  }
 
   constructor(values: MathObj[][])
   constructor(values: number[][])

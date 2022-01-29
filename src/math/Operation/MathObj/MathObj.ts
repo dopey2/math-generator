@@ -56,9 +56,9 @@ export default abstract class MathObj {
         return this.solveAll().map((x) => x.toTex());
     };
 
-    solve = () => {
+    solve = <D extends MathObj>() => {
         const steps = this.solveAll();
-        return steps[steps.length - 1];
+        return steps[steps.length - 1] as D;
     };
 }
 
