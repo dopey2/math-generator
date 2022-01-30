@@ -111,3 +111,61 @@ describe("Transpose matrix", () => {
     });
 });
 
+describe("Compute determinant", () => {
+
+    it("Case 2x2", () => {
+        const d = Matrix.computeDeterminant(new Matrix([
+            [2, 3],
+            [5, 6]
+        ]));
+
+        expect(d).toBe(-3);
+    });
+
+    it("Case 3x3", () => {
+        const d = Matrix.computeDeterminant(new Matrix([
+            [2, 3, 4],
+            [5, 6, 7],
+            [8, 9, 7]
+        ]));
+
+        expect(d).toBe(9);
+    });
+
+    it("Case 4x4", () => {
+        const d = Matrix.computeDeterminant(new Matrix([
+            [2, 3, 4, 2],
+            [5, 6, 7, 1],
+            [8, 9, 7, 0],
+            [2, 6, 3, 5]
+        ]));
+
+        expect(d).toBe(-45);
+    });
+    
+    it("Case 5x5", () => {
+        const d = Matrix.computeDeterminant(new Matrix([
+            [2, 3, 4, 2, -3],
+            [5, 6, 7, 1, 5],
+            [8, 9, 7, 0, 2],
+            [2, 6, 3, 5, 1],
+            [7, -6, 8, 4, 3]
+        ]));
+
+        expect(d).toBe(-10137);
+    });
+
+    it("Case 6x6", () => {
+        const d = Matrix.computeDeterminant(new Matrix([
+            [2, 3, 4, 2, -3, 1],
+            [5, 6, 7, 1, 5, 6],
+            [8, 9, 7, 0, 2, 4],
+            [2, 6, 3, 5, 1, -2],
+            [7, -6, 8, 4, 3, 0],
+            [1, 4, -5, -8, 0, 3]
+        ]));
+
+        expect(d).toBe(-14038);
+    });
+});
+

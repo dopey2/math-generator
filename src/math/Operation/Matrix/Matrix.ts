@@ -126,6 +126,10 @@ export default class Matrix extends MathObj {
   }
 
 
+  /**
+   * TODO WRITE UNITE TEST FOR THIS
+   * @param matrix
+   */
   multiply = (matrix: Matrix) => {
       if(this.matrix.col !== matrix.matrix.row) {
           throw "The number of columns of the 1st matrix must equal the number of rows of the 2nd matrix.";
@@ -200,6 +204,39 @@ export default class Matrix extends MathObj {
       }
       
       return new Matrix(transposedValues);      
+  }
+  
+  static computeDeterminant = (matrix: Matrix) => {
+      if(matrix.matrix.row !== matrix.matrix.col) {
+          throw "The matrix should be square (Have the same number of row and column";
+      }
+
+      let res = 0;
+
+      if(matrix.matrix.row === 2) {
+          res = (matrix.values[0][0] * matrix.values[1][1]) - matrix.values[0][1] * matrix.values[1][0];
+      } else if(matrix.matrix.row > 2) {
+        
+          for(let i = 0; i < matrix.matrix.col; i++) {
+              let k = matrix.values[0][i];
+              let subMatrixValues = matrix.matrix.values.slice(1, matrix.matrix.values.length);
+              subMatrixValues = subMatrixValues.map((row) => row.filter((c, j) => j !== i));
+              const subMatrix = new Matrix(subMatrixValues);
+              const determinant = Matrix.computeDeterminant(subMatrix);
+              
+              if(i % 2 === 0) {
+                  res += k * determinant;
+              } else {
+                  res -= k * determinant;
+              }
+          }
+      }
+
+      return res;
+  }
+  
+  getDeterminant = () => {
+      return Matrix.computeDeterminant(this);
   }
 
   getRow = (r: number) => this.matrix.values[r];
