@@ -141,3 +141,19 @@ export const multiplyMatrixByMatrix = () => {
         .toJSON();
 };
 
+export const computeMatrixDeterminant = () => {
+    const i = MathX.random(2, 2);
+    const matrixValues = generateRandomMatrix({ row: i, col: i });
+    const matrix = new Matrix(matrixValues);
+
+    const determinant = matrix.getDeterminant();
+
+    const expression = "Calculer le determinant de la matrice A";
+    const latexExpression = `A = ${matrix.toTex()}`;
+
+    return new ExerciseBuilder()
+        .addQuestionLatexText(expression)
+        .addQuestionLatex(latexExpression)
+        .addAnswerLatex(`|A| = ${determinant}`)
+        .toJSON();
+};

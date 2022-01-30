@@ -1,8 +1,6 @@
 import React from 'react';
 
-import MathObj from "../../math/Operation/MathObj/MathObj";
-import {expressionsList} from "./expressionsList";
-import KatexComponent from "../../component/Katex.component";
+import { expressionsList } from "./expressionsList";
 import ExpressionSolver from './ExpressionSolver.component';
 
 interface State {
@@ -23,7 +21,7 @@ export default class DraftOperationPage extends React.PureComponent<any, State> 
     prevExpression = () => {
         this.setState((prevState) => {
             const selected = Math.max(0, prevState.selected - 1);
-            return {selected};
+            return { selected };
         });
     };
 
@@ -31,7 +29,7 @@ export default class DraftOperationPage extends React.PureComponent<any, State> 
     nextExpression = () => {
         this.setState((prevState) => {
             const selected = Math.min(expressionsList.length - 1, prevState.selected + 1);
-            return {selected};
+            return { selected };
         });
     };
 
