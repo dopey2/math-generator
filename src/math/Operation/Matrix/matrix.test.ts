@@ -119,7 +119,12 @@ describe("Compute determinant", () => {
             [5, 6]
         ]));
 
-        expect(d).toBe(-3);
+        const dSolved = d.solve();
+
+        expect(dSolved.constant).toBeDefined();
+        if(dSolved.constant) {
+            expect(dSolved.constant.value).toBe(-3);
+        }
     });
 
     it("Case 3x3", () => {
@@ -129,7 +134,12 @@ describe("Compute determinant", () => {
             [8, 9, 7]
         ]));
 
-        expect(d).toBe(9);
+        const dSolved = d.solve();
+
+        expect(dSolved.constant).toBeDefined();
+        if(dSolved.constant) {
+            expect(dSolved.constant.value).toBe(9);
+        }
     });
 
     it("Case 4x4", () => {
@@ -140,7 +150,12 @@ describe("Compute determinant", () => {
             [2, 6, 3, 5]
         ]));
 
-        expect(d).toBe(-45);
+        const dSolved = d.solve();
+
+        expect(dSolved.constant).toBeDefined();
+        if(dSolved.constant) {
+            expect(dSolved.constant.value).toBe(-45);
+        }
     });
     
     it("Case 5x5", () => {
@@ -152,7 +167,12 @@ describe("Compute determinant", () => {
             [7, -6, 8, 4, 3]
         ]));
 
-        expect(d).toBe(-10137);
+        const dSolved = d.solve();
+
+        expect(dSolved.constant).toBeDefined();
+        if(dSolved.constant) {
+            expect(dSolved.constant.value).toBe(-10137);
+        }
     });
 
     it("Case 6x6", () => {
@@ -165,7 +185,12 @@ describe("Compute determinant", () => {
             [1, 4, -5, -8, 0, 3]
         ]));
 
-        expect(d).toBe(-14038);
+        const dSolved = d.solve();
+
+        expect(dSolved.constant).toBeDefined();
+        if(dSolved.constant) {
+            expect(dSolved.constant.value).toBe(-14038);
+        }
     });
 });
 

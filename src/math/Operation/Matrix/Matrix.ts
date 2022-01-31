@@ -3,6 +3,7 @@ import Constant from "../Constant/Constant";
 import Add from "../Add/Add";
 import Subtract from "../Subtract/Subtract";
 import Multiply from "../Multiply/Multiply";
+import Parenthesis from "../Parenthese/Parenthesis";
 
 export interface MatrixData {
   /**
@@ -211,28 +212,43 @@ export default class Matrix extends MathObj {
           throw "The matrix should be square (Have the same number of row and column";
       }
 
-      let res = 0;
-
       if(matrix.matrix.row === 2) {
-          res = (matrix.values[0][0] * matrix.values[1][1]) - matrix.values[0][1] * matrix.values[1][0];
-      } else if(matrix.matrix.row > 2) {
+          return new Subtract(
+              new Multiply(
+                  new Constant(matrix.values[0][0]),
+                  new Constant(matrix.values[1][1])
+              ),
+              new Multiply(
+                  new Constant(matrix.values[0][1]) ,
+                  new Constant(matrix.values[1][0])
+              )
+          );
+      } 
         
-          for(let i = 0; i < matrix.matrix.col; i++) {
-              let k = matrix.values[0][i];
-              let subMatrixValues = matrix.matrix.values.slice(1, matrix.matrix.values.length);
-              subMatrixValues = subMatrixValues.map((row) => row.filter((c, j) => j !== i));
-              const subMatrix = new Matrix(subMatrixValues);
-              const determinant = Matrix.computeDeterminant(subMatrix);
+      let res: MathObj | null = null;
+      
+      for(let i = 0; i < matrix.matrix.col; i++) {
+          let k = matrix.values[0][i];
+          let subMatrixValues = matrix.matrix.values.slice(1, matrix.matrix.values.length);
+          subMatrixValues = subMatrixValues.map((row) => row.filter((c, j) => j !== i));
+          const subMatrix = new Matrix(subMatrixValues);
+          const determinant = Matrix.computeDeterminant(subMatrix) as MathObj;
               
+          const multiplyExpression = new Multiply(new Constant(k), new Parenthesis(determinant));
+          
+          if(res === null) {
+              res = multiplyExpression;
+          } else {
+
               if(i % 2 === 0) {
-                  res += k * determinant;
+                  res = new Add(res, multiplyExpression);
               } else {
-                  res -= k * determinant;
-              }
+                  res = new Subtract(res, multiplyExpression);
+              }    
           }
       }
 
-      return res;
+      return res as MathObj;
   }
   
   getDeterminant = () => {

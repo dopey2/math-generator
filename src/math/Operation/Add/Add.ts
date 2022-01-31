@@ -1,4 +1,4 @@
-import MathObj, {MathObjType} from "../MathObj/MathObj";
+import MathObj, { MathObjType } from "../MathObj/MathObj";
 import Constant from "../Constant/Constant";
 import Fraction from "../Fraction/Fraction";
 import Subtract from "../Subtract/Subtract";
@@ -48,7 +48,17 @@ export default class Add extends MathObj {
         return `${this.left.toString()} + ${this.right.toString()}`;
     };
 
-    toTex = () => {
-        return `${this.left.toTex()} + ${this.right.toTex()}`;
+    toTex = (data?: {
+        constant?: {
+            showSign?: boolean,
+            negativeOnly?: boolean,
+            positiveOnly?: boolean,
+            hideSign?: boolean,
+            showNegativeInParenthesis?: boolean,
+        }
+    }) => {
+        const left = this.left.toTex({ constant: { showNegativeInParenthesis: data?.constant?.showNegativeInParenthesis } });
+        const right = this.right.toTex({ constant: { showNegativeInParenthesis: true } });
+        return `${left} + ${right}`;
     }
 }

@@ -142,11 +142,14 @@ export const multiplyMatrixByMatrix = () => {
 };
 
 export const computeMatrixDeterminant = () => {
-    const i = MathX.random(2, 2);
+    const i = MathX.random(2, 3);
     const matrixValues = generateRandomMatrix({ row: i, col: i });
     const matrix = new Matrix(matrixValues);
 
     const determinant = matrix.getDeterminant();
+
+    const steps = determinant.solveAllToTex();
+    const stepsLatex = steps.map((s) => `|A| = ${s}`);
 
     const expression = "Calculer le determinant de la matrice A";
     const latexExpression = `A = ${matrix.toTex()}`;
@@ -154,6 +157,7 @@ export const computeMatrixDeterminant = () => {
     return new ExerciseBuilder()
         .addQuestionLatexText(expression)
         .addQuestionLatex(latexExpression)
-        .addAnswerLatex(`|A| = ${determinant}`)
+        .addStepAnswerLatex(...stepsLatex)
+        .addAnswerLatex(stepsLatex[stepsLatex.length - 1])
         .toJSON();
 };

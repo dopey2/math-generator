@@ -50,7 +50,17 @@ export default class Multiply extends MathObj {
         return `${this.left.toString()} * ${this.right.toString({ constant: { showNegativeInParenthesis: true } })}`;
     }
 
-    toTex = () => {
-        return `${this.left.toTex()} * ${this.right.toTex({ constant: { showNegativeInParenthesis: true } })}`;
+    toTex = (data?: {
+        constant?: {
+            showSign?: boolean,
+            negativeOnly?: boolean,
+            positiveOnly?: boolean,
+            hideSign?: boolean,
+            showNegativeInParenthesis?: boolean,
+        }
+    }) => {
+        const left = this.left.toTex({ constant: { showNegativeInParenthesis: data?.constant?.showNegativeInParenthesis } });
+        const right = this.right.toTex({ constant: { showNegativeInParenthesis: true } });
+        return `${left} * ${right}`;
     }
 }

@@ -49,8 +49,16 @@ export default class Subtract extends MathObj {
         return `${left} - ${right}`;
     }
 
-    toTex = () => {
-        const left = this.left.toTex({ constant: { negativeOnly: true } });
+    toTex = (data?: {
+        constant?: {
+            showSign?: boolean,
+            negativeOnly?: boolean,
+            positiveOnly?: boolean,
+            hideSign?: boolean,
+            showNegativeInParenthesis?: boolean,
+        }
+    }) => {
+        const left = this.left.toTex({ constant: { negativeOnly: true, showNegativeInParenthesis: data?.constant?.showNegativeInParenthesis } });
         const right = this.right.toTex({ constant: { showNegativeInParenthesis: true } });
         return `${left} - ${right}`;
     }
