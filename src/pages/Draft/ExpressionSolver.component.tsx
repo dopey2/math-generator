@@ -20,7 +20,15 @@ export default class ExpressionSolver extends React.PureComponent<Props, State> 
             lastStep: props.expression,
             steps: [props.expression.toTex()],
         };
-
+    }
+    
+    componentDidUpdate(prevProps: Props) {
+        if(prevProps.expression !== this.props.expression) {
+            this.setState({
+                lastStep: this.props.expression,
+                steps: [this.props.expression.toTex()],
+            });
+        }
     }
 
     solveNext = () => {
