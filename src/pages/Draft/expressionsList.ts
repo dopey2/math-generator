@@ -7,7 +7,7 @@ import Subtract from "../../math/Operation/Subtract/Subtract";
 import MathX from "../../math/MathX/MathX";
 import Matrix from "../../math/Operation/Matrix/Matrix";
 import { generateRandomMatrix } from "../../generator/linear_algebra/matrix";
-import Parenthesis from "../../math/Operation/Parenthese/Parenthesis";
+import Parenthesis from "../../math/Operation/Parenthesis/Parenthesis";
 
 // @ts-ignore
 const fraction0 = new Fraction(new Constant(4), new Constant(5)) as MathObj;

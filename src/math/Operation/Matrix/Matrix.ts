@@ -3,7 +3,7 @@ import Constant from "../Constant/Constant";
 import Add from "../Add/Add";
 import Subtract from "../Subtract/Subtract";
 import Multiply from "../Multiply/Multiply";
-import Parenthesis from "../Parenthese/Parenthesis";
+import Parenthesis from "../Parenthesis/Parenthesis";
 
 export interface MatrixData {
   /**

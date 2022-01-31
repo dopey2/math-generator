@@ -3,7 +3,7 @@ import Multiply from "./Multiply/Multiply";
 import Constant from "./Constant/Constant";
 import MathObj from "./MathObj/MathObj";
 import Subtract from "./Subtract/Subtract";
-import Parenthesis from "./Parenthese/Parenthesis";
+import Parenthesis from "./Parenthesis/Parenthesis";
 
 const isNumber = (n: string) => !isNaN(Number(n));
 

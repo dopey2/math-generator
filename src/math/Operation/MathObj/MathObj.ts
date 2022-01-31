@@ -1,7 +1,7 @@
 import { ConstantData } from "../Constant/Constant";
 import { FractionData } from "../Fraction/Fraction";
 import { MatrixData } from "../Matrix/Matrix";
-import { ParenthesisData } from "../Parenthese/Parenthesis";
+import { ParenthesisData } from "../Parenthesis/Parenthesis";
 
 export enum MathObjType {
     constant = "constant",
