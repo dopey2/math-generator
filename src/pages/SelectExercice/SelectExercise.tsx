@@ -39,7 +39,7 @@ import { degToRadian } from "../../generator/trigonometry/trigonometry";
 import { vectors1 } from "../../generator/linear_algebra/vectors";
 import { pythagore, triangleAAS } from "../../generator/geometry/triangle/triangles";
 import {
-    addMatrix, computeMatrixDeterminant,
+    addMatrix, computeMatrixDeterminant, computeMatrixInverse2x2,
     multiplyMatrixByConstant, multiplyMatrixByMatrix,
     subtractMatrix,
     transposeMatrix
@@ -81,6 +81,7 @@ const exerciseList: ExerciseItem[] = [
     { label: "Multiply matrix by matrix", fun: () => multiplyMatrixByMatrix() },
     { label: "Transpose matrix", fun: () => transposeMatrix() },
     { label: "Calculate matrix determinant", fun: () => computeMatrixDeterminant() },
+    { label: "Calculate matrix inverse", fun: () => computeMatrixInverse2x2() },
     { label: "Pythagore", fun: () => pythagore() },
     { label: "Triangle AAS", fun: () => triangleAAS() },
     { label: "Square area", fun: () => getSquareArea() },

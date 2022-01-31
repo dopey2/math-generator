@@ -1,6 +1,9 @@
 import MathX from "../../math/MathX/MathX";
 import ExerciseBuilder from "../ExerciseBuilder";
 import Matrix from "../../math/Operation/Matrix/Matrix";
+import Fraction from "../../math/Operation/Fraction/Fraction";
+import Constant from "../../math/Operation/Constant/Constant";
+import Tex from "../../math/Tex";
 
 export const generateRandomMatrix = (args?: {
     minValue?: number;
@@ -159,5 +162,62 @@ export const computeMatrixDeterminant = () => {
         .addQuestionLatex(latexExpression)
         .addStepAnswerLatex(...stepsLatex)
         .addAnswerLatex(stepsLatex[stepsLatex.length - 1])
+        .toJSON();
+};
+
+export const computeMatrixInverse2x2 = () => {
+    const i = MathX.random(2, 2);
+    const matrixValues = generateRandomMatrix({ row: i, col: i, minValue: 0 });
+    const matrix = new Matrix(matrixValues);
+
+
+    const determinantObj = matrix.getDeterminant();
+    const determinant = determinantObj.solve()?.constant?.value || 0;
+
+    const fraction1 = new Fraction(new Constant(1), determinantObj);
+    const fraction2 = fraction1.next();
+    const fraction3 = fraction2.next();
+    const fraction4 = fraction3.next();
+
+    const expression = "Calculer l'inverse de A";
+    const latexExpression = `A = ${matrix.toTex()}`;
+
+    const swapMatrix = new Matrix([
+        [matrixValues[1][1], -matrixValues[0][1]],
+        [-matrixValues[1][0], matrixValues[0][0]]
+    ]);
+    
+    const steps = [
+        `A^{-1} = ${Tex.fraction(1, '|A|')} ${swapMatrix.toTex()}`,
+        `A^{-1} = ${fraction1.toTex()} ${swapMatrix.toTex()}`,
+        `A^{-1} = ${fraction2.toTex()} ${swapMatrix.toTex()}`,
+        `A^{-1} = ${fraction3.toTex()} ${swapMatrix.toTex()}`
+    ];
+
+
+    if(determinant === 0) {
+        steps.push(`Il n'existe pas de matrice inverse car le déterminant est null`);
+    } else {
+        steps.push(`A^{-1} = ${fraction4.toTex()} ${swapMatrix.toTex()}`);
+        const matrixValuesTimesInverse = swapMatrix.values.map((r) => {
+            return r.map((c) => c * (1 / determinant), 3);
+        });
+
+        const matrixValuesTimesInverseStr = matrixValuesTimesInverse.map((r) => {
+            return r.map((c) => MathX.toFixed(c));
+        });
+        
+        const inverseMatrix = new Matrix(matrixValuesTimesInverse);
+        const inverseMatrixStr = new Matrix(matrixValuesTimesInverseStr);
+
+        steps.push(`A^{-1} = ${inverseMatrixStr.toTex()}`);
+        steps.push(inverseMatrix.multiply(matrix).solve().toTex());
+    }
+    
+    return new ExerciseBuilder()
+        .addQuestionLatexText(expression)
+        .addQuestionLatex(latexExpression)
+        .addStepAnswerLatex(...steps)
+        .addAnswerLatex("test")
         .toJSON();
 };
