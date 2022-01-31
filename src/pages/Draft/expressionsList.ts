@@ -7,6 +7,7 @@ import Subtract from "../../math/Operation/Subtract/Subtract";
 import MathX from "../../math/MathX/MathX";
 import Matrix from "../../math/Operation/Matrix/Matrix";
 import { generateRandomMatrix } from "../../generator/linear_algebra/matrix";
+import Parenthesis from "../../math/Operation/Parenthese/Parenthesis";
 
 // @ts-ignore
 const fraction0 = new Fraction(new Constant(4), new Constant(5)) as MathObj;
@@ -94,6 +95,26 @@ const result = matrixA.multiply(matrixB);
 const subtract2 = new Subtract(new Constant(0), new Constant(12));
 const subtract3 = new Subtract(subtract2, new Constant(40));
 
+const expWithParenthesis = new Multiply(
+    new Constant(3),
+    new Parenthesis(new Add(
+        new Constant(1),
+        new Constant(3)
+    ))
+);
+
+const expWithParenthesis2 = new Add(
+    new Parenthesis(new Subtract(
+        new Constant(8), 
+        new Constant(4)
+    )), 
+    
+    new Parenthesis(new Add(
+        new Constant(8),
+        expWithParenthesis
+    ))
+);
+
 
 export const expressionsList: MathObj[] = [
     multiplyFraction,
@@ -110,5 +131,7 @@ export const expressionsList: MathObj[] = [
     fractionMultiplyAndAdd,
     add3,
     result,
-    subtract3
+    subtract3,
+    expWithParenthesis,
+    expWithParenthesis2
 ];

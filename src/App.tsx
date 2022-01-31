@@ -19,12 +19,12 @@ const App: React.FC<any> = () => {
                         <SelectExercise/>
                     </Route>
 
-                    <Route path="/draftOperation">
+                    <Route path="/draftOperation/:id">
                         <DraftOperationPage/>
                     </Route>
 
                     <Route path="/">
-                        <a href="/draftOperation">Operation Draft</a>
+                        <a href="/draftOperation/0">Operation Draft</a>
                         <a href="/select/0">Select</a>
                     </Route>
                 </Switch>
