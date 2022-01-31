@@ -87,4 +87,8 @@ export default class MathX {
       const y = Math.sin(MathX.degToRadian(degree)) * length;
       return [x, y];
   }
+
+  static toFixed = (n: number, f = 2) => {
+      return parseFloat(n.toFixed(2));
+  }
 }

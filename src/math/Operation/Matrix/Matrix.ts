@@ -302,6 +302,6 @@ export default class Matrix extends MathObj {
           content += `\\`;
       }
 
-      return `\\begin{pmatrix}${content}end{pmatrix}`;
+      return `\\begin{bmatrix}${content}end{bmatrix}`;
   }
 }
