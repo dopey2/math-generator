@@ -32,6 +32,8 @@ export default class Multiply extends MathObj {
                 return new Multiply(this.left, this.right.next());
             }
             return new Multiply(new Fraction(this.left, new Constant(1)), this.right);
+        } else if (!this.left.atomic || !this.right.atomic) {
+            return new Multiply(this.left.next(), this.right.next());
         }
 
         return this;

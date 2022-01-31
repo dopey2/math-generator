@@ -1,6 +1,7 @@
 import { ConstantData } from "../Constant/Constant";
 import { FractionData } from "../Fraction/Fraction";
 import { MatrixData } from "../Matrix/Matrix";
+import { ParenthesisData } from "../Parenthese/Parenthesis";
 
 export enum MathObjType {
     constant = "constant",
@@ -29,6 +30,7 @@ export default abstract class MathObj {
     constant?: ConstantData;
     fraction?: FractionData;
     matrix?: MatrixData;
+    parenthesis?: ParenthesisData;
 
     abstract next: () => MathObj;
     abstract toString: (data?: any) => string;
