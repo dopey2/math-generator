@@ -1,27 +1,9 @@
 import { parse } from "./parser";
 
-
 describe("Math parser",() => {
-    
-    it("3 + -2", () => {
-        const n = -2;
-        const expression = parse(`3 + ${n}`);
-        const res = expression.solve();
-        expect(expression.toTex()).toBe("3 - 2");
-        expect(res).toBeDefined();
-        expect(res.constant?.value).toBe(1);
-    });
-    
+
     it("0 + 0", () => {
         const expression = parse("0 + 0");
-        const res = expression.solve();
-        expect(expression.toTex()).toBe("0 + 0");
-        expect(res).toBeDefined();
-        expect(res.constant?.value).toBe(0);
-    });
-
-    it("-0 + 0", () => {
-        const expression = parse("-0 + 0");
         const res = expression.solve();
         expect(expression.toTex()).toBe("0 + 0");
         expect(res).toBeDefined();
@@ -234,4 +216,42 @@ describe("Math parser",() => {
         expect(res.constant?.value).toBe(0);
     });
     
+});
+
+describe("Math parser, edge case", () => {
+    it("3 + -2", () => {
+        const n = -2;
+        const expression = parse(`3 + ${n}`);
+        const res = expression.solve();
+        expect(expression.toTex()).toBe("3 - 2");
+        expect(res).toBeDefined();
+        expect(res.constant?.value).toBe(1);
+    });
+
+    it("3 * -2", () => {
+        const n = -2;
+        const expression = parse(`3 * ${n}`);
+        const res = expression.solve();
+        expect(expression.toTex()).toBe("3 * (-2)");
+        expect(res).toBeDefined();
+        expect(res.constant?.value).toBe(-6);
+    });
+
+    it("3 - -2", () => {
+        const n = -2;
+        const expression = parse(`3 - ${n}`);
+        const res = expression.solve();
+        expect(expression.toTex()).toBe("3 - (-2)");
+        expect(res).toBeDefined();
+        expect(res.constant?.value).toBe(5);
+    });
+
+    it("-0 + 0", () => {
+        const expression = parse("-0 + 0");
+        const res = expression.solve();
+        expect(expression.toTex()).toBe("0 + 0");
+        expect(res).toBeDefined();
+        expect(res.constant?.value).toBe(0);
+    });
+
 });
