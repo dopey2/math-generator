@@ -45,8 +45,10 @@ export const parseParenthesis = (exp: string) => {
 export const parse: (expression: string) => MathObj = (expression: string) => {
     const symbols = expression.split("").filter((c)=>c !== " ");
 
+
     let lowestPriority = 3;
-    
+    let lastLowestPriorityIndex = -1;
+
     let depth = 0;
     
     for(let i = 0; i < symbols.length; i++) {
@@ -58,29 +60,33 @@ export const parse: (expression: string) => MathObj = (expression: string) => {
         if(char === ")") {
             depth--;
         }
-        
-        if(depth === 0 && isOperator(char)) {
+
+        /**
+         * Ignore the operators in the parenthesis since they are parsed later
+         */
+        if(depth > 0) {
+            continue;
+        }
+
+        /**
+         * Ignore the negative signe which comes from negative numbers ex: Add(-5,3)
+         */
+        if(i === 0 && char === "-") {
+            continue;
+        }
+
+        if(isOperator(char)) {
             const operatorPriority = getOperatorPriority(char);
             if(operatorPriority <= lowestPriority) {
                 lowestPriority = operatorPriority;
+                lastLowestPriorityIndex = i;
             }
         }  
     }
 
-    let nextOperatorIndex = -1;
-
-    for(let i = 0; i < symbols.length; i++) {
-        const char = symbols[i];
-
-        if(isOperator(char) && getOperatorPriority(char) === lowestPriority) {
-            nextOperatorIndex = i;
-        }
-
-    }
-
-    const operator = symbols[nextOperatorIndex];
-    const left = symbols.slice(0, nextOperatorIndex).join("");
-    const right = symbols.slice(nextOperatorIndex + 1, symbols.length).join("");
+    const operator = symbols[lastLowestPriorityIndex];
+    const left = symbols.slice(0, lastLowestPriorityIndex).join("");
+    const right = symbols.slice(lastLowestPriorityIndex + 1, symbols.length).join("");
     
     
     const leftMath = isNumber(left)
@@ -103,3 +109,7 @@ export const parse: (expression: string) => MathObj = (expression: string) => {
 
     return new Add(new Constant(0), new Constant(0));
 };
+
+const mathObj1 = parse("2 + (3 - 4)");
+console.log(mathObj1);
+console.log(mathObj1.toTex());
