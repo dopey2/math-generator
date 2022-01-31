@@ -71,8 +71,14 @@ export const parse: (expression: string) => MathObj = (expression: string) => {
         /**
          * Ignore the negative signe which comes from negative numbers ex: Add(-5,3)
          */
-        if(i === 0 && char === "-") {
-            continue;
+        if(char === "-") {
+            const prevChar = symbols[i - 1];
+            if(prevChar === undefined) {
+                continue;
+            }
+            if(isOperator(prevChar)) {
+                continue;
+            }
         }
 
         if(isOperator(char)) {
@@ -110,6 +116,6 @@ export const parse: (expression: string) => MathObj = (expression: string) => {
     return new Add(new Constant(0), new Constant(0));
 };
 
-const mathObj1 = parse("2 + (3 - 4)");
-console.log(mathObj1);
-console.log(mathObj1.toTex());
+// const mathObj1 = parse("3 + -2");
+// console.log(mathObj1);
+// console.log(mathObj1.toTex());
