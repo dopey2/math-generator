@@ -4,6 +4,7 @@ import Constant from "./Constant/Constant";
 import MathObj from "./MathObj/MathObj";
 import Subtract from "./Subtract/Subtract";
 import Parenthesis from "./Parenthesis/Parenthesis";
+import Fraction from "./Fraction/Fraction";
 
 const isNumber = (n: string) => !isNaN(Number(n));
 
@@ -14,8 +15,15 @@ const isInParenthesis = (expression: string) => {
     return first === "(" && last === ")";
 };
 
+const isInBracket = (expression: string) => {
+    const exp = expression.trim();
+    const first = exp[0];
+    const last = exp[exp.length - 1];
+    return first === "{" && last === "}";
+};
+
 const getParenthesisContent = (expression: string) => {
-    return expression.slice(1, expression.length - 1);   
+    return expression.slice(1, expression.length - 1);
 };
 
 const isOperator = (c: string) => {
@@ -33,10 +41,15 @@ const getOperatorPriority = (operator: string) => {
     return 0;
 };
 
-export const parseParenthesis = (exp: string) => {
+export const parseParenthesisAndBracket = (exp: string) => {
     if(isInParenthesis(exp)) {
         const parenthesisContent = getParenthesisContent(exp);
         return new Parenthesis(parse(parenthesisContent));
+    }
+
+    if(isInBracket(exp)) {
+        const bracketContent = getParenthesisContent(exp);
+        return parse(bracketContent);
     }
 
     return parse(exp);
@@ -50,14 +63,14 @@ export const parse: (expression: string) => MathObj = (expression: string) => {
     let lastLowestPriorityIndex = -1;
 
     let depth = 0;
-    
+
     for(let i = 0; i < symbols.length; i++) {
         const char = symbols[i];
 
-        if(char === "(") {
+        if(char === "(" || char === "{") {
             depth++;
         }
-        if(char === ")") {
+        if(char === ")" || char === "}") {
             depth--;
         }
 
@@ -87,21 +100,21 @@ export const parse: (expression: string) => MathObj = (expression: string) => {
                 lowestPriority = operatorPriority;
                 lastLowestPriorityIndex = i;
             }
-        }  
+        }
     }
 
     const operator = symbols[lastLowestPriorityIndex];
     const left = symbols.slice(0, lastLowestPriorityIndex).join("");
     const right = symbols.slice(lastLowestPriorityIndex + 1, symbols.length).join("");
-    
-    
+
+
     const leftMath = isNumber(left)
         ? new Constant(parseFloat(left))
-        : parseParenthesis(left);
-    
-    const rightMath = isNumber(right) 
+        : parseParenthesisAndBracket(left);
+
+    const rightMath = isNumber(right)
         ? new Constant(parseFloat(right))
-        : parseParenthesis(right);
+        : parseParenthesisAndBracket(right);
 
     if(operator === "+") {
         return new Add(leftMath, rightMath);
@@ -110,12 +123,8 @@ export const parse: (expression: string) => MathObj = (expression: string) => {
     } else if(operator === "*") {
         return new Multiply(leftMath, rightMath);
     } else if(operator === "/") {
-        // TODO next
+        return new Fraction(leftMath, rightMath);
     }
 
     return new Add(new Constant(0), new Constant(0));
 };
-
-// const mathObj1 = parse("3 + -2");
-// console.log(mathObj1);
-// console.log(mathObj1.toTex());
