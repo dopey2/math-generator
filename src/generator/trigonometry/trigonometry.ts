@@ -24,7 +24,7 @@ import ExerciseBuilder from "../ExerciseBuilder";
 
 
 export const degToRadian = () => {
-    const deg = 180; // MathX.random(0, 36) * 10;
+    const deg = MathX.random(0, 36) * 10;
     const rad = MathX.degToRadian(deg);
 
     const expression = `Exprimer l'angle ${deg}° en radion.`;

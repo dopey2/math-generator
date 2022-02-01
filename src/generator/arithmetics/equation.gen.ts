@@ -1,11 +1,8 @@
 import ExerciseBuilder from "../ExerciseBuilder";
 import Point2D from "../../math/Point2D";
-import Fraction from "../../math/Operation/Fraction/Fraction";
-import Subtract from "../../math/Operation/Subtract/Subtract";
-import Constant from "../../math/Operation/Constant/Constant";
-import Multiply from "../../math/Operation/Multiply/Multiply";
 import MathX from "../../math/MathX/MathX";
 import Tex from "../../math/Tex";
+import { parse } from "../../math/Operation/parser";
 
 const withSigne = (x: number) => {
     return x >= 0 ? `+ ${x}` : `- ${Math.abs(x)}`;
@@ -219,7 +216,6 @@ export const equation7 = () => {
 
 };
 
-
 export const lineEquationFromPoints = () => {
     const [xa, ya] = MathX.randomValues(2, -10, 10);
     const x2Step = MathX.random(1, 10);
@@ -234,24 +230,19 @@ export const lineEquationFromPoints = () => {
         `Trouver l'équation de la forme y = mx + b`
     ];
 
-    const m = new Fraction(
-        new Subtract(new Constant(pB.y), new Constant(pA.y)),
-        new Subtract(new Constant(pB.x), new Constant(pA.x))
-    );
-
+    const m = parse(`{${pB.y} - ${pA.y}}/{${pB.x} - ${pA.x}}`);
     const mFormula = `m = \\frac{y_b - y_a}{x_b - x_a}`;
 
     const mSolved = m.solve();
     const mStepsLatex = [`m = ${m.toTex()}`, `m = ${mSolved.toTex()}`];
 
-    const mx = new Multiply(new Constant(pA.x), mSolved);
+    const mx = parse(`${pA.x} * ${mSolved}`);
     const mxSolved = mx.solve();
 
     const mxStepsLatex = [`${pA.y} = ${mx.toTex()} + b`, `${pA.y} = ${mxSolved.toTex()} + b`];
 
-    const b = new Subtract(new Constant(pA.y), mxSolved);
+    const b = parse(`${pA.y} - ${mxSolved}`);
     const bSolved = b.solve();
-
 
     const bStepsLatex = [`${b.toTex()} = b`, `b = ${bSolved.toTex()}`];
     const yEquation = `\\boxed{y = ${mSolved.toTex()}x + ${bSolved.toTex({ constant: { showNegativeInParenthesis: true } })}}`;
