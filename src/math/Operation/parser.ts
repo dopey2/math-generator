@@ -42,7 +42,7 @@ const getOperatorPriority = (operator: string) => {
     return 0;
 };
 
-export const parseParenthesisAndBracket = (exp: string) => {
+const parseParenthesisAndBracket = (exp: string) => {
     if(isInParenthesis(exp)) {
         const content = getParenthesisContent(exp);
         return new Parenthesis(parse(content));
@@ -144,6 +144,3 @@ const createMathObj = (operator: string, left: MathObj, right: MathObj) => {
 
     return new Add(new Constant(0), new Constant(0));
 };
-
-
-const exp = parse("2^{3}");
