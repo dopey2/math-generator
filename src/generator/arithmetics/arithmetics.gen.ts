@@ -1,7 +1,6 @@
-import * as math from 'mathjs';
-
 import ExerciseBuilder from "../ExerciseBuilder";
 import MathX from "../../math/MathX/MathX";
+import { parse } from "../../math/Operation/parser";
 
 
 // TODO REMOVE THIS
@@ -34,7 +33,7 @@ export const addition = (
 ) => {
     const operands = MathX.randomValues(terms, 1, maxNumber);
     const expression = operands.join(` + `);
-    const value = math.evaluate(expression);
+    const value = parse(expression).solveValue();
     return new ExerciseBuilder()
         .addQuestionLatex(expression)
         .addAnswerLatex(`${expression} = ${value}`)
@@ -47,41 +46,23 @@ export const multiplication = (args: {
     minNumber?: number,
 }) => {
     const { terms, minNumber, maxNumber } = args;
-
     const operands = MathX.randomValues(terms, minNumber ?? 1, maxNumber);
     const expression = operands.join(` * `);
 
-    const value = math.evaluate(expression);
+    const value = parse(expression).solveValue();
 
     return new ExerciseBuilder()
         .addQuestionLatex(expression)
         .addAnswerLatex(`${expression} = ${value}`)
         .toJSON();
 };
-
-// export const substraction = (
-//     maxNumber: number,
-//     allowNegative: number
-// ) => {
-//     const operands: number[] = MathX.randomValues(2, 1, maxNumber);
-//
-//     const min = Math.min(...operands);
-//     const max = Math.max(...operands);
-//     const expression = `${max} - ${min}`;
-//     const value = max - min;
-//
-//     return new ExerciseBuilder()
-//         .addQuestionLatex(expression)
-//         .addAnswerLatex(`${expression} = ${value}`)
-//         .toJSON();
-// };
+;
 
 export const division = (args: {
     minNumber?: number,
     maxNumber: number
 }) => {
     const { minNumber, maxNumber } = args;
-
     const [divisor, quotient] = MathX.randomValues(2, minNumber ?? 1, maxNumber);
     const dividend = divisor * quotient;
     const expression = `${dividend}/${divisor}`;
