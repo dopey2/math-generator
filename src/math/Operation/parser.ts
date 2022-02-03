@@ -5,6 +5,7 @@ import MathObj from "./MathObj/MathObj";
 import Subtract from "./Subtract/Subtract";
 import Parenthesis from "./Parenthesis/Parenthesis";
 import Fraction from "./Fraction/Fraction";
+import Exponent from "./Exponent/Exponent";
 
 const isNumber = (n: string) => !isNaN(Number(n));
 
@@ -44,11 +45,21 @@ const getOperatorPriority = (operator: string) => {
 export const parseParenthesisAndBracket = (exp: string) => {
     if(isInParenthesis(exp)) {
         const parenthesisContent = getParenthesisContent(exp);
+
+        if(isNumber(parenthesisContent)) {
+            return new Parenthesis(new Constant(parseFloat(parenthesisContent)));
+        }
+
         return new Parenthesis(parse(parenthesisContent));
     }
 
     if(isInBracket(exp)) {
         const bracketContent = getParenthesisContent(exp);
+
+        if(isNumber(bracketContent)) {
+            return new Constant(parseFloat(bracketContent));
+        }
+        
         return parse(bracketContent);
     }
 
@@ -124,7 +135,11 @@ export const parse: (expression: string) => MathObj = (expression: string) => {
         return new Multiply(leftMath, rightMath);
     } else if(operator === "/") {
         return new Fraction(leftMath, rightMath);
+    } else if(operator === "^") {
+        return new Exponent(leftMath, rightMath);
     }
 
     return new Add(new Constant(0), new Constant(0));
 };
+
+const exp = parse("2^{3}");

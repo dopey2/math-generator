@@ -218,6 +218,74 @@ describe("Math parser",() => {
     
 });
 
+
+describe("Math parser, exponents", () => {
+    it("2 ^ 3", () => {
+        const expression = parse("2 ^ 3");
+        const res = expression.solve();
+        expect(expression.toTex()).toBe("2^{3}");
+        expect(res).toBeDefined();
+        expect(res.constant?.value).toBe(8);
+    });
+
+    it("2 ^{3}", () => {
+        const expression = parse("2^{3}");
+        const res = expression.solve();
+        expect(expression.toTex()).toBe("2^{3}");
+        expect(res).toBeDefined();
+        expect(res.constant?.value).toBe(8);
+    });
+
+    it("2 ^{2 + 2}", () => {
+        const expression = parse("2^{2 + 2}");
+        const res = expression.solve();
+        expect(expression.toTex()).toBe("2^{2 + 2}");
+        expect(res).toBeDefined();
+        expect(res.constant?.value).toBe(16);
+    });
+
+    it("4 * 3 ^ 2", () => {
+        const expression = parse("4 * 3 ^ 2");
+        const res = expression.solve();
+        expect(expression.toTex()).toBe("4 * 3^{2}");
+        expect(res).toBeDefined();
+        expect(res.constant?.value).toBe(36);
+    });
+
+    it("(4 * 3)^ 2", () => {
+        const expression = parse("(4 * 3) ^ 2");
+        const res = expression.solve();
+        expect(expression.toTex()).toBe("(4 * 3)^{2}");
+        expect(res).toBeDefined();
+        expect(res.constant?.value).toBe(144);
+    });
+
+    it("(1 + 3)^ 2 * 3 ", () => {
+        const expression = parse("(1 + 3) ^ 2 * 3");
+        const res = expression.solve();
+        expect(expression.toTex()).toBe("(1 + 3)^{2} * 3");
+        expect(res).toBeDefined();
+        expect(res.constant?.value).toBe(48);
+    });
+
+    it("(1 + 3)^{2 * 3} ", () => {
+        const expression = parse("(1 + 3) ^{2 * 3}");
+        const res = expression.solve();
+        expect(expression.toTex()).toBe("(1 + 3)^{2 * 3}");
+        expect(res).toBeDefined();
+        expect(res.constant?.value).toBe(4096);
+    });
+
+    it("5^0", () => {
+        const expression = parse("5^0");
+        const res = expression.solve();
+        expect(expression.toTex()).toBe("5^{0}");
+        expect(res).toBeDefined();
+        expect(res.constant?.value).toBe(1);
+    });
+});
+
+
 describe("Math parser, edge case", () => {
     it("3 + -2", () => {
         const n = -2;
