@@ -64,5 +64,9 @@ export default abstract class MathObj {
         const steps = this.solveAll();
         return steps[steps.length - 1] as D;
     };
+
+    solveValue = () => {
+        return this.solve()?.constant?.value || 0;
+    }
 }
 

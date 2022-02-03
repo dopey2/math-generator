@@ -44,32 +44,26 @@ const getOperatorPriority = (operator: string) => {
 
 export const parseParenthesisAndBracket = (exp: string) => {
     if(isInParenthesis(exp)) {
-        const parenthesisContent = getParenthesisContent(exp);
-
-        if(isNumber(parenthesisContent)) {
-            return new Parenthesis(new Constant(parseFloat(parenthesisContent)));
-        }
-
-        return new Parenthesis(parse(parenthesisContent));
+        const content = getParenthesisContent(exp);
+        return new Parenthesis(parse(content));
     }
-
+    
     if(isInBracket(exp)) {
-        const bracketContent = getParenthesisContent(exp);
-
-        if(isNumber(bracketContent)) {
-            return new Constant(parseFloat(bracketContent));
-        }
-        
-        return parse(bracketContent);
+        const content = getParenthesisContent(exp);
+        return parse(content);
     }
 
     return parse(exp);
 };
 
-export const parse: (expression: string) => MathObj = (expression: string) => {
-    const symbols = expression.split("").filter((c)=>c !== " ");
-
-
+/**
+ * Return the index of the last operator with the lowest priority
+ * The function read each character from left to right
+ * Ex. ["2", "+", "6", "-", "3", "*" "2"]
+ * The last lowest priority operator is "-" so
+ * @param symbols string[]
+ */
+const findLastLowestPriorityOperator = (symbols: string[]) => {
     let lowestPriority = 3;
     let lastLowestPriorityIndex = -1;
 
@@ -114,32 +108,42 @@ export const parse: (expression: string) => MathObj = (expression: string) => {
         }
     }
 
+    return lastLowestPriorityIndex;
+};
+
+export const parse: (expression: string) => MathObj = (expression: string) => {
+    if(isNumber(expression)) {
+        return new Constant(parseFloat(expression));
+    }
+
+    const symbols = expression.split("").filter((c)=>c !== " ");
+    const lastLowestPriorityIndex = findLastLowestPriorityOperator(symbols);
+
     const operator = symbols[lastLowestPriorityIndex];
-    const left = symbols.slice(0, lastLowestPriorityIndex).join("");
-    const right = symbols.slice(lastLowestPriorityIndex + 1, symbols.length).join("");
+    const leftString = symbols.slice(0, lastLowestPriorityIndex).join("");
+    const rightString = symbols.slice(lastLowestPriorityIndex + 1, symbols.length).join("");
 
+    const left = parseParenthesisAndBracket(leftString);
+    const right = parseParenthesisAndBracket(rightString);
 
-    const leftMath = isNumber(left)
-        ? new Constant(parseFloat(left))
-        : parseParenthesisAndBracket(left);
+    return createMathObj(operator, left, right);
+};
 
-    const rightMath = isNumber(right)
-        ? new Constant(parseFloat(right))
-        : parseParenthesisAndBracket(right);
-
+const createMathObj = (operator: string, left: MathObj, right: MathObj) => {
     if(operator === "+") {
-        return new Add(leftMath, rightMath);
+        return new Add(left, right);
     } else if(operator === "-") {
-        return new Subtract(leftMath, rightMath);
+        return new Subtract(left, right);
     } else if(operator === "*") {
-        return new Multiply(leftMath, rightMath);
+        return new Multiply(left, right);
     } else if(operator === "/") {
-        return new Fraction(leftMath, rightMath);
+        return new Fraction(left, right);
     } else if(operator === "^") {
-        return new Exponent(leftMath, rightMath);
+        return new Exponent(left, right);
     }
 
     return new Add(new Constant(0), new Constant(0));
 };
+
 
 const exp = parse("2^{3}");
