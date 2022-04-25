@@ -1,8 +1,6 @@
 import React from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { RouteComponentProps } from "react-router";
-import clsx from "clsx";
-
 
 import {
     addition,
@@ -44,6 +42,7 @@ import {
     subtractMatrix,
     transposeMatrix
 } from "../../generator/linear_algebra/matrix";
+import Drawer from "../../component/Drawer/Drawer";
 
 type ExerciseItem = { label: string, fun: () => ExerciseI };
 
@@ -140,22 +139,13 @@ class SelectExercise extends React.PureComponent<RouteComponentProps<{ id: strin
 
     render() {
         return (
-            <div id={"selectPage"} className={styles.pageContainer}>
+            <div className={styles.content}>
 
-                <div className={styles.navMenu}>
-                    <ul>
-                        {exerciseList.map((ex, i) => (
-                            <li
-                                key={i}
-                                className={clsx({
-                                    [styles.navItemSelected]: i === parseInt(this.props.match.params.id),
-                                    [styles.navItem]: true,
-                                })}>
-                                <Link to={`/select/${i}`}>{i} - {ex.label}</Link>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+                <Drawer items={exerciseList.map((ex, i) => ({
+                    path: `/select/${i}`,
+                    label: `${i} - ${ex.label}`,
+                    isSelected: i === parseInt(this.props.match.params.id),
+                }))} />
 
                 <div className={styles.contentContainer}>
                     <button onClick={this.generateExercise}>new</button>
@@ -179,10 +169,7 @@ class SelectExercise extends React.PureComponent<RouteComponentProps<{ id: strin
 export default withRouter(SelectExercise);
 
 const styles = {
-    pageContainer: "flex flex-1 w-full h-full",
-    navMenu: "flex shrink-0 flex-col w-96 h-full border-r-2 border-grey-300 pl-4 pr-4 pt-4 pb-4 overflow-y-scroll no-scrollbar",
-    navItem: "pl-4 pr-4 pt-2 pb-2",
-    navItemSelected: "bg-green-300 text-white rounded-md",
+    content: "flex flex-1 overflow-y-hidden",
     contentContainer: "flex flex-col flex-1 p-8 overflow-y-scroll",
     exerciseContainer: "mt-8 flex-1 w-full",
 };

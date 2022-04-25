@@ -6,9 +6,16 @@ import clsx from "clsx";
 import { Link, withRouter } from "react-router-dom";
 import { RouteComponentProps } from "react-router";
 
+import { Constant } from "@math-x-ts/core";
+
+const a = new Constant(3);
+
+console.log("a", a);
+
 interface State {
     selected: number
 }
+
 
 class DraftOperationPage extends React.PureComponent<any, State> {
 

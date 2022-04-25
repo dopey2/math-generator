@@ -1,6 +1,6 @@
 import ExerciseBuilder from "../ExerciseBuilder";
 import MathX from "../../math/MathX/MathX";
-import { parse } from "../../math/Operation/parser";
+import { evaluate } from "@math-x-ts/compiler";
 
 
 // TODO REMOVE THIS
@@ -33,7 +33,7 @@ export const addition = (
 ) => {
     const operands = MathX.randomValues(terms, 1, maxNumber);
     const expression = operands.join(` + `);
-    const value = parse(expression).solveValue();
+    const value = evaluate(expression);
     return new ExerciseBuilder()
         .addQuestionLatex(expression)
         .addAnswerLatex(`${expression} = ${value}`)
@@ -49,7 +49,7 @@ export const multiplication = (args: {
     const operands = MathX.randomValues(terms, minNumber ?? 1, maxNumber);
     const expression = operands.join(` * `);
 
-    const value = parse(expression).solveValue();
+    const value = evaluate(expression);
 
     return new ExerciseBuilder()
         .addQuestionLatex(expression)

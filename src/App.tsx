@@ -8,12 +8,15 @@ import {
 import DraftOperationPage from "./pages/Draft/DraftOperationPage";
 import SelectExercise from "./pages/SelectExercice/SelectExercise";
 import TestParser from "./pages/TestParser/TestParser";
+import Navbar from "./component/Navbar/Navbar";
 
 const App: React.FC<any> = () => {
 
 
     return (
-        <div className="App">
+        <div className="w-full h-full flex flex-1 flex-col">
+            <Navbar />
+
             <Router>
                 <Switch>
                     <Route path="/select/:id">
@@ -26,12 +29,6 @@ const App: React.FC<any> = () => {
 
                     <Route path="/testParser">
                         <TestParser/>
-                    </Route>
-
-                    <Route path="/">
-                        <a href="/draftOperation/0">Operation Draft</a>
-                        <a href="/testParser">Test parser</a>
-                        <a href="/select/0">Select</a>
                     </Route>
                 </Switch>
             </Router>
