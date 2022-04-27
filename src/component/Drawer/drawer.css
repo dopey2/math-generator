@@ -1,0 +1,14 @@
+.collapsible {
+  max-height: 0;
+  transition: max-height 0.15s ease-out;
+  overflow: hidden;
+}
+
+
+.drawer-nested__content {
+  border-width: 0;
+  border-left-width: 2px;
+  border-style: solid;
+  border-color: #CCC;
+  margin-left: 1px;
+}

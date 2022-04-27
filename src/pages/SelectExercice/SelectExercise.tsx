@@ -141,11 +141,28 @@ class SelectExercise extends React.PureComponent<RouteComponentProps<{ id: strin
         return (
             <div className={styles.content}>
 
-                <Drawer items={exerciseList.map((ex, i) => ({
-                    path: `/select/${i}`,
-                    label: `${i} - ${ex.label}`,
-                    isSelected: i === parseInt(this.props.match.params.id),
-                }))} />
+                <Drawer items={[
+                    {
+                        label: "Arithmetic",
+                        path: "/nested",
+                        items: [
+                            {
+                                label: "Subcat 1",
+                                path: "/nested/subcat1",
+
+                            },
+                            {
+                                label: "Subcat 2",
+                                path: "/nested/subcat2",
+
+                            }
+                        ],
+                    },
+                    ...exerciseList.map((ex, i) => ({
+                        path: `/select/${i}`,
+                        label: `${i} - ${ex.label}`,
+                        isSelected: i === parseInt(this.props.match.params.id),
+                    }))]} />
 
                 <div className={styles.contentContainer}>
                     <button onClick={this.generateExercise}>new</button>
