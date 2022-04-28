@@ -3,6 +3,7 @@ import clsx from "clsx";
 import { Link } from "react-router-dom";
 
 import './drawer.css';
+import Collapsible from "../Collapsible/Collapsible";
 
 interface DrawerItem {
   path: string;
@@ -16,8 +17,22 @@ interface Props {
   items: DrawerItem[];
 }
 
-export default class Drawer extends React.PureComponent<Props> {
+interface State {
+  selectedByKey: {[key: string]: boolean}
+}
 
+export default class Drawer extends React.PureComponent<Props, State> {
+
+  state: State = {
+      selectedByKey: {},
+  }
+
+
+  onClickToggle = (i: number, depth: number) => {
+      this.setState((prevState) => ({
+          selectedByKey: { ...prevState.selectedByKey, [`${i}-${depth}`]: !prevState.selectedByKey[`${i}-${depth}`] },
+      }));
+  }
 
   renderItems = (items: DrawerItem[], depth = 0) => {
       return items.map((item, i) => {
@@ -28,17 +43,16 @@ export default class Drawer extends React.PureComponent<Props> {
                       <li className={styles.navItemNested} key={i}>
                           {item.label}
                           <img
-                              onClick={() => console.log("on click")}
+                              onClick={this.onClickToggle.bind(this, i,depth)}
                               width={20}
                               height={20}
                               src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22 fill=%22%232563eb%22%3E%3Cpath fill-rule=%22evenodd%22 d=%22M1.646 4.646a.5.5.0 01.708.0L8 10.293l5.646-5.647a.5.5.0 01.708.708l-6 6a.5.5.0 01-.708.0l-6-6a.5.5.0 010-.708z%22/%3E%3C/svg%3E"
                           />
                       </li>
 
-                      <div className="drawer-nested__content">
-                          {this.renderItems(item.items, depth + 1)}
-                      </div>
-
+                      <Collapsible open={this.state.selectedByKey[`${i}-${depth}`]} >
+                          <div className={"drawer-nested__content"}>{this.renderItems(item.items, depth + 1)}</div>
+                      </Collapsible>
                   </div>
 
               );
