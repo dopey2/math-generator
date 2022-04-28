@@ -15,7 +15,6 @@ export default class Collapsible extends React.PureComponent<Props> {
         }
     }
 
-
     open() {
         if(this.content && this.container) {
             this.container.style.height = this.content.clientHeight + "px";

@@ -44,47 +44,97 @@ import {
 } from "../../generator/linear_algebra/matrix";
 import Drawer from "../../component/Drawer/Drawer";
 
-type ExerciseItem = { label: string, fun: () => ExerciseI };
+
+interface Category {
+    id: string,
+    label: string,
+    parent: null,
+}
+
+const CategoryMap: {[key: string]: Category} = {
+    arithmetic: {
+        id: "arithmetic",
+        label: "Arithmetic",
+        parent: null,
+    },
+    developpe_expression: {
+        id: "developpe_expression",
+        label: "Developpe expression",
+        parent: null,
+    },
+    equation: {
+        id: "equation",
+        label: "Equation",
+        parent: null,
+    },
+    probability: {
+        id: "probability",
+        label: "Probability",
+        parent: null,
+    },
+    linear_algebra: {
+        id: "linear_algebra",
+        label: "Linear algebra",
+        parent: null,
+    },
+    geometry: {
+        id: "geometry",
+        label: "Geometry",
+        parent: null,
+    },
+    other: {
+        id: "other",
+        label: "Other",
+        parent: null,
+    },
+};
+
+type ExerciseItem = {
+    label: string,
+    fun: () => ExerciseI
+    cat?: string
+};
 
 const exerciseList: ExerciseItem[] = [
-    { label: "Addition", fun: () => addition(3, 99) },
-    { label: "Multiplication 1", fun: () => multiplication({ terms: 2, minNumber: 10, maxNumber: 20 }) },
-    { label: "Multiplication 2", fun: () => multiplication({ terms: 2, minNumber: 22, maxNumber: 99 }) },
-    { label: "Division 1", fun: () => division({ minNumber: 1, maxNumber: 10 }) },
-    { label: "Division 2", fun: () => division({ minNumber: 10, maxNumber: 20 }) },
-    { label: "Square Root", fun: () => radical(20) },
-    { label: "X Base Exponent Multiplication", fun: () => xBaseExponentMultiplication() },
-    { label: "X Base Exponent Division", fun: () => xBaseExponentDivision() },
-    { label: "X Base Exponent", fun: () => xBaseExponent() },
-    { label: "Square Root", fun: () => radical(20) },
-    { label: "Develop Expression", fun: () => developpeExpression2() },
-    { label: "Develop Expression square root", fun: () => developExpressionSquareRoot1() },
-    { label: "Fraction rules", fun: () => fractionRulesExpression() },
-    { label: "Equation 1", fun: () => equation1() },
-    { label: "Equation 2", fun: () => equation2() },
-    { label: "Equation 3", fun: () => equation3() },
-    { label: "Equation 4 - fraction", fun: () => equation4() },
-    { label: "Equation 5 - fraction", fun: () => equation5() },
-    { label: "Equation 6 - fraction", fun: () => equation6() },
-    { label: "Equation 7 - Square root", fun: () => equation7() },
-    { label: "Line equation from point", fun: () => lineEquationFromPoints() },
-    { label: "Linear system with 2 unknown", fun: () => systemWith2Unknown() },
-    { label: "Enumeration locker", fun: () => enumerationLocker() },
-    { label: "Enumeration locker 2", fun: () => enumerationDigitCode() },
-    { label: "Enumeration pin code", fun: () => enumerationPinCode() },
-    { label: "Probability with intersection", fun: () => probabilityWithIntersection() },
-    { label: "Vecteurs", fun: () => vectors1() },
-    { label: "Add matrix", fun: () => addMatrix() },
-    { label: "Subtract matrix", fun: () => subtractMatrix() },
-    { label: "Multiply matrix by constant", fun: () => multiplyMatrixByConstant() },
-    { label: "Multiply matrix by matrix", fun: () => multiplyMatrixByMatrix() },
-    { label: "Transpose matrix", fun: () => transposeMatrix() },
-    { label: "Calculate matrix determinant", fun: () => computeMatrixDeterminant() },
-    { label: "Calculate matrix inverse", fun: () => computeMatrixInverse2x2() },
-    { label: "Pythagore", fun: () => pythagore() },
-    { label: "Triangle AAS", fun: () => triangleAAS() },
-    { label: "Square area", fun: () => getSquareArea() },
-    { label: "Convert degree to radian", fun: () => degToRadian() }
+    { label: "Addition", fun: () => addition(3, 99), cat: CategoryMap.arithmetic.id },
+    { label: "Multiplication 1", fun: () => multiplication({ terms: 2, minNumber: 10, maxNumber: 20 }), cat: CategoryMap.arithmetic.id },
+    { label: "Multiplication 2", fun: () => multiplication({ terms: 2, minNumber: 22, maxNumber: 99 }), cat: CategoryMap.arithmetic.id },
+    { label: "Division 1", fun: () => division({ minNumber: 1, maxNumber: 10 }), cat: CategoryMap.arithmetic.id },
+    { label: "Division 2", fun: () => division({ minNumber: 10, maxNumber: 20 }), cat: CategoryMap.arithmetic.id },
+    { label: "Square Root", fun: () => radical(20), cat: CategoryMap.arithmetic.id },
+
+    { label: "X Base Exponent Multiplication", fun: () => xBaseExponentMultiplication(), cat: CategoryMap.developpe_expression.id },
+    { label: "X Base Exponent Division", fun: () => xBaseExponentDivision(), cat: CategoryMap.developpe_expression.id },
+    { label: "X Base Exponent", fun: () => xBaseExponent(), cat: CategoryMap.developpe_expression.id },
+    { label: "Square Root", fun: () => radical(20), cat: CategoryMap.developpe_expression.id },
+    { label: "Develop Expression", fun: () => developpeExpression2(), cat: CategoryMap.developpe_expression.id },
+    { label: "Develop Expression square root", fun: () => developExpressionSquareRoot1(), cat: CategoryMap.developpe_expression.id },
+    { label: "Fraction rules", fun: () => fractionRulesExpression(), cat: CategoryMap.developpe_expression.id },
+    { label: "Equation 1", fun: () => equation1(), cat: CategoryMap.equation.id },
+    { label: "Equation 2", fun: () => equation2(), cat: CategoryMap.equation.id },
+    { label: "Equation 3", fun: () => equation3(), cat: CategoryMap.equation.id },
+    { label: "Equation 4 - fraction", fun: () => equation4(), cat: CategoryMap.equation.id },
+    { label: "Equation 5 - fraction", fun: () => equation5(), cat: CategoryMap.equation.id },
+    { label: "Equation 6 - fraction", fun: () => equation6(), cat: CategoryMap.equation.id },
+    { label: "Equation 7 - Square root", fun: () => equation7(), cat: CategoryMap.equation.id },
+    { label: "Line equation from point", fun: () => lineEquationFromPoints(), cat: CategoryMap.equation.id },
+    { label: "Linear system with 2 unknown", fun: () => systemWith2Unknown(), cat: CategoryMap.equation.id },
+    { label: "Enumeration locker", fun: () => enumerationLocker(), cat: CategoryMap.probability.id },
+    { label: "Enumeration locker 2", fun: () => enumerationDigitCode(), cat: CategoryMap.probability.id },
+    { label: "Enumeration pin code", fun: () => enumerationPinCode(), cat: CategoryMap.probability.id },
+    { label: "Probability with intersection", fun: () => probabilityWithIntersection(), cat: CategoryMap.probability.id },
+    { label: "Vecteurs", fun: () => vectors1(), cat: CategoryMap.linear_algebra.id },
+    { label: "Add matrix", fun: () => addMatrix(), cat: CategoryMap.linear_algebra.id },
+    { label: "Subtract matrix", fun: () => subtractMatrix(), cat: CategoryMap.linear_algebra.id },
+    { label: "Multiply matrix by constant", fun: () => multiplyMatrixByConstant(), cat: CategoryMap.linear_algebra.id },
+    { label: "Multiply matrix by matrix", fun: () => multiplyMatrixByMatrix(), cat: CategoryMap.linear_algebra.id },
+    { label: "Transpose matrix", fun: () => transposeMatrix(), cat: CategoryMap.linear_algebra.id },
+    { label: "Calculate matrix determinant", fun: () => computeMatrixDeterminant(), cat: CategoryMap.linear_algebra.id },
+    { label: "Calculate matrix inverse", fun: () => computeMatrixInverse2x2(), cat: CategoryMap.linear_algebra.id },
+    { label: "Pythagore", fun: () => pythagore(), cat: CategoryMap.geometry.id },
+    { label: "Triangle AAS", fun: () => triangleAAS(), cat: CategoryMap.geometry.id },
+    { label: "Square area", fun: () => getSquareArea(), cat: CategoryMap.geometry.id },
+    { label: "Convert degree to radian", fun: () => degToRadian(), cat: CategoryMap.geometry.id }
 ];
 
 interface State {
@@ -93,7 +143,7 @@ interface State {
     refreshKey: number;
 }
 
-class SelectExercise extends React.PureComponent<RouteComponentProps<{ id: string }>, State> {
+class SelectExercise extends React.PureComponent<RouteComponentProps<{ id: string, category?: string }>, State> {
 
 
     constructor(props: any) {
@@ -137,32 +187,51 @@ class SelectExercise extends React.PureComponent<RouteComponentProps<{ id: strin
         }
     };
 
+    getDrawerItems() {
+        const exercisesByCat: {[key: string]: any} = {};
+        const others: any = [];
+
+        exerciseList.forEach((exercise, i) => {
+
+            if(exercise.cat) {
+                const cat = CategoryMap[exercise.cat];
+
+                if(cat) {
+                    if(!exercisesByCat[exercise.cat]) {
+
+                        console.log("category", this.props.match.params.category);
+
+                        exercisesByCat[exercise.cat] = {
+                            label: cat.label,
+                            path: `select/${cat.id}`,
+                            items: [],
+                            isSelected: cat.id === this.props.match.params.category,
+                        };
+                    }
+
+                    exercisesByCat[exercise.cat].items.push({
+                        label: exercise.label,
+                        path: `/select/${cat.id}/${i}`,
+                        isSelected: i === parseInt(this.props.match.params.id),
+                    });
+                }
+            } else {
+                others.push({
+                    path: `/select/${i}`,
+                    label: `${i} - ${exercise.label}`,
+                    isSelected: i === parseInt(this.props.match.params.id),
+                });
+            }
+        });
+
+        return [...Object.values(exercisesByCat), ...others];
+    }
+
     render() {
         return (
             <div className={styles.content}>
 
-                <Drawer items={[
-                    {
-                        label: "Arithmetic",
-                        path: "/nested",
-                        items: [
-                            {
-                                label: "Subcat 1",
-                                path: "/nested/subcat1",
-
-                            },
-                            {
-                                label: "Subcat 2",
-                                path: "/nested/subcat2",
-
-                            }
-                        ],
-                    },
-                    ...exerciseList.map((ex, i) => ({
-                        path: `/select/${i}`,
-                        label: `${i} - ${ex.label}`,
-                        isSelected: i === parseInt(this.props.match.params.id),
-                    }))]} />
+                <Drawer items={this.getDrawerItems() as any} />
 
                 <div className={styles.contentContainer}>
                     <button onClick={this.generateExercise}>new</button>

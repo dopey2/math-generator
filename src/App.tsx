@@ -19,6 +19,11 @@ const App: React.FC<any> = () => {
 
             <Router>
                 <Switch>
+
+                    <Route path="/select/:category/:id">
+                        <SelectExercise/>
+                    </Route>
+
                     <Route path="/select/:id">
                         <SelectExercise/>
                     </Route>
