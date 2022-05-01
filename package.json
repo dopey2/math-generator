@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@math-x-ts/compiler": "^0.0.4",
+    "@math-x-ts/parser": "^0.0.9",
     "@types/katex": "^0.11.1",
     "clsx": "^1.1.1",
     "katex": "^0.15.2",

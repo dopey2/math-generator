@@ -1484,17 +1484,19 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@math-x-ts/compiler@^0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@math-x-ts/compiler/-/compiler-0.0.4.tgz#3576866644ab14f9e3d300ef67ebc19bb3a434dd"
-  integrity sha512-GscJu2sQx72AtiQYDN8MFpnQOA47IsDmAmuh0U9LdNney952BVh2mNQ625A1kAVOB5InJK5+bJdba8Pl//hVgg==
+"@math-x-ts/core@0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@math-x-ts/core/-/core-0.0.9.tgz#975e89c2ba81bcccef2a6471847f42d65314722d"
+  integrity sha512-781BYT+idvN9hi/9I9EtWruyZ8YuVzBPzg+sO1WbBB4SJo7ysMbyVqPPoGORPLh3dfzZeaNWa8B0mOea4QH88Q==
   dependencies:
-    "@math-x-ts/core" "0.0.4"
+    "@math-x-ts/parser" "0.0.9"
 
-"@math-x-ts/core@0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@math-x-ts/core/-/core-0.0.4.tgz#4faec39d9f7ddab369e71cdc2a97fe56ae35542f"
-  integrity sha512-E9gXs5lI0+zXifqo1D7QUSobyPxmfzowGBIaE1RuzX0ARZotowfccyQZzC4RPtZmyViqwL3FHzDiTanDgJGGHQ==
+"@math-x-ts/parser@0.0.9", "@math-x-ts/parser@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@math-x-ts/parser/-/parser-0.0.9.tgz#ae9d762ee7c08c9683eda3b8a30bfe63a05e6245"
+  integrity sha512-SbRth//Ky8u/gBuWVkc3ugdrrvpD5QKiYvnI+HXVdB3T8CaWydUONLtquAksO7QBj0zcK91nf++6dzXF2vaTsg==
+  dependencies:
+    "@math-x-ts/core" "0.0.9"
 
 "@nodelib/fs.scandir@2.1.4":
   version "2.1.4"
