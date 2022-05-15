@@ -18,14 +18,16 @@ export interface ExerciseI {
     question: VisualRepresentationI[];
     answer: VisualRepresentationI[];
     stepAnswer?: VisualRepresentationI[];
+    inlineAnswer?: boolean
 }
 
 export default class ExerciseBuilder {
     output: any = {
         question: [],
         answer: [],
+        inlineAnswer: false,
     };
-    
+
     addQuestionLatexText(text: string) {
         this.output.question.push({ type: "latex-text", latexText: text });
         return this;
@@ -46,6 +48,11 @@ export default class ExerciseBuilder {
 
     addQuestionHtml(...args: any) {
         this.output.question.push({ type: 'html', html: args });
+        return this;
+    }
+
+    inlineAnswer() {
+        this.output.inlineAnswer = true;
         return this;
     }
 

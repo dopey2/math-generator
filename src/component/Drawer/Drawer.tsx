@@ -46,15 +46,22 @@ export default class Drawer extends React.PureComponent<Props, State> {
                               { [styles.navItemSelected]: item.isSelected }
                           )} key={i}>
                           {item.label}
-                          <img
+                          <svg
                               className={clsx(
                                   "transition-all duration-300 ease-in-ou",
                                   { "rotate-180": this.state.selectedByKey[`${i}-${depth}`] }
                               )}
                               width={20}
                               height={20}
-                              src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22 fill=%22%232563eb%22%3E%3Cpath fill-rule=%22evenodd%22 d=%22M1.646 4.646a.5.5.0 01.708.0L8 10.293l5.646-5.647a.5.5.0 01.708.708l-6 6a.5.5.0 01-.708.0l-6-6a.5.5.0 010-.708z%22/%3E%3C/svg%3E"
-                          />
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 16 16"
+                              fill={item.isSelected && this.state.selectedByKey[`${i}-${depth}`] ? "white" : "#2563eb"}
+                          >
+                              <path
+                                  fillRule="evenodd"
+                                  d="M1.646 4.646a.5.5.0 01.708.0L8 10.293l5.646-5.647a.5.5.0 01.708.708l-6 6a.5.5.0 01-.708.0l-6-6a.5.5.0 010-.708z"
+                              />
+                          </svg>
                       </li>
 
                       <Collapsible open={this.state.selectedByKey[`${i}-${depth}`]} >

@@ -1,7 +1,6 @@
 import MathX from "../../math/MathX/MathX";
 import ExerciseBuilder from "../ExerciseBuilder";
 
-
 /**
  * Permutation avec remise
  */

@@ -44,9 +44,11 @@ const ExerciseComponent: React.FC<Props> = (props) => {
                         <div style={{ minHeight: 55 }} className={"items-start border-0 border-b"} key={i}>
 
 
-                            {exercise.question.map((q, i) => (
-                                <ExerciseStrategy key={i} visualRepresentation={q} />
-                            ))}
+                            {!(showResult !== 0 && exercise.inlineAnswer) && (
+                                exercise.question.map((q, i) => (
+                                    <ExerciseStrategy key={i} visualRepresentation={q} />
+                                ))
+                            )}
 
                             {showResult === 1 && (
                                 <>

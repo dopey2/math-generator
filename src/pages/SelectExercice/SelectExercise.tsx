@@ -5,15 +5,12 @@ import { RouteComponentProps } from "react-router";
 import {
     addition,
     division,
-    fractionRulesExpression,
     multiplication,
-    radical, xBaseExponent,
-    xBaseExponentDivision,
-    xBaseExponentMultiplication
+    radical
 } from "../../generator/arithmetics/arithmetics.gen";
 import {
     developExpressionSquareRoot1,
-    developpeExpression2
+    developpeExpression2, fractionRulesExpression, xBaseExponent, xBaseExponentDivision, xBaseExponentMultiplication
 } from "../../generator/arithmetics/developpeExpression/developpeExpression";
 import {
     equation1,
@@ -34,7 +31,7 @@ import {
 import ExerciseComponent from "../../component/Exercice.component";
 import { getSquareArea } from "../../generator/geometry/geometry";
 import { degToRadian } from "../../generator/trigonometry/trigonometry";
-import { vectors1 } from "../../generator/linear_algebra/vectors";
+import { vectors1, vectors2 } from "../../generator/linear_algebra/vectors";
 import { pythagore, triangleAAS } from "../../generator/geometry/triangle/triangles";
 import {
     addMatrix, computeMatrixDeterminant, computeMatrixInverse2x2,
@@ -106,10 +103,10 @@ const exerciseList: ExerciseItem[] = [
     { label: "X Base Exponent Multiplication", fun: () => xBaseExponentMultiplication(), cat: CategoryMap.developpe_expression.id },
     { label: "X Base Exponent Division", fun: () => xBaseExponentDivision(), cat: CategoryMap.developpe_expression.id },
     { label: "X Base Exponent", fun: () => xBaseExponent(), cat: CategoryMap.developpe_expression.id },
-    { label: "Square Root", fun: () => radical(20), cat: CategoryMap.developpe_expression.id },
     { label: "Develop Expression", fun: () => developpeExpression2(), cat: CategoryMap.developpe_expression.id },
     { label: "Develop Expression square root", fun: () => developExpressionSquareRoot1(), cat: CategoryMap.developpe_expression.id },
     { label: "Fraction rules", fun: () => fractionRulesExpression(), cat: CategoryMap.developpe_expression.id },
+
     { label: "Equation 1", fun: () => equation1(), cat: CategoryMap.equation.id },
     { label: "Equation 2", fun: () => equation2(), cat: CategoryMap.equation.id },
     { label: "Equation 3", fun: () => equation3(), cat: CategoryMap.equation.id },
@@ -119,11 +116,14 @@ const exerciseList: ExerciseItem[] = [
     { label: "Equation 7 - Square root", fun: () => equation7(), cat: CategoryMap.equation.id },
     { label: "Line equation from point", fun: () => lineEquationFromPoints(), cat: CategoryMap.equation.id },
     { label: "Linear system with 2 unknown", fun: () => systemWith2Unknown(), cat: CategoryMap.equation.id },
+
     { label: "Enumeration locker", fun: () => enumerationLocker(), cat: CategoryMap.probability.id },
     { label: "Enumeration locker 2", fun: () => enumerationDigitCode(), cat: CategoryMap.probability.id },
     { label: "Enumeration pin code", fun: () => enumerationPinCode(), cat: CategoryMap.probability.id },
     { label: "Probability with intersection", fun: () => probabilityWithIntersection(), cat: CategoryMap.probability.id },
+
     { label: "Vecteurs", fun: () => vectors1(), cat: CategoryMap.linear_algebra.id },
+    { label: "Vecteurs 2", fun: () => vectors2(), cat: CategoryMap.linear_algebra.id },
     { label: "Add matrix", fun: () => addMatrix(), cat: CategoryMap.linear_algebra.id },
     { label: "Subtract matrix", fun: () => subtractMatrix(), cat: CategoryMap.linear_algebra.id },
     { label: "Multiply matrix by constant", fun: () => multiplyMatrixByConstant(), cat: CategoryMap.linear_algebra.id },
@@ -131,6 +131,7 @@ const exerciseList: ExerciseItem[] = [
     { label: "Transpose matrix", fun: () => transposeMatrix(), cat: CategoryMap.linear_algebra.id },
     { label: "Calculate matrix determinant", fun: () => computeMatrixDeterminant(), cat: CategoryMap.linear_algebra.id },
     { label: "Calculate matrix inverse", fun: () => computeMatrixInverse2x2(), cat: CategoryMap.linear_algebra.id },
+
     { label: "Pythagore", fun: () => pythagore(), cat: CategoryMap.geometry.id },
     { label: "Triangle AAS", fun: () => triangleAAS(), cat: CategoryMap.geometry.id },
     { label: "Square area", fun: () => getSquareArea(), cat: CategoryMap.geometry.id },
