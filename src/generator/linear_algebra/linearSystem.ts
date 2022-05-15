@@ -1,8 +1,9 @@
 import MathX from "../../math/MathX/MathX";
 import ExerciseBuilder from "../ExerciseBuilder";
-import Constant from "../../math/Operation/Constant/Constant";
 import Tex from "../../math/Tex";
 
+
+const showSigne = (x: number) => `${x > 0 ? "+" : "-"}${Math.abs(x)}`;
 
 /**
  * aX + bY = e
@@ -13,8 +14,8 @@ export const systemWith2Unknown = () => {
     const [x, y, a, b, c, d] = MathX.randomValues(6, -10, 10, [0]);
 
     const expression = Tex.toMultilineLatex([
-        `${a}x ${new Constant(b).toTex({ constant: { showSign: true } })}y = ${a * x + b * y}`,
-        `${c}x ${new Constant(d).toTex({ constant: { showSign: true } })}y = ${c * x + d * y}`
+        `${a}x ${showSigne(b)}y = ${a * x + b * y}`,
+        `${c}x ${showSigne(d)}y = ${c * x + d * y}`
     ]);
 
 
