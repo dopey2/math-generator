@@ -115,7 +115,7 @@ const exerciseList: ExerciseItem[] = [
     { label: "Equation 6 - fraction", fun: () => equation6(), cat: CategoryMap.equation.id },
     { label: "Equation 7 - Square root", fun: () => equation7(), cat: CategoryMap.equation.id },
     { label: "Line equation from point", fun: () => lineEquationFromPoints(), cat: CategoryMap.equation.id },
-    { label: "Linear system with 2 unknown", fun: () => systemWith2UnknownBySubstitution(), cat: CategoryMap.equation.id },
+    { label: "Linear System - 2 - Substitution", fun: () => systemWith2UnknownBySubstitution(), cat: CategoryMap.equation.id },
 
     { label: "Enumeration locker", fun: () => enumerationLocker(), cat: CategoryMap.probability.id },
     { label: "Enumeration locker 2", fun: () => enumerationDigitCode(), cat: CategoryMap.probability.id },

@@ -52,8 +52,6 @@ export const systemWith2UnknownBySubstitution = () => {
     let cStep1 = -c;
 
     const steps1 = [
-        `1) On résout la deuxième équation pour y`,
-        ``,
         `${showNegativeOnly(d, true)}y = ${res2Step1} ${showSigne(cStep1, true)}x`
     ];
 
@@ -77,7 +75,7 @@ export const systemWith2UnknownBySubstitution = () => {
     const resStep2 = res1 - bResStep2;
     const xRes = resStep2 / addX;
 
-    const steps2 = [
+    const xSteps = [
         `${showNegativeOnly(a, true)}x ${showSigne(b)}(${res2Step1} ${showSigne(cStep1, true)}x) = ${res1}`,
         `${showNegativeOnly(a, true)}x ${showSigne(bResStep2)} ${showSigne(b * cStep1, true)}x = ${res1}`,
         `${showNegativeOnly(addX, true)}x ${showSigne(bResStep2)} = ${res1}`,
@@ -88,25 +86,26 @@ export const systemWith2UnknownBySubstitution = () => {
     ];
 
     const cXRes = cStep1 * xRes;
+    const yRes = cStep1 * xRes;
 
-    const steps3 = [
+    const ySteps = [
         `y = ${res2Step1} ${showSigne(cStep1, true)}(${xRes})`,
         `y = ${res2Step1} ${showSigne(cXRes, true)}`,
-        `y = ${res2Step1 + cXRes}`
+        `y = ${yRes}`
     ];
 
-
-    const lcmAB = MathX.lcm(a, b);
-    const aa = lcmAB / a;
-    const bb = lcmAB / b;
+    const answer = `
+x = ${xRes}
+y = ${yRes};
+    `;
 
 
     return new ExerciseBuilder()
         .addQuestionLatex(expression)
-        .addAnswerLatex(expression)
-        .addStepAnswerLatex(...steps1)
-        .addStepAnswerLatex(...steps2)
-        .addStepAnswerLatex(...steps3)
+        .addAnswerLatex(answer)
+        .addStepAnswerLatex(Tex.toMultilineLatex(steps1))
+        .addStepAnswerLatex(Tex.toMultilineLatex(xSteps))
+        .addStepAnswerLatex(Tex.toMultilineLatex(ySteps))
         .toJSON();
 };
 
