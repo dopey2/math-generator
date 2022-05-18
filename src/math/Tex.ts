@@ -1,7 +1,7 @@
 export default class Tex {
 
     static color(c: string, tex: string) {
-        return `\\color{${c}}{${tex}}`;
+        return `\\textcolor{${c}}{${tex}}`;
     }
 
     static fraction(n: number | string, d: number | string) {

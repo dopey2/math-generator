@@ -25,7 +25,7 @@ export const equation1 = () => {
     const expression = `${a}x ${withSigne(k)} = ${res}`;
 
     const res1 = res - k;
-    const step1 = `${a}x ${withSigne(k)} \\color{red}{${inverseSigne(k)}} = ${res} \\color{red}{${inverseSigne(k)}}`;
+    const step1 = `${a}x ${withSigne(k)} \\textcolor{red}{${inverseSigne(k)}} = ${res} \\textcolor{red}{${inverseSigne(k)}}`;
     const step2 = `${a}x = ${res1}`;
     const step3Left = `\\frac{${withNegativeSigne(a)}x}{\\color{red}{${withNegativeSigne(a)}}}`;
     const step3Right = `\\frac{${withNegativeSigne(res1)}}{\\color{red}{${withNegativeSigne(a)}}}`;
@@ -69,15 +69,15 @@ export const equation2 = () => {
     }
 
     const expression = `${a}x ${withSigne(j)} = ${b}x ${withSigne(k)}`;
-    const step1 = `${a}x \\color{red}{${inverseSigne(b)}x} ${withSigne(j)} = ${b}x \\color{red}{${inverseSigne(b)}x} ${withSigne(k)}`;
+    const step1 = `${a}x \\textcolor{red}{${inverseSigne(b)}x} ${withSigne(j)} = ${b}x \\textcolor{red}{${inverseSigne(b)}x} ${withSigne(k)}`;
     const a2 = b > 0 ? a - b : a + Math.abs(b);
     const step2 = `${a2}x ${withSigne(j)} = ${withSigne(k)}`;
-    const step3 = `${a2}x ${withSigne(j)} \\color{red}{${inverseSigne(j)}} = ${withSigne(k)} \\color{red}{${inverseSigne(j)}}`;
+    const step3 = `${a2}x ${withSigne(j)} \\textcolor{red}{${inverseSigne(j)}} = ${withSigne(k)} \\textcolor{red}{${inverseSigne(j)}}`;
     const k4 = j > 0 ? k - j : k + Math.abs(j);
     const step4 = `${a2}x = ${withSigne(k4)}`;
 
-    const step5Left = `\\frac{${withNegativeSigne(a2)}x}{\\color{red}{${withNegativeSigne(a2)}}}`;
-    const step5Right = `\\frac{${withNegativeSigne(k4)}}{\\color{red}{${withNegativeSigne(a2)}}}`;
+    const step5Left = `\\frac{${withNegativeSigne(a2)}x}{\\textcolor{red}{${withNegativeSigne(a2)}}}`;
+    const step5Right = `\\frac{${withNegativeSigne(k4)}}{\\textcolor{red}{${withNegativeSigne(a2)}}}`;
     const step5 = `${step5Left} = ${step5Right}`;
     const step6 = `\\boxed{x = ${withNegativeSigne(k4 / a2)}}`;
 
@@ -104,7 +104,7 @@ export const equation3 = () => {
     const step2 = `${withNegativeSigne(a)}x ${withSigne(ab)} ${Tex.color('red', inverseSigne(ab))} = ${res} ${Tex.color('red', inverseSigne(ab))}`;
     const res3 = res - ab;
     const step3 = `${withNegativeSigne(a)}x = ${res3}`;
-    const step4 = `\\frac{${withNegativeSigne(a)}x}{\\color{red}{${withNegativeSigne(a)}}} = \\frac{${res3}}{\\color{red}{${withNegativeSigne(a)}}}`;
+    const step4 = `\\frac{${withNegativeSigne(a)}x}{\\textcolor{red}{${withNegativeSigne(a)}}} = \\frac{${res3}}{\\textcolor{red}{${withNegativeSigne(a)}}}`;
     const step5 = `\\boxed{x = ${res3 / a}}`;
 
     return new ExerciseBuilder()
@@ -126,11 +126,11 @@ export const equation4 = () => {
     const res = (x / a) + b;
 
     const expression = `\\frac{x}{${a}} ${withSigne(b)} = ${res}`;
-    const step1 = `\\frac{x}{${a}} ${withSigne(b)} \\color{red}{${inverseSigne(b)}} = ${res} \\color{red}{${inverseSigne(b)}}`;
+    const step1 = `\\frac{x}{${a}} ${withSigne(b)} \\textcolor{red}{${inverseSigne(b)}} = ${res} \\textcolor{red}{${inverseSigne(b)}}`;
     const res2 = res - b;
     const step2 = `\\frac{x}{${a}} = ${res2}`;
     const aStep3 = a < 0 ? `(${a})` : a;
-    const step3 = `\\frac{x}{${a}} \\color{red}{ * ${aStep3}} = ${res2} \\color{red}{ * ${aStep3}}`;
+    const step3 = `\\frac{x}{${a}} \\textcolor{red}{ * ${aStep3}} = ${res2} \\textcolor{red}{ * ${aStep3}}`;
     const res4 = res2 * a;
     const step4 = `\\boxed{x = ${res4}}`;
 
@@ -152,10 +152,10 @@ export const equation5 = () => {
 
     const expression = `\\frac{x ${withSigne(b)}}{${a}} = ${res}`;
     const a2 = a < 0 ? `(${a})` : a;
-    const step1 = `\\frac{x ${withSigne(b)}}{${a}} \\color{red}{ * ${a2}} = ${res} \\color{red}{ * ${a2}}`;
+    const step1 = `\\frac{x ${withSigne(b)}}{${a}} \\textcolor{red}{ * ${a2}} = ${res} \\textcolor{red}{ * ${a2}}`;
     const res2 = res * a;
     const step2 = `x ${withSigne(b)} = ${res2}`;
-    const step3 = `x ${withSigne(b)} \\color{red}{${inverseSigne(b)}} = ${res2} \\color{red}{${inverseSigne(b)}}`;
+    const step3 = `x ${withSigne(b)} \\textcolor{red}{${inverseSigne(b)}} = ${res2} \\textcolor{red}{${inverseSigne(b)}}`;
     const res4 = res2 - b;
     const step4 = `\\boxed{x = ${res4}}`;
 
@@ -176,10 +176,10 @@ export const equation6 = () => {
 
     const res = a / x;
     const expression = `${res} = \\frac{${a}}{x}`;
-    const step1 = `${res} \\color{red}{* x} = \\frac{${a}}{x} \\color{red}{* x}`;
+    const step1 = `${res} \\textcolor{red}{* x} = \\frac{${a}}{x} \\textcolor{red}{* x}`;
     const step2 = `${res}x = ${a}`;
     const res3 = a / res;
-    const step3 = `\\frac{${res}x}{\\color{red}{${res}}} = \\frac{${a}}{\\color{red}{${res}}}`;
+    const step3 = `\\frac{${res}x}{\\textcolor{red}{${res}}} = \\frac{${a}}{\\textcolor{red}{${res}}}`;
     const step4 = `\\boxed{x = ${res3}}`;
 
     return new ExerciseBuilder()
@@ -201,10 +201,10 @@ export const equation7 = () => {
 
 
     const expression = `\\sqrt{x ${withSigne(b)}} = ${res}`;
-    const step1 = `\\sqrt{x ${withSigne(b)}}^{\\color{red}{2}} = ${res}^{\\color{red}{2}}`;
+    const step1 = `\\sqrt{x ${withSigne(b)}}^{\\textcolor{red}{2}} = ${res}^{\\textcolor{red}{2}}`;
     const res2 = res * res;
     const step2 = `x ${withSigne(b)} = ${res2}`;
-    const step3 = `x ${withSigne(b)} \\color{red}{${inverseSigne(b)}} = ${res2} \\color{red}{${inverseSigne(b)}}`;
+    const step3 = `x ${withSigne(b)} \\textcolor{red}{${inverseSigne(b)}} = ${res2} \\textcolor{red}{${inverseSigne(b)}}`;
     const res4 = res2 - b;
     const step4 = `\\boxed{x = ${res4}}`;
 
