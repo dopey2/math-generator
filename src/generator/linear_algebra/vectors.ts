@@ -21,9 +21,9 @@ export const vectors1 = () => {
     ];
 
     const answer = Tex.toMultilineLatex([
-        `\\overrightarrow{u} = (${x1}, ${y1})`,
-        `\\overrightarrow{v} = (${x2}, ${y2})`,
-        `\\overrightarrow{w} = (${x3}, ${y3})`
+        `\\overrightarrow{u} = (${x1}; ${y1})`,
+        `\\overrightarrow{v} = (${x2}; ${y2})`,
+        `\\overrightarrow{w} = (${x3}; ${y3})`
     ]);
 
     return new ExerciseBuilder()
@@ -44,9 +44,9 @@ export const vectors2 = () => {
 
     const expression = Tex.toMultilineLatex([
         `Construire les vecteurs sur le graph à partir des coordonnées ci-dessous:`,
-        `\\overrightarrow{u} = (${x1}, ${y1})`,
-        `\\overrightarrow{v} = (${x2}, ${y2})`,
-        `\\overrightarrow{w} = (${x3}, ${y3})`
+        `\\overrightarrow{u} = (${x1}; ${y1})`,
+        `\\overrightarrow{v} = (${x2}; ${y2})`,
+        `\\overrightarrow{w} = (${x3}; ${y3})`
     ]);
 
     const vectors = [
@@ -75,8 +75,8 @@ export const vectors3 = () => {
 
     const expression = Tex.toMultilineLatex([
         `Construire les vecteurs sur le graph à partir des coordonnées ci-dessous:`,
-        `\\overrightarrow{u} = (${x1}, ${y1})`,
-        `\\overrightarrow{v} = (${x2}, ${y2})`,
+        `\\overrightarrow{u} = (${x1}; ${y1})`,
+        `\\overrightarrow{v} = (${x2}; ${y2})`,
         `\\overrightarrow{w} = \\overrightarrow{u} + \\overrightarrow{v}`
     ]);
 
@@ -94,3 +94,26 @@ export const vectors3 = () => {
         .addCustomAnswer(GraphsComponent, { vectors })
         .toJSON();
 };
+
+export const vectorFromUnitVector = () => {
+    const vx = MathX.random(-10, 10, [0]);
+    const vy = MathX.random(-5, 5, [0, vx]);
+
+    const expression = Tex.toMultilineLatex([
+        `Sois le vecteur \\overrightarrow{v} = (${vx}; ${vy})`,
+        `Exprimer le vecteur v en fonction des vecteurs unitaire i et j`,
+        `i = (1; 0) et j = (0; 1)`
+    ]);
+
+    const answer = `\\overrightarrow{v} = ${vx}i + ${vy}j`;
+
+    return new ExerciseBuilder()
+        .addQuestionLatex(expression)
+        .addAnswerLatex(answer)
+        .toJSON();
+};
+
+/**
+ * combinaison linéaire
+ * https://www.alloprof.qc.ca/fr/eleves/bv/mathematiques/la-combinaison-lineaire-de-vecteurs-m1305
+ */

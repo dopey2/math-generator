@@ -31,7 +31,7 @@ import {
 import ExerciseComponent from "../../component/Exercice.component";
 import { getSquareArea } from "../../generator/geometry/geometry";
 import { degToRadian } from "../../generator/trigonometry/trigonometry";
-import { vectors1, vectors2, vectors3 } from "../../generator/linear_algebra/vectors";
+import { vectors1, vectors2, vectors3, vectorFromUnitVector } from "../../generator/linear_algebra/vectors";
 import { pythagore, triangleAAS } from "../../generator/geometry/triangle/triangles";
 import {
     addMatrix, computeMatrixDeterminant, computeMatrixInverse2x2,
@@ -125,6 +125,7 @@ const exerciseList: ExerciseItem[] = [
     { label: "Vecteurs", fun: () => vectors1(), cat: CategoryMap.linear_algebra.id },
     { label: "Vecteurs 2", fun: () => vectors2(), cat: CategoryMap.linear_algebra.id },
     { label: "Vecteurs 3", fun: () => vectors3(), cat: CategoryMap.linear_algebra.id },
+    { label: "Vector from unit vector", fun: () => vectorFromUnitVector(), cat: CategoryMap.linear_algebra.id },
     { label: "Add matrix", fun: () => addMatrix(), cat: CategoryMap.linear_algebra.id },
     { label: "Subtract matrix", fun: () => subtractMatrix(), cat: CategoryMap.linear_algebra.id },
     { label: "Multiply matrix by constant", fun: () => multiplyMatrixByConstant(), cat: CategoryMap.linear_algebra.id },
