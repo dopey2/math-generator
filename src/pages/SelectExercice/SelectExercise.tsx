@@ -21,7 +21,7 @@ import {
     lineEquationFromPoints
 } from "../../generator/arithmetics/equation.gen";
 import { ExerciseI } from "../../generator/ExerciseBuilder";
-import { systemWith2Unknown } from "../../generator/linear_algebra/linearSystem";
+import { systemWith2UnknownBySubstitution } from "../../generator/linear_algebra/linearSystem";
 import { probabilityWithIntersection } from "../../generator/probability/probability1";
 import {
     enumerationDigitCode,
@@ -115,7 +115,7 @@ const exerciseList: ExerciseItem[] = [
     { label: "Equation 6 - fraction", fun: () => equation6(), cat: CategoryMap.equation.id },
     { label: "Equation 7 - Square root", fun: () => equation7(), cat: CategoryMap.equation.id },
     { label: "Line equation from point", fun: () => lineEquationFromPoints(), cat: CategoryMap.equation.id },
-    { label: "Linear system with 2 unknown", fun: () => systemWith2Unknown(), cat: CategoryMap.equation.id },
+    { label: "Linear system with 2 unknown", fun: () => systemWith2UnknownBySubstitution(), cat: CategoryMap.equation.id },
 
     { label: "Enumeration locker", fun: () => enumerationLocker(), cat: CategoryMap.probability.id },
     { label: "Enumeration locker 2", fun: () => enumerationDigitCode(), cat: CategoryMap.probability.id },
