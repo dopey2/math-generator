@@ -3,13 +3,15 @@ import clsx from "clsx";
 import { Link } from "react-router-dom";
 
 import Collapsible from "../Collapsible/Collapsible";
+import DrawerItemArrow from "./DrawerItemArrow";
 
-interface DrawerItem {
+export interface DrawerItem {
   path: string;
   label: string;
   icon?: any;
   isSelected?: boolean;
   items?: DrawerItem[];
+  data?: {}
 }
 
 interface Props {
@@ -27,45 +29,40 @@ export default class Drawer extends React.PureComponent<Props, State> {
   }
 
 
-  onClickToggle = (i: number, depth: number) => {
+  onClickToggle = (key: string) => {
       this.setState((prevState) => ({
-          selectedByKey: { ...prevState.selectedByKey, [`${i}-${depth}`]: !prevState.selectedByKey[`${i}-${depth}`] },
+          selectedByKey: {
+              ...prevState.selectedByKey,
+              [key]: !prevState.selectedByKey[key],
+          },
       }));
   }
 
-  renderItems = (items: DrawerItem[], depth = 0) => {
-      return items.map((item, i) => {
+  renderItems = (items: DrawerItem[]) => {
+      return items.map((item) => {
 
-          if(item.items) {
+
+          if(item.items && item.items.length) {
               return (
-                  <div className="flex flex-col">
+                  <div className="flex flex-col" key={item.path}>
                       <li
-                          onClick={this.onClickToggle.bind(this, i,depth)}
+                          onClick={this.onClickToggle.bind(this, item.path)}
                           className={clsx(
                               styles.navItemNested,
                               { [styles.navItemSelected]: item.isSelected }
-                          )} key={i}>
+                          )}
+                      >
                           {item.label}
-                          <svg
-                              className={clsx(
-                                  "transition-all duration-300 ease-in-ou",
-                                  { "rotate-180": this.state.selectedByKey[`${i}-${depth}`] }
-                              )}
-                              width={20}
-                              height={20}
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 16 16"
-                              fill={item.isSelected && this.state.selectedByKey[`${i}-${depth}`] ? "white" : "#2563eb"}
-                          >
-                              <path
-                                  fillRule="evenodd"
-                                  d="M1.646 4.646a.5.5.0 01.708.0L8 10.293l5.646-5.647a.5.5.0 01.708.708l-6 6a.5.5.0 01-.708.0l-6-6a.5.5.0 010-.708z"
-                              />
-                          </svg>
+                          <DrawerItemArrow
+                              rotate={this.state.selectedByKey[item.path]}
+                              fill={item.isSelected && this.state.selectedByKey[item.path] ? "white" : "#2563eb"}
+                          />
                       </li>
 
-                      <Collapsible open={this.state.selectedByKey[`${i}-${depth}`]} >
-                          <div className="flex flex-1 flex-col border-0 border-l-4 border-sky-600 ml-4 pl-4">{this.renderItems(item.items, depth + 1)}</div>
+                      <Collapsible open={this.state.selectedByKey[item.path]} key={item.path}>
+                          <div className="flex flex-1 flex-col border-0 border-l-4 border-grey-600 ml-4 pl-4">
+                              {this.renderItems(item.items)}
+                          </div>
                       </Collapsible>
                   </div>
 
@@ -73,7 +70,7 @@ export default class Drawer extends React.PureComponent<Props, State> {
           }
 
           return (
-              <li key={i} className={styles.navItemOuter}>
+              <li key={item.path} className={styles.navItemOuter}>
                   <Link
                       className={clsx(styles.navItem, {
                           [styles.navItemSelected]: item.isSelected,
@@ -87,7 +84,7 @@ export default class Drawer extends React.PureComponent<Props, State> {
       return (
           <div className={styles.navMenu}>
               <ul>
-                  {this.renderItems(this.props.items, 0)}
+                  {this.renderItems(this.props.items)}
               </ul>
           </div>
       );
