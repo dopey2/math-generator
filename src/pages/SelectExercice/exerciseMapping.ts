@@ -36,7 +36,7 @@ import { pythagore, triangleAAS } from "../../generator/geometry/triangle/triang
 import { getSquareArea } from "../../generator/geometry/geometry";
 import { degToRadian } from "../../generator/trigonometry/trigonometry";
 import { ExerciseI } from "../../generator/ExerciseBuilder";
-import { factorisation1 } from "../../generator/algebra/factorisation";
+import { factorisation1, factorisation2 } from "../../generator/algebra/factorisation";
 
 interface Category {
   id: string,
@@ -102,36 +102,21 @@ type ExerciseItem = {
 
 export const exerciseList: ExerciseItem[] = [
     { label: "Addition", fun: () => addition(3, 99), cat: CategoryMap.arithmetic.id },
-    {
-        label: "Multiplication 1",
-        fun: () => multiplication({ terms: 2, minNumber: 10, maxNumber: 20 }),
-        cat: CategoryMap.arithmetic.id,
-    },
-    {
-        label: "Multiplication 2",
-        fun: () => multiplication({ terms: 2, minNumber: 22, maxNumber: 99 }),
-        cat: CategoryMap.arithmetic.id,
-    },
+    { label: "Multiplication 1", fun: () => multiplication({ terms: 2, minNumber: 10, maxNumber: 20 }), cat: CategoryMap.arithmetic.id },
+    { label: "Multiplication 2", fun: () => multiplication({ terms: 2, minNumber: 22, maxNumber: 99 }), cat: CategoryMap.arithmetic.id },
     { label: "Division 1", fun: () => division({ minNumber: 1, maxNumber: 10 }), cat: CategoryMap.arithmetic.id },
     { label: "Division 2", fun: () => division({ minNumber: 10, maxNumber: 20 }), cat: CategoryMap.arithmetic.id },
     { label: "Square Root", fun: () => radical(20), cat: CategoryMap.arithmetic.id },
 
-    {
-        label: "X Base Exponent Multiplication",
-        fun: () => xBaseExponentMultiplication(),
-        cat: CategoryMap.developpe_expression.id,
-    },
+    { label: "X Base Exponent Multiplication", fun: () => xBaseExponentMultiplication(), cat: CategoryMap.developpe_expression.id },
     { label: "X Base Exponent Division", fun: () => xBaseExponentDivision(), cat: CategoryMap.developpe_expression.id },
     { label: "X Base Exponent", fun: () => xBaseExponent(), cat: CategoryMap.developpe_expression.id },
     { label: "Develop Expression", fun: () => developpeExpression2(), cat: CategoryMap.developpe_expression.id },
-    {
-        label: "Develop Expression square root",
-        fun: () => developExpressionSquareRoot1(),
-        cat: CategoryMap.developpe_expression.id,
-    },
+    { label: "Develop Expression square root", fun: () => developExpressionSquareRoot1(), cat: CategoryMap.developpe_expression.id },
     { label: "Fraction rules", fun: () => fractionRulesExpression(), cat: CategoryMap.developpe_expression.id },
 
     { label: "Factorisation 1", fun: () => factorisation1(), cat: CategoryMap.factor_expression.id },
+    { label: "Factorisation 2", fun: () => factorisation2(), cat: CategoryMap.factor_expression.id },
 
     { label: "Equation 1", fun: () => equation1(), cat: CategoryMap.equation.id },
     { label: "Equation 2", fun: () => equation2(), cat: CategoryMap.equation.id },
@@ -141,11 +126,7 @@ export const exerciseList: ExerciseItem[] = [
     { label: "Equation 6 - fraction", fun: () => equation6(), cat: CategoryMap.equation.id },
     { label: "Equation 7 - Square root", fun: () => equation7(), cat: CategoryMap.equation.id },
     { label: "Line equation from point", fun: () => lineEquationFromPoints(), cat: CategoryMap.equation.id },
-    {
-        label: "Linear System - 2 - Substitution",
-        fun: () => systemWith2UnknownBySubstitution(),
-        cat: CategoryMap.equation.id,
-    },
+    { label: "Linear System - 2 - Substitution", fun: () => systemWith2UnknownBySubstitution(), cat: CategoryMap.equation.id },
 
     { label: "Enumeration locker", fun: () => enumerationLocker(), cat: CategoryMap.probability.id },
     { label: "Enumeration locker 2", fun: () => enumerationDigitCode(), cat: CategoryMap.probability.id },

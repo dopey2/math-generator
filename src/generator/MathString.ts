@@ -18,4 +18,10 @@ export default class MathString {
   static inverseSigne = (x: number) => {
       return x > 0 ? `- ${x}` : `+ ${-x}`;
   };
+
+  static getSigne = (x: number) => {
+      return x > 0 ? "+" : "-";
+  }
+
 }
+

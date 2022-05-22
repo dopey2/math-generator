@@ -13,7 +13,7 @@ export default class DrawerItemArrow extends React.PureComponent<Props> {
             <svg
                 className={clsx(
                     "transition-all duration-300 ease-in-out",
-                    { "rotate-180": this.props.rotate }
+                    { "-rotate-90": this.props.rotate }
                 )}
                 width={20}
                 height={20}

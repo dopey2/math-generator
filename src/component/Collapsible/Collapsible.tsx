@@ -38,7 +38,7 @@ export default class Collapsible extends React.PureComponent<Props> {
         }
     }
 
-    getClosesParents(container: HTMLElement | Element) {
+    getClosestParents(container: HTMLElement | Element) {
         let parentContent = container.closest(".collapsible-container > .collapsible-content") as HTMLElement;
         let parentContainer = null;
 
@@ -56,17 +56,17 @@ export default class Collapsible extends React.PureComponent<Props> {
             let totalHeight = this.content.clientHeight;
             this.container.style.height = totalHeight + "px";
 
-            let [parentContent, parentContainer] = this.getClosesParents(this.container);
+            let [parentContent, parentContainer] = this.getClosestParents(this.container);
 
             while(parentContent && parentContainer) {
                 totalHeight += parentContent.clientHeight;
                 parentContainer.style.height = totalHeight + "px";
-                [parentContent, parentContainer] = this.getClosesParents(parentContainer);
+                [parentContent, parentContainer] = this.getClosestParents(parentContainer);
             }
         }
     }
 
-    async close() {
+    close() {
         this.getElements();
 
         if(this.container && this.content) {
@@ -74,12 +74,12 @@ export default class Collapsible extends React.PureComponent<Props> {
 
             let totalHeight = this.content.clientHeight;
 
-            let [parentContent, parentContainer] = this.getClosesParents(this.container);
+            let [parentContent, parentContainer] = this.getClosestParents(this.container);
 
             while(parentContent && parentContainer) {
                 totalHeight -= parentContainer.clientHeight;
                 parentContainer.style.height = Math.abs(totalHeight) + "px";
-                [parentContent, parentContainer] = this.getClosesParents(parentContainer);
+                [parentContent, parentContainer] = this.getClosestParents(parentContainer);
             }
         }
     }
