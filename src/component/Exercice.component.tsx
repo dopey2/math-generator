@@ -38,10 +38,10 @@ const ExerciseComponent: React.FC<Props> = (props) => {
 
             </div>
 
-            <div className={"inline-block pl-4 pr-24 overflow-x-scroll"}>
+            <div className={"inline-block pl-4 pr-24 overflow-x-scroll pb-4"}>
                 {props.exercise.map((exercise, i) => {
                     return (
-                        <div style={{ minHeight: 55 }} className={"items-start border-0 border-b"} key={i}>
+                        <div style={{ minHeight: 55 }} className={"items-start border-0"} key={i}>
 
 
                             {!(showResult !== 0 && exercise.inlineAnswer) && (

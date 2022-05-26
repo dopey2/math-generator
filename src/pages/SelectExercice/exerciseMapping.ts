@@ -37,6 +37,7 @@ import { getSquareArea } from "../../generator/geometry/geometry";
 import { degToRadian } from "../../generator/trigonometry/trigonometry";
 import { ExerciseI } from "../../generator/ExerciseBuilder";
 import { factorisation1, factorisation2 } from "../../generator/algebra/factorisation";
+import { placePointsOnAPlane } from "../../generator/unsorted/plane2D";
 
 interface Category {
   id: string,
@@ -86,9 +87,9 @@ export const CategoryMap: { [key: string]: Category } = {
         label: "Geometry",
         parent: null,
     },
-    other: {
-        id: "other",
-        label: "Other",
+    unsorted: {
+        id: "unsorted",
+        label: "Unsorted",
         parent: null,
     },
 };
@@ -148,7 +149,9 @@ export const exerciseList: ExerciseItem[] = [
     { label: "Pythagore", fun: () => pythagore(), cat: CategoryMap.geometry.id },
     { label: "Triangle AAS", fun: () => triangleAAS(), cat: CategoryMap.geometry.id },
     { label: "Square area", fun: () => getSquareArea(), cat: CategoryMap.geometry.id },
-    { label: "Convert degree to radian", fun: () => degToRadian(), cat: CategoryMap.geometry.id }
+    { label: "Convert degree to radian", fun: () => degToRadian(), cat: CategoryMap.geometry.id },
+
+    { label: "Place the points on a 2D plane", fun: () => placePointsOnAPlane(), cat: CategoryMap.unsorted.id }
 ];
 
 
