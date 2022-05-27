@@ -22,6 +22,7 @@ export default class MathX {
       }
 
       const numbers = [];
+
       for (let i = minIncluded; i <= maxIncluded; i++) {
           if (!excludes.includes(i)) {
               numbers.push(i);

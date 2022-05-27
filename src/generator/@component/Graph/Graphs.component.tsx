@@ -1,21 +1,32 @@
 import React from 'react';
 import GraphGridComponent from "./GraphGrid.component";
-import VectorComponent from "./Vector.component";
-import Points2DComponent from "./Points2D.component";
+import GraphVectorComponent from "./GraphVector.component";
+import GraphPoints2DComponent from "./GraphPoints2D.component";
+import GraphLineComponent from "./GraphLine.component";
+import GraphFunctionComponent from "./GraphFunction.component";
 
 
 interface PointsProps {
-    x: number,
-    y: number,
-    label?: string,
-    color?: string
+    x: number;
+    y: number;
+    label?: string;
+    color?: string;
 }
 
 interface VectorProps {
-    x: number,
-    y: number,
-    label?: string,
-    color?: string
+    x: number;
+    y: number;
+    label?: string;
+    color?: string;
+}
+
+interface LineProps {
+    x1: number;
+    y1: number;
+    x2: number;
+    y2: number;
+    label?: string;
+    color?: string;
 }
 
 interface Props {
@@ -24,6 +35,8 @@ interface Props {
     units?: number;
     hideUnits?: boolean;
     unitsInterval?: number;
+    functions?: Array<(x: number) => number>
+    lines?: LineProps[];
     points?: PointsProps[];
     vectors?: VectorProps[];
 }
@@ -68,8 +81,26 @@ export default class GraphsComponent extends React.PureComponent<Props> {
                         hideUnits={this.props.hideUnits}
                     />
 
+                    {this.props.functions && this.props.functions.map((f, i) => (
+                        <GraphFunctionComponent
+                            key={i}
+                            function={f}
+                            units={this.units}
+                            origin={{ x: this.width / 2, y: this.height / 2 }}
+                        />
+                    ))}
+
+                    {this.props.lines && this.props.lines.map((l, i) => (
+                        <GraphLineComponent
+                            key={i}
+                            {...l}
+                            units={this.units}
+                            origin={{ x: this.width / 2, y: this.height / 2 }}
+                        />
+                    ))}
+
                     {this.props.points && this.props.points.map((p, i) => (
-                        <Points2DComponent
+                        <GraphPoints2DComponent
                             key={i}
                             {...p}
                             units={this.units}
@@ -78,7 +109,7 @@ export default class GraphsComponent extends React.PureComponent<Props> {
                     ))}
 
                     {this.props.vectors && this.props.vectors.length && this.props.vectors.map((v, i) => (
-                        <VectorComponent
+                        <GraphVectorComponent
                             key={i}
                             {...v}
                             units={this.units}

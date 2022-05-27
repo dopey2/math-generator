@@ -10,7 +10,7 @@ interface Props {
     origin: { x: number, y: number }
 }
 
-export default class VectorComponent extends React.PureComponent<Props> {
+export default class GraphVectorComponent extends React.PureComponent<Props> {
     static id = 0;
     private _id = 0;
 
@@ -20,8 +20,8 @@ export default class VectorComponent extends React.PureComponent<Props> {
 
     constructor(props: Props) {
         super(props);
-        this._id = VectorComponent.id;
-        VectorComponent.id += 1;
+        this._id = GraphVectorComponent.id;
+        GraphVectorComponent.id += 1;
     }
 
     getLabelCoordinates = () => {

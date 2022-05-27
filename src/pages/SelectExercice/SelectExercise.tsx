@@ -112,8 +112,6 @@ class SelectExercise extends React.PureComponent<RouteComponentProps<{ id: strin
     render() {
         const drawerItems = this.getDrawerItems(getExerciseByCat(), "select") as any;
 
-        console.log(drawerItems);
-
         return (
             <div className={styles.content}>
 

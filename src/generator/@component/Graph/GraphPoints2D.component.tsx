@@ -12,7 +12,7 @@ interface Props {
   units: number;
 }
 
-export default class Points2DComponent extends React.PureComponent<Props> {
+export default class GraphPoints2DComponent extends React.PureComponent<Props> {
 
     get color() {
         return this.props.color || "#000";

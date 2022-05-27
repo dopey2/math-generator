@@ -37,7 +37,7 @@ import { getSquareArea } from "../../generator/geometry/geometry";
 import { degToRadian } from "../../generator/trigonometry/trigonometry";
 import { ExerciseI } from "../../generator/ExerciseBuilder";
 import { factorisation1, factorisation2 } from "../../generator/algebra/factorisation";
-import { placePointsOnAPlane } from "../../generator/unsorted/plane2D";
+import { placePointsOnAPlane, readYValuesFromAGraph } from "../../generator/unsorted/plane2D";
 
 interface Category {
   id: string,
@@ -151,7 +151,8 @@ export const exerciseList: ExerciseItem[] = [
     { label: "Square area", fun: () => getSquareArea(), cat: CategoryMap.geometry.id },
     { label: "Convert degree to radian", fun: () => degToRadian(), cat: CategoryMap.geometry.id },
 
-    { label: "Place the points on a 2D plane", fun: () => placePointsOnAPlane(), cat: CategoryMap.unsorted.id }
+    { label: "Place the points on a 2D plane", fun: () => placePointsOnAPlane(), cat: CategoryMap.unsorted.id },
+    { label: "Read Y values from graph function", fun: () => readYValuesFromAGraph(), cat: CategoryMap.unsorted.id }
 ];
 
 
