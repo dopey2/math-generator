@@ -48,31 +48,22 @@ export const readYValuesFromAGraph = () => {
 
 
     const expression = 'Placer les points suivants sur le repère orthonormée';
-    const pointA = `A = (${x1}, ${y1})`;
-    const pointB = `B = (${x2}, ${y2})`;
-    const pointC = `C = (${x3}, ${y3})`;
 
     return new ExerciseBuilder()
-        .addQuestionLatex(Tex.toMultilineLatex([expression, pointA, pointB, pointC]))
-        .addCustomQuestion(GraphsComponent, {})
+        .addQuestionLatex(Tex.toMultilineLatex([expression]))
+        .addCustomQuestion(GraphsComponent, { functions: [randomFunction]})
         .inlineAnswer()
-        .addAnswerLatex(Tex.toMultilineLatex([expression, pointA, pointB, pointC]))
-        .addCustomAnswer(GraphsComponent, { functions: [randomFunction] })
         .toJSON();
 };
 
 
 const generateFunction = () => {
-    const n = MathX.random(4, 4);
+    const n = MathX.random(3, 19);
 
     const xArray: number[] = [];
     const yArray: number[] = [];
 
-    let step = 20;
-
-    for(let i = 0; i < n - 2; i++) {
-        step /= 2;
-    }
+    let step = 20 / n + 1;
 
     let x = -10;
     let y = 0;
@@ -94,7 +85,6 @@ const generateFunction = () => {
 
         x += step;
     }
-
 
     const lines: {x1: number, y1: number, x2: number, y2: number}[] = [];
 
