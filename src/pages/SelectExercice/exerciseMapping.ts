@@ -20,7 +20,7 @@ import {
     lineEquationFromPoints
 } from "../../generator/algebra/equation.gen";
 import { systemWith2UnknownBySubstitution } from "../../generator/linear_algebra/linearSystem";
-import { enumerationDigitCode, enumerationLocker, enumerationPinCode } from "../../generator/enumeration/enumeration";
+import { enumerationDigitCode, enumerationLocker, enumerationPinCode } from "../../generator/enumeration/enumeration.gen";
 import { probabilityWithIntersection } from "../../generator/probability/probability1";
 import { vectorFromUnitVector, vectors1, vectors2, vectors3 } from "../../generator/linear_algebra/vectors";
 import {
@@ -38,6 +38,7 @@ import { degToRadian } from "../../generator/trigonometry/trigonometry";
 import { ExerciseI } from "../../generator/ExerciseBuilder";
 import { factorisation1, factorisation2 } from "../../generator/algebra/factorisation";
 import { placePointsOnAPlane, readYValuesFromAGraph } from "../../generator/unsorted/plane2D";
+import { venDiagram1 } from "../../generator/enumeration/venDiagram.gen";
 
 interface Category {
   id: string,
@@ -133,6 +134,8 @@ export const exerciseList: ExerciseItem[] = [
     { label: "Enumeration locker 2", fun: () => enumerationDigitCode(), cat: CategoryMap.probability.id },
     { label: "Enumeration pin code", fun: () => enumerationPinCode(), cat: CategoryMap.probability.id },
     { label: "Probability with intersection", fun: () => probabilityWithIntersection(), cat: CategoryMap.probability.id },
+    { label: "Ven diagram 1", fun: () => venDiagram1(), cat: CategoryMap.probability.id },
+
 
     { label: "Vecteurs", fun: () => vectors1(), cat: CategoryMap.linear_algebra.id },
     { label: "Vecteurs 2", fun: () => vectors2(), cat: CategoryMap.linear_algebra.id },

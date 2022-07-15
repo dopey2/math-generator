@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 
 import SelectExercise from "./pages/SelectExercice/SelectExercise";
+import Draft from "./pages/Draft/Draft";
 import Navbar from "./component/Navbar/Navbar";
 
 const App: React.FC<any> = () => {
@@ -24,6 +25,10 @@ const App: React.FC<any> = () => {
 
                     <Route path="/select/:id">
                         <SelectExercise/>
+                    </Route>
+
+                    <Route path="/draft">
+                        <Draft/>
                     </Route>
                 </Switch>
             </Router>

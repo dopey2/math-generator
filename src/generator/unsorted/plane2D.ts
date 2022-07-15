@@ -35,35 +35,51 @@ export const placePointsOnAPlane = () => {
 
 
 export const readYValuesFromAGraph = () => {
-    const x1 = MathX.random(-9, -5);
-    const x2 = MathX.random(-4, 0);
-    const x3 = MathX.random(1, 5);
-    const x4 = MathX.random(6, 9);
+    const b = MathX.random(-3, 3);
 
-    const randomFunction = generateFunction();
-    const y1 = randomFunction(x1);
-    const y2 = randomFunction(x2);
-    const y3 = randomFunction(x3);
-    const y4 = randomFunction(x4);
+    const x1 = -5 + b;
+    const x2 = b;
+    const x3 = 5 + b;
 
+    const randomFunction = generateFunction(b);
 
-    const expression = 'Placer les points suivants sur le repère orthonormée';
+    const y1 = Math.round(randomFunction(x1));
+    const y2 = Math.round(randomFunction(x2));
+    const y3 = Math.round(randomFunction(x3));
+
+    const expression = `Lire le graph et donner l'image de ${x1}, ${x2} et ${x3} sous la form f(x) = y`;
+
+    const pointA = `f(${x1}) =`;
+    const pointB = `f(${x2}) ${x2 < 0 ? '' : ' '}=`;
+    const pointC = `f(${x3})  =`;
+
+    const resPointA = `f(${x1}) = ${y1}`;
+    const resPointB = `f(${x2}) ${x2 < 0 ? '' : ' '}= ${y2}`;
+    const resPointC = `f(${x3})  = ${y3}`;
 
     return new ExerciseBuilder()
-        .addQuestionLatex(Tex.toMultilineLatex([expression]))
-        .addCustomQuestion(GraphsComponent, { functions: [randomFunction]})
+        .addQuestionLatex(expression)
+        .addCustomQuestion(GraphsComponent, { functions: [randomFunction] })
+        .addQuestionLatex(Tex.toMultilineLatex([pointA, pointB, pointC]))
         .inlineAnswer()
+        .addAnswerLatex(expression)
+        .addCustomAnswer(GraphsComponent, { functions: [randomFunction] })
+        .addAnswerLatex(Tex.toMultilineLatex([resPointA, resPointB, resPointC]))
         .toJSON();
 };
 
 
-const generateFunction = () => {
-    const n = MathX.random(3, 19);
+const generateFunction = (b: number = 0) => {
+    const n = MathX.random(4, 4);
 
     const xArray: number[] = [];
     const yArray: number[] = [];
 
-    let step = 20 / n + 1;
+    let step = 20;
+
+    for(let i = 0; i < n - 2; i++) {
+        step /= 2;
+    }
 
     let x = -10;
     let y = 0;
@@ -92,16 +108,16 @@ const generateFunction = () => {
 
     for(let i = 1; i < xArray.length; i++) {
         lines.push({
-            x1: xArray[i - 1],
+            x1: xArray[i - 1] + b,
             y1: yArray[i - 1],
-            x2: xArray[i],
+            x2: xArray[i] + b,
             y2: yArray[i],
         });
 
         lineFunctions.push(new Line(
-            xArray[i - 1],
+            xArray[i - 1] + b,
             yArray[i - 1],
-            xArray[i],
+            xArray[i] + b,
             yArray[i]
         ));
     }
@@ -119,6 +135,3 @@ const generateFunction = () => {
         return funct.getY(x);
     };
 };
-
-// @ts-ignore
-window.test = generateFunction();
